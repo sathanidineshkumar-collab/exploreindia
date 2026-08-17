@@ -18,7 +18,7 @@ if (fs.existsSync(path.join(process.cwd(), ".env.local"))) {
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || "explore_india_secret_key_1337";
 
 // Middleware
