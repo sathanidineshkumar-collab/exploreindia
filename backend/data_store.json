@@ -1570,6 +1570,964 @@
       },
       "city": "Mumbai",
       "state": "Maharashtra"
+    },
+    {
+      "id": "mock-temple-puttaparthi-0-pnyco",
+      "name": "Prasanthi Nilayam (Main Ashram)",
+      "type": "temple",
+      "subtypes": [
+        "Spiritual Sites",
+        "Temples",
+        "Heritage Shrines"
+      ],
+      "rating": 4.1,
+      "reviewCount": 752,
+      "priceLevel": 4,
+      "priceRange": "₹0 - ₹250",
+      "address": "Temple Road, Puttaparthi, Andhra Pradesh",
+      "description": "The world-famous spiritual ashram of Sri Sathya Sai Baba, featuring grand prayer halls, meditation spaces, and gardens.",
+      "photos": [
+        "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=600",
+        "https://images.unsplash.com/photo-1616038242814-a6eac7845d88?w=600",
+        "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=600",
+        "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=600"
+      ],
+      "facilities": [
+        "Parking",
+        "Prasadam Allowed",
+        "Shoe Keeping Area"
+      ],
+      "phone": "+91 7334649575",
+      "website": "https://www.exploreprasanthinilayammainashram.com",
+      "coordinates": {
+        "lat": 15.852670858618922,
+        "lng": 80.45988975295036
+      },
+      "city": "Puttaparthi",
+      "state": "Andhra Pradesh",
+      "reviews": [],
+      "activities": [
+        "Swimming",
+        "Spa treatment",
+        "Yoga session",
+        "Local city tour"
+      ],
+      "rooms": [
+        {
+          "type": "Standard Room",
+          "price": "₹0",
+          "amenities": [
+            "Queen Bed",
+            "AC",
+            "WiFi"
+          ]
+        },
+        {
+          "type": "Executive Suite",
+          "price": "₹250",
+          "amenities": [
+            "King Bed",
+            "AC",
+            "WiFi",
+            "Balcony"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mock-attraction-lake-puttaparthi-0-hzcas",
+      "name": "Sri Sathya Sai Samadhi Lake Reserve",
+      "type": "attraction",
+      "subtypes": [
+        "Scenic Points",
+        "Lakes & Water Bodies",
+        "Boating Ghats"
+      ],
+      "rating": 4.5,
+      "reviewCount": 657,
+      "priceLevel": 2,
+      "priceRange": "₹0 - ₹150",
+      "address": "Lake Road, Puttaparthi, Andhra Pradesh",
+      "description": "A calm reservoir lake situated next to the holy samadhi shrine.",
+      "photos": [
+        "https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=600",
+        "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600",
+        "https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=600",
+        "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=600"
+      ],
+      "facilities": [
+        "Boating",
+        "Scenic Walking Path",
+        "Sunset Viewpoint"
+      ],
+      "phone": "+91 7287824978",
+      "website": "https://www.exploresrisathyasaisamadhilakereserve.com",
+      "coordinates": {
+        "lat": 15.845592598804116,
+        "lng": 80.45246852578923
+      },
+      "city": "Puttaparthi",
+      "state": "Andhra Pradesh",
+      "reviews": [],
+      "activities": [
+        "Swimming",
+        "Spa treatment",
+        "Yoga session",
+        "Local city tour"
+      ],
+      "rooms": [
+        {
+          "type": "Standard Room",
+          "price": "₹0",
+          "amenities": [
+            "Queen Bed",
+            "AC",
+            "WiFi"
+          ]
+        },
+        {
+          "type": "Executive Suite",
+          "price": "₹150",
+          "amenities": [
+            "King Bed",
+            "AC",
+            "WiFi",
+            "Balcony"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mock-attraction-puttaparthi-0-3kowp",
+      "name": "Chaitanya Jyoti Museum",
+      "type": "attraction",
+      "subtypes": [
+        "Sightseeing",
+        "Historical Sites",
+        "Famous Landmarks"
+      ],
+      "rating": 4.6,
+      "reviewCount": 781,
+      "priceLevel": 1,
+      "priceRange": "₹50 - ₹250",
+      "address": "Near City Center, Puttaparthi, Andhra Pradesh",
+      "description": "An architectural wonder displaying the life and teachings of Sri Sathya Sai Baba.",
+      "photos": [
+        "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=600",
+        "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600",
+        "https://images.unsplash.com/photo-1610641818989-c2051b5e2cfd?w=600",
+        "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=600"
+      ],
+      "facilities": [
+        "Parking",
+        "Guided Tours",
+        "Camera Allowed"
+      ],
+      "phone": "+91 7760633754",
+      "website": "https://www.explorechaitanyajyotimuseum.com",
+      "coordinates": {
+        "lat": 15.863238462076072,
+        "lng": 80.47078666780516
+      },
+      "city": "Puttaparthi",
+      "state": "Andhra Pradesh",
+      "reviews": [],
+      "activities": [
+        "Swimming",
+        "Spa treatment",
+        "Yoga session",
+        "Local city tour"
+      ],
+      "rooms": [
+        {
+          "type": "Standard Room",
+          "price": "₹50",
+          "amenities": [
+            "Queen Bed",
+            "AC",
+            "WiFi"
+          ]
+        },
+        {
+          "type": "Executive Suite",
+          "price": "₹250",
+          "amenities": [
+            "King Bed",
+            "AC",
+            "WiFi",
+            "Balcony"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mock-hotel-su0k4f3lz",
+      "name": "Puttaparthi Sri Balaji Residency",
+      "type": "hotel",
+      "subtypes": [
+        "Luxury Hotels",
+        "Stays",
+        "Boutique Stays"
+      ],
+      "rating": 4.8,
+      "reviewCount": 781,
+      "priceLevel": 3,
+      "priceRange": "₹2,500 - ₹7,500",
+      "address": "Near City Center, Puttaparthi, Andhra Pradesh",
+      "description": "Experience a luxurious stay at the Puttaparthi Sri Balaji Residency, located in the heart of Puttaparthi. Featuring premium rooms with air conditioning, complimentary breakfast, ultra-fast WiFi, and round-the-clock room service. Perfect for both business travelers and families seeking standard amenities.",
+      "photos": [
+        "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600",
+        "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600",
+        "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600",
+        "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600"
+      ],
+      "facilities": [
+        "WiFi",
+        "AC",
+        "Breakfast",
+        "Parking",
+        "Gym"
+      ],
+      "phone": "+91 8038168377",
+      "website": "https://www.exploreputtaparthisribalajiresidency.com",
+      "coordinates": {
+        "lat": 15.851248437951686,
+        "lng": 80.46373767282239
+      },
+      "city": "Puttaparthi",
+      "state": "Andhra Pradesh",
+      "reviews": [],
+      "activities": [
+        "Swimming",
+        "Spa treatment",
+        "Yoga session",
+        "Local city tour"
+      ],
+      "rooms": [
+        {
+          "type": "Standard Room",
+          "price": "₹2,500",
+          "amenities": [
+            "Queen Bed",
+            "AC",
+            "WiFi"
+          ]
+        },
+        {
+          "type": "Executive Suite",
+          "price": "₹7,500",
+          "amenities": [
+            "King Bed",
+            "AC",
+            "WiFi",
+            "Balcony"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mock-hotel-ukfeffvf5",
+      "name": "Puttaparthi Dwaraka Plaza Stays",
+      "type": "hotel",
+      "subtypes": [
+        "Luxury Hotels",
+        "Stays",
+        "Boutique Stays"
+      ],
+      "rating": 4.7,
+      "reviewCount": 448,
+      "priceLevel": 3,
+      "priceRange": "₹2,500 - ₹7,500",
+      "address": "Near City Center, Puttaparthi, Andhra Pradesh",
+      "description": "Experience a luxurious stay at the Puttaparthi Dwaraka Plaza Stays, located in the heart of Puttaparthi. Featuring premium rooms with air conditioning, complimentary breakfast, ultra-fast WiFi, and round-the-clock room service. Perfect for both business travelers and families seeking standard amenities.",
+      "photos": [
+        "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600",
+        "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600",
+        "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600",
+        "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600"
+      ],
+      "facilities": [
+        "WiFi",
+        "AC",
+        "Breakfast",
+        "Parking",
+        "Gym"
+      ],
+      "phone": "+91 6288136429",
+      "website": "https://www.exploreputtaparthidwarakaplazastays.com",
+      "coordinates": {
+        "lat": 15.860460473766626,
+        "lng": 80.45703805140849
+      },
+      "city": "Puttaparthi",
+      "state": "Andhra Pradesh",
+      "reviews": [],
+      "activities": [
+        "Swimming",
+        "Spa treatment",
+        "Yoga session",
+        "Local city tour"
+      ],
+      "rooms": [
+        {
+          "type": "Standard Room",
+          "price": "₹2,500",
+          "amenities": [
+            "Queen Bed",
+            "AC",
+            "WiFi"
+          ]
+        },
+        {
+          "type": "Executive Suite",
+          "price": "₹7,500",
+          "amenities": [
+            "King Bed",
+            "AC",
+            "WiFi",
+            "Balcony"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mock-hotel-6acpgqttk",
+      "name": "Puttaparthi Deccan Highway Inn",
+      "type": "hotel",
+      "subtypes": [
+        "Luxury Hotels",
+        "Stays",
+        "Boutique Stays"
+      ],
+      "rating": 4.7,
+      "reviewCount": 129,
+      "priceLevel": 1,
+      "priceRange": "₹2,500 - ₹7,500",
+      "address": "Near City Center, Puttaparthi, Andhra Pradesh",
+      "description": "Experience a luxurious stay at the Puttaparthi Deccan Highway Inn, located in the heart of Puttaparthi. Featuring premium rooms with air conditioning, complimentary breakfast, ultra-fast WiFi, and round-the-clock room service. Perfect for both business travelers and families seeking standard amenities.",
+      "photos": [
+        "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600",
+        "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600",
+        "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600",
+        "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600"
+      ],
+      "facilities": [
+        "WiFi",
+        "AC",
+        "Breakfast",
+        "Parking",
+        "Gym"
+      ],
+      "phone": "+91 7856915643",
+      "website": "https://www.exploreputtaparthideccanhighwayinn.com",
+      "coordinates": {
+        "lat": 15.852055087925178,
+        "lng": 80.45817461353991
+      },
+      "city": "Puttaparthi",
+      "state": "Andhra Pradesh",
+      "reviews": [],
+      "activities": [
+        "Swimming",
+        "Spa treatment",
+        "Yoga session",
+        "Local city tour"
+      ],
+      "rooms": [
+        {
+          "type": "Standard Room",
+          "price": "₹2,500",
+          "amenities": [
+            "Queen Bed",
+            "AC",
+            "WiFi"
+          ]
+        },
+        {
+          "type": "Executive Suite",
+          "price": "₹7,500",
+          "amenities": [
+            "King Bed",
+            "AC",
+            "WiFi",
+            "Balcony"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mock-resort-d6e2nm5h0",
+      "name": "Puttaparthi Satya Hills Eco Resort",
+      "type": "resort",
+      "subtypes": [
+        "Resorts",
+        "Luxury Resorts",
+        "Scenic Stays"
+      ],
+      "rating": 4.7,
+      "reviewCount": 389,
+      "priceLevel": 3,
+      "priceRange": "₹8,000 - ₹22,000",
+      "address": "Near City Center, Puttaparthi, Andhra Pradesh",
+      "description": "Escape the hustle and bustle of city life at Puttaparthi Satya Hills Eco Resort. Nestled in beautiful, lush surroundings, this premium resort features private cottages, swimming pools, full-service health spas, and guided nature trails. Enjoy exquisite local cuisine and top-tier hospitality.",
+      "photos": [
+        "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600",
+        "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600",
+        "https://images.unsplash.com/photo-1610641818989-c2051b5e2cfd?w=600",
+        "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600"
+      ],
+      "facilities": [
+        "WiFi",
+        "AC",
+        "Swimming Pool",
+        "Spa",
+        "Breakfast",
+        "Parking"
+      ],
+      "phone": "+91 8620959034",
+      "website": "https://www.exploreputtaparthisatyahillsecoresort.com",
+      "coordinates": {
+        "lat": 15.855457936894265,
+        "lng": 80.46701714392648
+      },
+      "city": "Puttaparthi",
+      "state": "Andhra Pradesh",
+      "reviews": [],
+      "activities": [
+        "Swimming",
+        "Spa treatment",
+        "Yoga session",
+        "Local city tour"
+      ],
+      "rooms": [
+        {
+          "type": "Standard Room",
+          "price": "₹8,000",
+          "amenities": [
+            "Queen Bed",
+            "AC",
+            "WiFi"
+          ]
+        },
+        {
+          "type": "Executive Suite",
+          "price": "₹22,000",
+          "amenities": [
+            "King Bed",
+            "AC",
+            "WiFi",
+            "Balcony"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mock-resort-u4szv25wv",
+      "name": "Puttaparthi Haritha Valley Resorts",
+      "type": "resort",
+      "subtypes": [
+        "Resorts",
+        "Luxury Resorts",
+        "Scenic Stays"
+      ],
+      "rating": 4.3,
+      "reviewCount": 660,
+      "priceLevel": 1,
+      "priceRange": "₹8,000 - ₹22,000",
+      "address": "Near City Center, Puttaparthi, Andhra Pradesh",
+      "description": "Escape the hustle and bustle of city life at Puttaparthi Haritha Valley Resorts. Nestled in beautiful, lush surroundings, this premium resort features private cottages, swimming pools, full-service health spas, and guided nature trails. Enjoy exquisite local cuisine and top-tier hospitality.",
+      "photos": [
+        "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600",
+        "https://images.unsplash.com/photo-1610641818989-c2051b5e2cfd?w=600",
+        "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600",
+        "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600"
+      ],
+      "facilities": [
+        "WiFi",
+        "AC",
+        "Swimming Pool",
+        "Spa",
+        "Breakfast",
+        "Parking"
+      ],
+      "phone": "+91 8958643746",
+      "website": "https://www.exploreputtaparthiharithavalleyresorts.com",
+      "coordinates": {
+        "lat": 15.850103671632686,
+        "lng": 80.46937630379303
+      },
+      "city": "Puttaparthi",
+      "state": "Andhra Pradesh",
+      "reviews": [],
+      "activities": [
+        "Swimming",
+        "Spa treatment",
+        "Yoga session",
+        "Local city tour"
+      ],
+      "rooms": [
+        {
+          "type": "Standard Room",
+          "price": "₹8,000",
+          "amenities": [
+            "Queen Bed",
+            "AC",
+            "WiFi"
+          ]
+        },
+        {
+          "type": "Executive Suite",
+          "price": "₹22,000",
+          "amenities": [
+            "King Bed",
+            "AC",
+            "WiFi",
+            "Balcony"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mock-restaurant-wupsgfmjv",
+      "name": "Puttaparthi Kanakadurga Family Restaurant",
+      "type": "restaurant",
+      "subtypes": [
+        "Fine Dining",
+        "Family Restaurants",
+        "Local Flavors"
+      ],
+      "rating": 4.1,
+      "reviewCount": 751,
+      "priceLevel": 4,
+      "priceRange": "₹400 for two",
+      "address": "Near City Center, Puttaparthi, Andhra Pradesh",
+      "description": "Discover genuine traditional tastes at Puttaparthi Kanakadurga Family Restaurant, the highly recommended dining place in Puttaparthi. We serve legendary local dishes, classic curries, freshly baked breads, and mouth-watering desserts prepared by master chefs using premium local ingredients.",
+      "photos": [
+        "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600",
+        "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600",
+        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600",
+        "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600"
+      ],
+      "facilities": [
+        "AC",
+        "Parking",
+        "Veg Friendly",
+        "Accepts Cards"
+      ],
+      "phone": "+91 7614310824",
+      "website": "https://www.exploreputtaparthikanakadurgafamilyrestaurant.com",
+      "coordinates": {
+        "lat": 15.85301268748729,
+        "lng": 80.45161394812585
+      },
+      "city": "Puttaparthi",
+      "state": "Andhra Pradesh",
+      "reviews": [],
+      "menuHighlights": [
+        "Butter Chicken",
+        "Dal Makhani",
+        "Tandoori Roti",
+        "Garlic Naan"
+      ],
+      "popularFoods": [
+        "Paneer Butter Masala",
+        "Chicken Tikka",
+        "Biryani"
+      ],
+      "vegFriendly": true,
+      "nonVegFriendly": true
+    },
+    {
+      "id": "mock-restaurant-fuyhq3htj",
+      "name": "Puttaparthi Godavari Ruchulu",
+      "type": "restaurant",
+      "subtypes": [
+        "Fine Dining",
+        "Family Restaurants",
+        "Local Flavors"
+      ],
+      "rating": 4.8,
+      "reviewCount": 545,
+      "priceLevel": 2,
+      "priceRange": "₹400 for two",
+      "address": "Near City Center, Puttaparthi, Andhra Pradesh",
+      "description": "Discover genuine traditional tastes at Puttaparthi Godavari Ruchulu, the highly recommended dining place in Puttaparthi. We serve legendary local dishes, classic curries, freshly baked breads, and mouth-watering desserts prepared by master chefs using premium local ingredients.",
+      "photos": [
+        "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600",
+        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600",
+        "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600",
+        "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600"
+      ],
+      "facilities": [
+        "AC",
+        "Parking",
+        "Veg Friendly",
+        "Accepts Cards"
+      ],
+      "phone": "+91 7344848446",
+      "website": "https://www.exploreputtaparthigodavariruchulu.com",
+      "coordinates": {
+        "lat": 15.852335571031636,
+        "lng": 80.45241263721168
+      },
+      "city": "Puttaparthi",
+      "state": "Andhra Pradesh",
+      "reviews": [],
+      "menuHighlights": [
+        "Butter Chicken",
+        "Dal Makhani",
+        "Tandoori Roti",
+        "Garlic Naan"
+      ],
+      "popularFoods": [
+        "Paneer Butter Masala",
+        "Chicken Tikka",
+        "Biryani"
+      ],
+      "vegFriendly": true,
+      "nonVegFriendly": true
+    },
+    {
+      "id": "mock-restaurant-kuhu6db4a",
+      "name": "Puttaparthi Sri Lakshmi Pure Veg",
+      "type": "restaurant",
+      "subtypes": [
+        "Fine Dining",
+        "Family Restaurants",
+        "Local Flavors"
+      ],
+      "rating": 4.4,
+      "reviewCount": 821,
+      "priceLevel": 2,
+      "priceRange": "₹400 for two",
+      "address": "Near City Center, Puttaparthi, Andhra Pradesh",
+      "description": "Discover genuine traditional tastes at Puttaparthi Sri Lakshmi Pure Veg, the highly recommended dining place in Puttaparthi. We serve legendary local dishes, classic curries, freshly baked breads, and mouth-watering desserts prepared by master chefs using premium local ingredients.",
+      "photos": [
+        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600",
+        "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600",
+        "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600",
+        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600"
+      ],
+      "facilities": [
+        "AC",
+        "Parking",
+        "Veg Friendly",
+        "Accepts Cards"
+      ],
+      "phone": "+91 9177473776",
+      "website": "https://www.exploreputtaparthisrilakshmipureveg.com",
+      "coordinates": {
+        "lat": 15.852252099011194,
+        "lng": 80.46742370486889
+      },
+      "city": "Puttaparthi",
+      "state": "Andhra Pradesh",
+      "reviews": [],
+      "menuHighlights": [
+        "Butter Chicken",
+        "Dal Makhani",
+        "Tandoori Roti",
+        "Garlic Naan"
+      ],
+      "popularFoods": [
+        "Paneer Butter Masala",
+        "Chicken Tikka",
+        "Biryani"
+      ],
+      "vegFriendly": true,
+      "nonVegFriendly": true
+    },
+    {
+      "id": "mock-cafe-0xsbm1dqk",
+      "name": "Puttaparthi Filter Kaapi Club",
+      "type": "cafe",
+      "subtypes": [
+        "Cafes",
+        "Hangout Places",
+        "Coffee Shops"
+      ],
+      "rating": 4.8,
+      "reviewCount": 77,
+      "priceLevel": 3,
+      "priceRange": "₹200 for two",
+      "address": "Near City Center, Puttaparthi, Andhra Pradesh",
+      "description": "Relax and unwind at Puttaparthi Filter Kaapi Club. A cozy, modern cafe offering coffee, tea, delicious snacks, and a quiet ambiance perfect for reading, remote working, or meeting friends. Features great indoor music and outdoor seating.",
+      "photos": [
+        "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600",
+        "https://images.unsplash.com/photo-1498804103079-a6351b050096?w=600",
+        "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600",
+        "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600"
+      ],
+      "facilities": [
+        "WiFi",
+        "AC",
+        "Outdoor Seating",
+        "Veg Friendly"
+      ],
+      "phone": "+91 7200063179",
+      "website": "https://www.exploreputtaparthifilterkaapiclub.com",
+      "coordinates": {
+        "lat": 15.85301330883384,
+        "lng": 80.46313838559301
+      },
+      "city": "Puttaparthi",
+      "state": "Andhra Pradesh",
+      "reviews": [],
+      "menuHighlights": [
+        "Butter Chicken",
+        "Dal Makhani",
+        "Tandoori Roti",
+        "Garlic Naan"
+      ],
+      "popularFoods": [
+        "Paneer Butter Masala",
+        "Chicken Tikka",
+        "Biryani"
+      ],
+      "vegFriendly": true,
+      "nonVegFriendly": false
+    },
+    {
+      "id": "mock-cafe-hb3ggwblz",
+      "name": "Puttaparthi Deccan Brews Cafe",
+      "type": "cafe",
+      "subtypes": [
+        "Cafes",
+        "Hangout Places",
+        "Coffee Shops"
+      ],
+      "rating": 4.3,
+      "reviewCount": 978,
+      "priceLevel": 2,
+      "priceRange": "₹200 for two",
+      "address": "Near City Center, Puttaparthi, Andhra Pradesh",
+      "description": "Relax and unwind at Puttaparthi Deccan Brews Cafe. A cozy, modern cafe offering coffee, tea, delicious snacks, and a quiet ambiance perfect for reading, remote working, or meeting friends. Features great indoor music and outdoor seating.",
+      "photos": [
+        "https://images.unsplash.com/photo-1498804103079-a6351b050096?w=600",
+        "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600",
+        "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600",
+        "https://images.unsplash.com/photo-1498804103079-a6351b050096?w=600"
+      ],
+      "facilities": [
+        "WiFi",
+        "AC",
+        "Outdoor Seating",
+        "Veg Friendly"
+      ],
+      "phone": "+91 8032425954",
+      "website": "https://www.exploreputtaparthideccanbrewscafe.com",
+      "coordinates": {
+        "lat": 15.854622167032119,
+        "lng": 80.45151094281574
+      },
+      "city": "Puttaparthi",
+      "state": "Andhra Pradesh",
+      "reviews": [],
+      "menuHighlights": [
+        "Butter Chicken",
+        "Dal Makhani",
+        "Tandoori Roti",
+        "Garlic Naan"
+      ],
+      "popularFoods": [
+        "Paneer Butter Masala",
+        "Chicken Tikka",
+        "Biryani"
+      ],
+      "vegFriendly": true,
+      "nonVegFriendly": false
+    },
+    {
+      "id": "mock-attraction-4mo0lkwjj",
+      "name": "Puttaparthi Freshwater Lake Basin",
+      "type": "attraction",
+      "subtypes": [
+        "Scenic Points",
+        "Lakes & Water Bodies",
+        "Boating Ghats"
+      ],
+      "rating": 4.6,
+      "reviewCount": 759,
+      "priceLevel": 4,
+      "priceRange": "₹0 - ₹150",
+      "address": "Near City Center, Puttaparthi, Andhra Pradesh",
+      "description": "Visit the beautiful Puttaparthi Freshwater Lake Basin, a popular and scenic waterfront destination in Puttaparthi. Famous for its peaceful nature walks, sunset viewing spots, and recreational boating activities.",
+      "photos": [
+        "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600",
+        "https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=600",
+        "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=600",
+        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600"
+      ],
+      "facilities": [
+        "Boating",
+        "Scenic Walking Path",
+        "Sunset Viewpoint",
+        "Food Stalls"
+      ],
+      "phone": "+91 8310328446",
+      "website": "https://www.exploreputtaparthifreshwaterlakebasin.com",
+      "coordinates": {
+        "lat": 15.861338301928757,
+        "lng": 80.46808813221355
+      },
+      "city": "Puttaparthi",
+      "state": "Andhra Pradesh",
+      "reviews": [],
+      "activities": [
+        "Swimming",
+        "Spa treatment",
+        "Yoga session",
+        "Local city tour"
+      ],
+      "rooms": [
+        {
+          "type": "Standard Room",
+          "price": "₹0",
+          "amenities": [
+            "Queen Bed",
+            "AC",
+            "WiFi"
+          ]
+        },
+        {
+          "type": "Executive Suite",
+          "price": "₹150",
+          "amenities": [
+            "King Bed",
+            "AC",
+            "WiFi",
+            "Balcony"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mock-temple-oj7s0dxkg",
+      "name": "Puttaparthi Sri Rama Temple Hill Temple",
+      "type": "temple",
+      "subtypes": [
+        "Spiritual Sites",
+        "Temples",
+        "Heritage Shrines"
+      ],
+      "rating": 4.6,
+      "reviewCount": 807,
+      "priceLevel": 3,
+      "priceRange": "₹0 - ₹250",
+      "address": "Near City Center, Puttaparthi, Andhra Pradesh",
+      "description": "Experience the serene and divine atmosphere at Puttaparthi Sri Rama Temple Hill Temple. A legendary temple complex with ancient architectural carvings, peaceful prayer halls, and rich spiritual history in Puttaparthi. Visitors are requested to follow traditional custom guidelines.",
+      "photos": [
+        "https://images.unsplash.com/photo-1616038242814-a6eac7845d88?w=600",
+        "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=600",
+        "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=600",
+        "https://images.unsplash.com/photo-1616038242814-a6eac7845d88?w=600"
+      ],
+      "facilities": [
+        "Parking",
+        "Guided Tours",
+        "Shoe Keeping Area",
+        "Prasadam Allowed"
+      ],
+      "phone": "+91 6516267488",
+      "website": "https://www.exploreputtaparthisriramatemplehilltemple.com",
+      "coordinates": {
+        "lat": 15.85069129700117,
+        "lng": 80.45825460698059
+      },
+      "city": "Puttaparthi",
+      "state": "Andhra Pradesh",
+      "reviews": [],
+      "activities": [
+        "Swimming",
+        "Spa treatment",
+        "Yoga session",
+        "Local city tour"
+      ],
+      "rooms": [
+        {
+          "type": "Standard Room",
+          "price": "₹0",
+          "amenities": [
+            "Queen Bed",
+            "AC",
+            "WiFi"
+          ]
+        },
+        {
+          "type": "Executive Suite",
+          "price": "₹250",
+          "amenities": [
+            "King Bed",
+            "AC",
+            "WiFi",
+            "Balcony"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mock-temple-oba26info",
+      "name": "Puttaparthi Durga Mata Mandir Swamy Devasthanam",
+      "type": "temple",
+      "subtypes": [
+        "Spiritual Sites",
+        "Temples",
+        "Heritage Shrines"
+      ],
+      "rating": 4.7,
+      "reviewCount": 550,
+      "priceLevel": 4,
+      "priceRange": "₹0 - ₹250",
+      "address": "Near City Center, Puttaparthi, Andhra Pradesh",
+      "description": "Experience the serene and divine atmosphere at Puttaparthi Durga Mata Mandir Swamy Devasthanam. A legendary temple complex with ancient architectural carvings, peaceful prayer halls, and rich spiritual history in Puttaparthi. Visitors are requested to follow traditional custom guidelines.",
+      "photos": [
+        "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=600",
+        "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=600",
+        "https://images.unsplash.com/photo-1616038242814-a6eac7845d88?w=600",
+        "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=600"
+      ],
+      "facilities": [
+        "Parking",
+        "Guided Tours",
+        "Shoe Keeping Area",
+        "Prasadam Allowed"
+      ],
+      "phone": "+91 7610867685",
+      "website": "https://www.exploreputtaparthidurgamatamandirswamydevasthanam.com",
+      "coordinates": {
+        "lat": 15.857548418267719,
+        "lng": 80.46054320526046
+      },
+      "city": "Puttaparthi",
+      "state": "Andhra Pradesh",
+      "reviews": [],
+      "activities": [
+        "Swimming",
+        "Spa treatment",
+        "Yoga session",
+        "Local city tour"
+      ],
+      "rooms": [
+        {
+          "type": "Standard Room",
+          "price": "₹0",
+          "amenities": [
+            "Queen Bed",
+            "AC",
+            "WiFi"
+          ]
+        },
+        {
+          "type": "Executive Suite",
+          "price": "₹250",
+          "amenities": [
+            "King Bed",
+            "AC",
+            "WiFi",
+            "Balcony"
+          ]
+        }
+      ]
     }
   ],
   "reviews": [

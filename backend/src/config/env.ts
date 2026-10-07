@@ -3,14 +3,26 @@ import fs from "fs";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const getModuleDir = (): string => {
+  try {
+    if (typeof __dirname !== "undefined") return __dirname;
+    if (typeof import.meta !== "undefined" && import.meta?.url) {
+      return path.dirname(fileURLToPath(import.meta.url));
+    }
+  } catch {
+    // ignore
+  }
+  return process.cwd();
+};
+
+const moduleDir = getModuleDir();
 
 // Load environment variables reliably from backend or root directory
 const possibleEnvPaths = [
   path.resolve(process.cwd(), ".env.local"),
-  path.resolve(__dirname, "../../.env.local"),
-  path.resolve(__dirname, "../../.env"),
+  path.resolve(moduleDir, "../../.env.local"),
+  path.resolve(moduleDir, "../../.env"),
+  path.resolve(moduleDir, "../.env"),
   path.resolve(process.cwd(), ".env")
 ];
 

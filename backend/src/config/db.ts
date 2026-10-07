@@ -3,16 +3,27 @@ import fs from "fs";
 import { fileURLToPath } from "url";
 import { Database } from "../models/types";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const getModuleDir = (): string => {
+  try {
+    if (typeof __dirname !== "undefined") return __dirname;
+    if (typeof import.meta !== "undefined" && import.meta?.url) {
+      return path.dirname(fileURLToPath(import.meta.url));
+    }
+  } catch {
+    // ignore
+  }
+  return process.cwd();
+};
+
+const moduleDir = getModuleDir();
 
 // Determine database file path reliably
 function resolveDbPath(): string {
   const possiblePaths = [
     path.resolve(process.cwd(), "data_store.json"),
     path.resolve(process.cwd(), "backend", "data_store.json"),
-    path.resolve(__dirname, "../../data_store.json"),
-    path.resolve(__dirname, "../../../data_store.json")
+    path.resolve(moduleDir, "../../data_store.json"),
+    path.resolve(moduleDir, "../../../data_store.json")
   ];
 
   for (const p of possiblePaths) {
