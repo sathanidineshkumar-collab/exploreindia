@@ -42,4 +42,7 @@ app.use(apiRoutes);
 // Central error handler
 app.use(errorHandler);
 
-export default app;
+// Export default standard handler for serverless runtimes (Vercel, AWS Lambda)
+export default function handler(req: any, res: any) {
+  return app(req, res);
+}
