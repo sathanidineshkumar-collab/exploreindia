@@ -13,7 +13,11 @@ import {
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ExploreMap from "./components/ExploreMap";
-import { FALLBACK_IMAGE, FALLBACK_AVATAR } from "./constants";
+import { 
+  FALLBACK_IMAGE, FALLBACK_AVATAR, 
+  DEFAULT_CITIES, DEFAULT_TIPS, DEFAULT_HOTELS, 
+  generateClientDiscovery 
+} from "./constants";
 import { getApiUrl } from "./services/api";
 
 export { FALLBACK_IMAGE, FALLBACK_AVATAR };
@@ -83,9 +87,9 @@ export default function App() {
   // Active View & Data state
   const [activeView, setActiveView] = useState<string>("home");
   const [activeViewData, setActiveViewData] = useState<any>(null);
-  const [trendingCities, setTrendingCities] = useState<CityInfo[]>([]);
-  const [famousHotels, setFamousHotels] = useState<Place[]>([]);
-  const [travelTips, setTravelTips] = useState<TravelTip[]>([]);
+  const [trendingCities, setTrendingCities] = useState<CityInfo[]>(DEFAULT_CITIES);
+  const [famousHotels, setFamousHotels] = useState<Place[]>(DEFAULT_HOTELS);
+  const [travelTips, setTravelTips] = useState<TravelTip[]>(DEFAULT_TIPS);
 
   // Search results state
   const [searchQuery, setSearchQuery] = useState("");
@@ -188,25 +192,25 @@ export default function App() {
   // Load trending cities, tips & famous hotels on startup
   useEffect(() => {
     fetch(getApiUrl("/api/cities/trending"))
-      .then(res => res.json())
+      .then(res => (res.ok ? res.json() : null))
       .then(data => {
-        if (Array.isArray(data)) setTrendingCities(data);
+        if (Array.isArray(data) && data.length > 0) setTrendingCities(data);
       })
-      .catch(err => console.error(err));
+      .catch(err => console.warn("Default cities used:", err));
 
     fetch(getApiUrl("/api/tips"))
-      .then(res => res.json())
+      .then(res => (res.ok ? res.json() : null))
       .then(data => {
-        if (Array.isArray(data)) setTravelTips(data);
+        if (Array.isArray(data) && data.length > 0) setTravelTips(data);
       })
-      .catch(err => console.error(err));
+      .catch(err => console.warn("Default tips used:", err));
 
     fetch(getApiUrl("/api/hotels/famous"))
-      .then(res => res.json())
+      .then(res => (res.ok ? res.json() : null))
       .then(data => {
-        if (Array.isArray(data)) setFamousHotels(data);
+        if (Array.isArray(data) && data.length > 0) setFamousHotels(data);
       })
-      .catch(err => console.error(err));
+      .catch(err => console.warn("Default hotels used:", err));
   }, []);
 
   // Fetch full profile data when visiting profile view
@@ -467,28 +471,45 @@ export default function App() {
         headers["x-user-id"] = user.id;
       }
 
-      const res = await fetch(getApiUrl("/api/discover"), {
-        method: "POST",
-        headers,
-        body: JSON.stringify(payload)
-      });
-      const data = await res.json();
-      
-      if (data.city) {
+      let data: any = null;
+      try {
+        const res = await fetch(getApiUrl("/api/discover"), {
+          method: "POST",
+          headers,
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          data = await res.json();
+        }
+      } catch (netErr) {
+        console.warn("Backend API not reachable, activating client discovery fallback:", netErr);
+      }
+
+      // If backend was unreachable or returned empty, use client-side discovery fallback
+      if (!data || !data.city) {
+        data = generateClientDiscovery(cityQuery, preDefinedCoords);
+      }
+
+      if (data && data.city) {
         setSelectedCity(data.city);
         setPlaces(data.places || []);
         setSelectedPlace(data.places?.[0] || null);
         setShowDirectionsOnMap(false);
         setActiveView("search");
-        if (data.suggestedTab) {
+        if (forceTab) {
+          setResultsTab(forceTab);
+        } else if (data.suggestedTab) {
           setResultsTab(data.suggestedTab as any);
         }
-      } else {
-        alert(data.error || "Failed to find location. Please check spelling.");
       }
-    } catch (e) {
-      console.error(e);
-      alert("Network error or slow connection. Please try again.");
+    } catch (e: any) {
+      console.warn("Search fallback activated due to:", e);
+      const fallback = generateClientDiscovery(cityQuery, preDefinedCoords);
+      setSelectedCity(fallback.city);
+      setPlaces(fallback.places);
+      setSelectedPlace(fallback.places[0] || null);
+      setShowDirectionsOnMap(false);
+      setActiveView("search");
     } finally {
       setIsSearching(false);
     }

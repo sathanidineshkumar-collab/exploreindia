@@ -9,9 +9,9 @@ const __dirname = path.dirname(__filename);
 // Determine database file path reliably
 function resolveDbPath(): string {
   const possiblePaths = [
-    path.resolve(__dirname, "../../data_store.json"),
-    path.resolve(process.cwd(), "backend", "data_store.json"),
     path.resolve(process.cwd(), "data_store.json"),
+    path.resolve(process.cwd(), "backend", "data_store.json"),
+    path.resolve(__dirname, "../../data_store.json"),
     path.resolve(__dirname, "../../../data_store.json")
   ];
 

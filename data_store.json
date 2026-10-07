@@ -434,7 +434,7 @@
         "Famous Food Places"
       ],
       "rating": 5,
-      "reviewCount": 6,
+      "reviewCount": 5,
       "priceLevel": 4,
       "priceRange": "₹3,500 for two",
       "address": "The Golkonda Resort, Gandipet, Hyderabad 500075",
@@ -1627,17 +1627,6 @@
       "text": "Exceptional ambiance, delicious regional cuisine, and hospitable staff!",
       "date": "7 Oct 2026",
       "approved": true
-    },
-    {
-      "id": "r-xwi27feno",
-      "placeId": "p-hyd-1",
-      "userId": "user-id",
-      "userName": "Dinesh Kumar",
-      "userAvatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150",
-      "rating": 5,
-      "text": "Exceptional ambiance, delicious regional cuisine, and hospitable staff!",
-      "date": "7 Oct 2026",
-      "approved": true
     }
   ],
   "searchHistory": [
@@ -1780,14 +1769,6 @@
       "type": "success",
       "read": false,
       "date": "2026-10-07T11:44:36.555Z"
-    },
-    {
-      "id": "notif-gg8kqiy2x",
-      "userId": "user-id",
-      "text": "Your review for Jewel of Nizams - Minar has been approved by the admin!",
-      "type": "success",
-      "read": false,
-      "date": "2026-10-07T12:30:35.516Z"
     }
   ],
   "cities": [
@@ -12225,48 +12206,6 @@
       ],
       "notes": {},
       "createdAt": "2026-10-07T11:44:36.374Z"
-    },
-    {
-      "id": "t-fvtwq4ej3",
-      "userId": "user-id",
-      "name": "Hyderabad Heritage Journey",
-      "destination": "Hyderabad",
-      "days": 3,
-      "itinerary": [
-        {
-          "day": 1,
-          "places": [
-            {
-              "id": "p-hyd-1",
-              "name": "Jewel of Nizams - Minar",
-              "type": "restaurant",
-              "rating": 5,
-              "reviewCount": 5,
-              "photos": [
-                "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600",
-                "https://images.unsplash.com/photo-1601050690597-df056fb4ce78?w=600"
-              ],
-              "address": "The Golkonda Resort, Gandipet, Hyderabad 500075",
-              "city": "Hyderabad",
-              "state": "Telangana",
-              "coordinates": {
-                "lat": 17.382,
-                "lng": 78.3032
-              }
-            }
-          ]
-        },
-        {
-          "day": 2,
-          "places": []
-        },
-        {
-          "day": 3,
-          "places": []
-        }
-      ],
-      "notes": {},
-      "createdAt": "2026-10-07T12:30:35.412Z"
     }
   ],
   "bookings": [
@@ -12339,20 +12278,6 @@
       "time": "14:00",
       "status": "confirmed",
       "createdAt": "2026-10-07T11:44:36.476Z"
-    },
-    {
-      "id": "b-8qosc7cj5",
-      "userId": "user-id",
-      "placeId": "p-hyd-1",
-      "placeName": "Jewel of Nizams - Minar",
-      "placePhoto": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600",
-      "city": "Hyderabad",
-      "date": "2026-11-10",
-      "dateOut": "2026-11-15",
-      "guests": 2,
-      "time": "14:00",
-      "status": "confirmed",
-      "createdAt": "2026-10-07T12:30:35.480Z"
     }
   ]
 }
