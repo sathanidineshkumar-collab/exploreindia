@@ -11,9 +11,12 @@
     "skipLibCheck": true,
     "allowJs": true,
     "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
     "noEmit": true
   },
   "include": [
+    "api/**/*",
     "frontend/src/**/*",
     "backend/src/**/*",
     "scripts/**/*",
