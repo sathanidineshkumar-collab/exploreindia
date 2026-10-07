@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { 
   Compass, Bell, User as UserIcon, LogOut, Shield, 
-  MapPin, Heart, History, Settings, Sun, Moon, Sparkles, Menu, X 
+  MapPin, Heart, History, Settings, Sun, Moon, Sparkles, Menu, X, Calendar 
 } from "lucide-react";
 import { User, Notification } from "../types";
+import { getApiUrl } from "../services/api";
 
 interface NavbarProps {
   user: User | null;
@@ -32,7 +33,7 @@ export default function Navbar({
   // Fetch notifications if logged in
   useEffect(() => {
     if (user) {
-      fetch("/api/notifications", {
+      fetch(getApiUrl("/api/notifications"), {
         headers: { "Authorization": `Bearer ${user.token}` }
       })
         .then(res => res.json())
@@ -48,7 +49,7 @@ export default function Navbar({
   const handleMarkAllRead = async () => {
     if (!user) return;
     try {
-      await fetch("/api/notifications/read-all", {
+      await fetch(getApiUrl("/api/notifications/read-all"), {
         method: "POST",
         headers: { "Authorization": `Bearer ${user.token}` }
       });
@@ -61,7 +62,7 @@ export default function Navbar({
   const navLinks = [
     { view: "home", label: "Home" },
     { view: "search", label: "Explore" },
-    { view: "profile-favorites", label: "Trips" },
+    { view: "trips", label: "Trips" },
     { view: "tips", label: "Travel Tips" }
   ];
 
@@ -104,15 +105,9 @@ export default function Navbar({
             {navLinks.map((link) => (
               <button
                 key={link.view}
-                onClick={() => {
-                  if (link.view === "profile-favorites" && !user) {
-                    onOpenAuth();
-                  } else {
-                    onNavigate(link.view);
-                  }
-                }}
+                onClick={() => onNavigate(link.view)}
                 className={`px-3 py-2 rounded-lg font-sans text-sm font-medium transition-all ${
-                  activeView === link.view || (link.view === "profile-favorites" && activeView === "profile")
+                  activeView === link.view
                     ? "text-[#004F32] dark:text-[#34E0A1] font-semibold bg-gray-100 dark:bg-slate-800"
                     : "text-gray-600 dark:text-gray-300 hover:text-[#004F32] dark:hover:text-[#34E0A1] hover:bg-gray-50 dark:hover:bg-slate-800"
                 }`}
@@ -240,19 +235,25 @@ export default function Navbar({
                         onClick={() => { onNavigate("profile"); setShowUserMenu(false); }}
                         className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left text-xs text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-all"
                       >
-                        <UserIcon className="w-4 h-4 text-gray-400" /> My Profile & Favorites
+                        <UserIcon className="w-4 h-4 text-gray-400" /> My Profile
+                      </button>
+                      <button
+                        onClick={() => { onNavigate("profile", { tab: "favorites" }); setShowUserMenu(false); }}
+                        className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left text-xs text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-all"
+                      >
+                        <Heart className="w-4 h-4 text-gray-400" /> Saved Favorites
+                      </button>
+                      <button
+                        onClick={() => { onNavigate("profile", { tab: "bookings" }); setShowUserMenu(false); }}
+                        className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left text-xs text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-all"
+                      >
+                        <Calendar className="w-4 h-4 text-gray-400" /> My Bookings
                       </button>
                       <button
                         onClick={() => { onNavigate("profile", { tab: "history" }); setShowUserMenu(false); }}
                         className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left text-xs text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-all"
                       >
                         <History className="w-4 h-4 text-gray-400" /> Search History
-                      </button>
-                      <button
-                        onClick={() => { onNavigate("profile", { tab: "favorites" }); setShowUserMenu(false); }}
-                        className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left text-xs text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-all"
-                      >
-                        <Heart className="w-4 h-4 text-gray-400" /> Favorites List
                       </button>
                     </div>
                     <div className="p-1 border-t border-gray-100 dark:border-slate-800">
@@ -294,14 +295,10 @@ export default function Navbar({
               key={link.view}
               onClick={() => {
                 setMobileMenuOpen(false);
-                if (link.view === "profile-favorites" && !user) {
-                  onOpenAuth();
-                } else {
-                  onNavigate(link.view);
-                }
+                onNavigate(link.view);
               }}
               className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                activeView === link.view || (link.view === "profile-favorites" && activeView === "profile")
+                activeView === link.view
                   ? "bg-gray-100 dark:bg-slate-800 text-[#004F32] dark:text-[#34E0A1] font-semibold"
                   : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-800"
               }`}

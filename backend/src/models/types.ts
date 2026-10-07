@@ -8,6 +8,8 @@ export interface User {
   isVerified: boolean;
   avatar?: string;
   token?: string;
+  passwordHash?: string;
+  otpCode?: string;
   favorites?: string[]; // list of placeIds
 }
 
@@ -34,11 +36,11 @@ export interface Place {
   id: string;
   name: string;
   type: PlaceType;
-  subtypes: string[]; // e.g., ['Luxury Hotels', 'Hill Resorts', 'Veg Friendly', 'Fine Dining']
+  subtypes: string[];
   rating: number;
   reviewCount: number;
-  priceLevel: number; // 1 to 4 stars ($ to $$$$)
-  priceRange?: string; // e.g., '₹1,500 - ₹3,000' or '₹500 for two'
+  priceLevel: number;
+  priceRange?: string;
   address: string;
   description: string;
   photos: string[];
@@ -106,4 +108,56 @@ export interface AnalyticsData {
   searchesCount: number;
   placesByType: Record<PlaceType, number>;
   popularCities: { name: string; count: number }[];
+}
+
+export interface TripPlace {
+  placeId: string;
+  name: string;
+  type: PlaceType;
+  city: string;
+  photo?: string;
+  notes?: string;
+}
+
+export interface Trip {
+  id: string;
+  userId: string;
+  name: string;
+  destination: string;
+  days: number;
+  itinerary: { day: number; places: any[] }[];
+  notes?: Record<string, string>;
+  createdAt: string;
+}
+
+export interface Booking {
+  id: string;
+  userId: string;
+  placeId: string;
+  placeName: string;
+  placePhoto?: string;
+  city?: string;
+  date: string;
+  dateOut?: string;
+  guests: number;
+  time?: string;
+  status: string;
+  createdAt: string;
+  placeType?: PlaceType;
+  checkIn?: string;
+  checkOut?: string;
+  roomType?: string;
+  totalPrice?: string;
+}
+
+export interface Database {
+  users: User[];
+  places: Place[];
+  reviews: Review[];
+  searchHistory: SearchHistory[];
+  notifications: Notification[];
+  cities: CityInfo[];
+  travelTips: TravelTip[];
+  trips?: Trip[];
+  bookings?: Booking[];
 }

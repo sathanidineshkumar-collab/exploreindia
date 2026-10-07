@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const DB_FILE = path.join(__dirname, 'data_store.json');
+const DB_FILE = path.resolve(__dirname, '../backend/data_store.json');
 
 // Read existing DB to preserve users, notifications etc.
 let dbData = {

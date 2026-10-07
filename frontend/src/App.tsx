@@ -14,6 +14,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ExploreMap from "./components/ExploreMap";
 import { FALLBACK_IMAGE, FALLBACK_AVATAR } from "./constants";
+import { getApiUrl } from "./services/api";
 
 export { FALLBACK_IMAGE, FALLBACK_AVATAR };
 
@@ -186,21 +187,21 @@ export default function App() {
 
   // Load trending cities, tips & famous hotels on startup
   useEffect(() => {
-    fetch("/api/cities/trending")
+    fetch(getApiUrl("/api/cities/trending"))
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) setTrendingCities(data);
       })
       .catch(err => console.error(err));
 
-    fetch("/api/tips")
+    fetch(getApiUrl("/api/tips"))
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) setTravelTips(data);
       })
       .catch(err => console.error(err));
 
-    fetch("/api/hotels/famous")
+    fetch(getApiUrl("/api/hotels/famous"))
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) setFamousHotels(data);
@@ -211,7 +212,7 @@ export default function App() {
   // Fetch full profile data when visiting profile view
   useEffect(() => {
     if (activeView === "profile" && user) {
-      fetch("/api/user/profile", {
+      fetch(getApiUrl("/api/user/profile"), {
         headers: { "Authorization": `Bearer ${user.token}` }
       })
         .then(res => res.json())
@@ -225,7 +226,7 @@ export default function App() {
   // Load user trips
   useEffect(() => {
     if (user) {
-      fetch("/api/trips", {
+      fetch(getApiUrl("/api/trips"), {
         headers: { "Authorization": `Bearer ${user.token}` }
       })
         .then(res => {
@@ -260,7 +261,7 @@ export default function App() {
   // Load user bookings
   useEffect(() => {
     if (user) {
-      fetch("/api/bookings", {
+      fetch(getApiUrl("/api/bookings"), {
         headers: { "Authorization": `Bearer ${user.token}` }
       })
         .then(res => {
@@ -279,7 +280,7 @@ export default function App() {
     if (activeView === "details" && selectedPlace?.id) {
       setActivePhotoIndex(0);
       setBookingSuccess(false);
-      fetch(`/api/places/${selectedPlace.id}`)
+      fetch(getApiUrl(`/api/places/${selectedPlace.id}`))
         .then(res => {
           if (res.ok) return res.json();
           throw new Error("Failed to fetch place details");
@@ -293,7 +294,7 @@ export default function App() {
   useEffect(() => {
     if (activeView === "admin" && user && user.role === "admin") {
       // Analytics
-      fetch("/api/admin/analytics", {
+      fetch(getApiUrl("/api/admin/analytics"), {
         headers: { "Authorization": `Bearer ${user.token}` }
       })
         .then(res => res.json())
@@ -301,7 +302,7 @@ export default function App() {
         .catch(err => console.error(err));
 
       // Places list
-      fetch("/api/admin/places", {
+      fetch(getApiUrl("/api/admin/places"), {
         headers: { "Authorization": `Bearer ${user.token}` }
       })
         .then(res => res.json())
@@ -309,7 +310,7 @@ export default function App() {
         .catch(err => console.error(err));
 
       // Users list
-      fetch("/api/admin/users", {
+      fetch(getApiUrl("/api/admin/users"), {
         headers: { "Authorization": `Bearer ${user.token}` }
       })
         .then(res => res.json())
@@ -317,7 +318,7 @@ export default function App() {
         .catch(err => console.error(err));
 
       // Pending reviews
-      fetch("/api/admin/reviews/pending", {
+      fetch(getApiUrl("/api/admin/reviews/pending"), {
         headers: { "Authorization": `Bearer ${user.token}` }
       })
         .then(res => res.json())
@@ -466,7 +467,7 @@ export default function App() {
         headers["x-user-id"] = user.id;
       }
 
-      const res = await fetch("/api/discover", {
+      const res = await fetch(getApiUrl("/api/discover"), {
         method: "POST",
         headers,
         body: JSON.stringify(payload)
@@ -502,7 +503,7 @@ export default function App() {
     }
 
     try {
-      const res = await fetch("/api/favorites/toggle", {
+      const res = await fetch(getApiUrl("/api/favorites/toggle"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -524,7 +525,7 @@ export default function App() {
 
         // Re-fetch profile data if on profile view
         if (activeView === "profile") {
-          fetch("/api/user/profile", {
+          fetch(getApiUrl("/api/user/profile"), {
             headers: { "Authorization": `Bearer ${user.token}` }
           })
             .then(res => res.json())
@@ -546,7 +547,7 @@ export default function App() {
     if (!selectedPlace) return;
 
     try {
-      const res = await fetch("/api/reviews", {
+      const res = await fetch(getApiUrl("/api/reviews"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -564,7 +565,7 @@ export default function App() {
         setReviewMessage(data.message);
         
         // Reload details to capture new reviews if immediately approved
-        fetch(`/api/places/${selectedPlace.id}`)
+        fetch(getApiUrl(`/api/places/${selectedPlace.id}`))
           .then(r => r.json())
           .then(p => setSelectedPlace(p));
 
@@ -585,7 +586,7 @@ export default function App() {
 
     try {
       if (authModal.mode === "login") {
-        const res = await fetch("/api/auth/login", {
+        const res = await fetch(getApiUrl("/api/auth/login"), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -603,7 +604,7 @@ export default function App() {
           setAuthError(data.error || "Login failed");
         }
       } else if (authModal.mode === "signup") {
-        const res = await fetch("/api/auth/signup", {
+        const res = await fetch(getApiUrl("/api/auth/signup"), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -626,7 +627,7 @@ export default function App() {
           setAuthError(data.error || "Registration failed");
         }
       } else if (authModal.mode === "verify") {
-        const res = await fetch("/api/auth/verify-otp", {
+        const res = await fetch(getApiUrl("/api/auth/verify-otp"), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -647,7 +648,7 @@ export default function App() {
           setAuthError(data.error || "Verification failed");
         }
       } else if (authModal.mode === "forgot") {
-        const res = await fetch("/api/auth/forgot-password", {
+        const res = await fetch(getApiUrl("/api/auth/forgot-password"), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: authInputs.email })
@@ -665,7 +666,7 @@ export default function App() {
           setAuthError(data.error || "Failed to process forgot password");
         }
       } else if (authModal.mode === "reset") {
-        const res = await fetch("/api/auth/reset-password", {
+        const res = await fetch(getApiUrl("/api/auth/reset-password"), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -776,7 +777,7 @@ export default function App() {
     e.preventDefault();
     if (!user) return;
     try {
-      const res = await fetch("/api/trips", {
+      const res = await fetch(getApiUrl("/api/trips"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -808,7 +809,7 @@ export default function App() {
     if (!user) return;
     if (!confirm("Are you sure you want to delete this trip planner?")) return;
     try {
-      const res = await fetch(`/api/trips/${tripId}`, {
+      const res = await fetch(getApiUrl(`/api/trips/${tripId}`), {
         method: "DELETE",
         headers: { "Authorization": `Bearer ${user.token}` }
       });
@@ -830,7 +831,7 @@ export default function App() {
   const handleAddPlaceToTrip = async (tripId: string, day: number) => {
     if (!user || !selectedPlace) return;
     try {
-      const res = await fetch(`/api/trips/${tripId}/add-place`, {
+      const res = await fetch(getApiUrl(`/api/trips/${tripId}/add-place`), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -856,7 +857,7 @@ export default function App() {
   const handleRemovePlaceFromTrip = async (tripId: string, placeId: string, day: number) => {
     if (!user) return;
     try {
-      const res = await fetch(`/api/trips/${tripId}/remove-place`, {
+      const res = await fetch(getApiUrl(`/api/trips/${tripId}/remove-place`), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -877,7 +878,7 @@ export default function App() {
   const handleUpdateTripNotes = async (tripId: string, day: number, noteText: string) => {
     if (!user) return;
     try {
-      const res = await fetch(`/api/trips/${tripId}/update-notes`, {
+      const res = await fetch(getApiUrl(`/api/trips/${tripId}/update-notes`), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -904,7 +905,7 @@ export default function App() {
     }
 
     try {
-      const res = await fetch("/api/bookings", {
+      const res = await fetch(getApiUrl("/api/bookings"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -936,7 +937,7 @@ export default function App() {
     if (!confirm("Are you sure you want to cancel this reservation?")) return;
 
     try {
-      const res = await fetch(`/api/bookings/${bookingId}`, {
+      const res = await fetch(getApiUrl(`/api/bookings/${bookingId}`), {
         method: "DELETE",
         headers: { "Authorization": `Bearer ${user.token}` }
       });
@@ -955,7 +956,7 @@ export default function App() {
   // Admin Actions
   const handleApproveReview = async (id: string) => {
     try {
-      const res = await fetch(`/api/admin/reviews/approve/${id}`, {
+      const res = await fetch(getApiUrl(`/api/admin/reviews/approve/${id}`), {
         method: "POST",
         headers: { "Authorization": `Bearer ${user?.token}` }
       });
@@ -971,7 +972,7 @@ export default function App() {
 
   const handleDeleteReview = async (id: string) => {
     try {
-      const res = await fetch(`/api/admin/reviews/${id}`, {
+      const res = await fetch(getApiUrl(`/api/admin/reviews/${id}`), {
         method: "DELETE",
         headers: { "Authorization": `Bearer ${user?.token}` }
       });
@@ -986,7 +987,7 @@ export default function App() {
   const handleDeletePlace = async (id: string) => {
     if (!confirm("Are you sure you want to delete this listing permanently?")) return;
     try {
-      const res = await fetch(`/api/admin/places/${id}`, {
+      const res = await fetch(getApiUrl(`/api/admin/places/${id}`), {
         method: "DELETE",
         headers: { "Authorization": `Bearer ${user?.token}` }
       });
@@ -2795,7 +2796,7 @@ export default function App() {
                     {profileData?.history?.length > 0 && (
                       <button 
                         onClick={async () => {
-                          await fetch("/api/user/clear-history", {
+                          await fetch(getApiUrl("/api/user/clear-history"), {
                             method: "POST",
                             headers: { "Authorization": `Bearer ${user.token}` }
                           });
@@ -2861,7 +2862,7 @@ export default function App() {
                   onSubmit={async (e) => {
                     e.preventDefault();
                     const nameInput = (e.target as any).elements.profileName.value;
-                    const res = await fetch("/api/user/profile/update", {
+                    const res = await fetch(getApiUrl("/api/user/profile/update"), {
                       method: "POST",
                       headers: {
                         "Content-Type": "application/json",
@@ -3104,7 +3105,7 @@ export default function App() {
                             disabled={u.id === "admin-id"}
                             onClick={async () => {
                               if (!confirm(`Are you sure you want to delete user ${u.name}?`)) return;
-                              const res = await fetch(`/api/admin/users/${u.id}`, {
+                              const res = await fetch(getApiUrl(`/api/admin/users/${u.id}`), {
                                 method: "DELETE",
                                 headers: { "Authorization": `Bearer ${user.token}` }
                               });
@@ -3407,7 +3408,7 @@ export default function App() {
               };
 
               if (isEditingPlace) {
-                const res = await fetch(`/api/admin/places/${isEditingPlace.id}`, {
+                const res = await fetch(getApiUrl(`/api/admin/places/${isEditingPlace.id}`), {
                   method: "PUT",
                   headers: {
                     "Content-Type": "application/json",
@@ -3436,7 +3437,7 @@ export default function App() {
                   facilities: ["WiFi", "AC", "Parking"],
                 };
 
-                const res = await fetch("/api/admin/places", {
+                const res = await fetch(getApiUrl("/api/admin/places"), {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",
