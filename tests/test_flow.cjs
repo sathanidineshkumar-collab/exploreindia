@@ -1,9 +1,9 @@
 const assert = require('assert');
 const { spawn } = require('child_process');
 
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = process.env.BASE_URL || 'http://127.0.0.1:5000';
 
-async function waitForServer(timeoutMs = 15000) {
+async function waitForServer(timeoutMs = 30000) {
   const start = Date.now();
   while (Date.now() - start < timeoutMs) {
     try {
@@ -150,6 +150,24 @@ async function testCompleteFlow() {
     assert(updatedTrip.itinerary[0].places.length > 0);
 
     // 8. Create Hotel Booking
+    // Clean up any previous test booking for this test date to ensure idempotency
+    try {
+      const prevRes = await fetch(`${BASE_URL}/api/bookings`, {
+        headers: { 'Authorization': `Bearer ${userToken}` }
+      });
+      if (prevRes.ok) {
+        const prevBookings = await prevRes.json();
+        for (const pb of prevBookings) {
+          if (pb.placeId === samplePlace.id && pb.date === '2026-11-10') {
+            await fetch(`${BASE_URL}/api/bookings/${pb.id}`, {
+              method: 'DELETE',
+              headers: { 'Authorization': `Bearer ${userToken}` }
+            });
+          }
+        }
+      }
+    } catch (_) {}
+
     const bookRes = await fetch(`${BASE_URL}/api/bookings`, {
       method: 'POST',
       headers: {
@@ -204,7 +222,106 @@ async function testCompleteFlow() {
     console.log(`✓ User profile fetched: Name=${profile.user.name}, Favorites count=${profile.favorites.length}`);
     assert(profile.favorites.length > 0);
 
-    console.log('\n--- ALL 12 INTEGRATION TESTS PASSED PERFECTLY! ---');
+    // 13. City-specific Image Uniqueness across cities (Hyderabad, Chennai, Mumbai, Bangalore, Delhi)
+    const hydRes = await fetch(`${BASE_URL}/api/discover`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query: 'Hyderabad' })
+    });
+    const hydData = await hydRes.json();
+
+    const chnRes = await fetch(`${BASE_URL}/api/discover`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query: 'Chennai' })
+    });
+    const chnData = await chnRes.json();
+
+    const mumRes = await fetch(`${BASE_URL}/api/discover`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query: 'Mumbai' })
+    });
+    const mumData = await mumRes.json();
+
+    const blrRes = await fetch(`${BASE_URL}/api/discover`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query: 'Bangalore' })
+    });
+    const blrData = await blrRes.json();
+
+    const delRes = await fetch(`${BASE_URL}/api/discover`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query: 'Delhi' })
+    });
+    const delData = await delRes.json();
+
+    console.log('Verifying hero image uniqueness across different cities:');
+    console.log(' - Hyderabad hero:', hydData.city.image);
+    console.log(' - Chennai hero:  ', chnData.city.image);
+    console.log(' - Mumbai hero:   ', mumData.city.image);
+    console.log(' - Bangalore hero:', blrData.city.image);
+    console.log(' - Delhi hero:    ', delData.city.image);
+
+    const heroImages = [hydData.city.image, chnData.city.image, mumData.city.image, blrData.city.image, delData.city.image];
+    const uniqueHeroImages = new Set(heroImages);
+    assert.strictEqual(uniqueHeroImages.size, 5, 'All 5 cities (Hyderabad, Chennai, Mumbai, Bangalore, Delhi) must have distinct hero images');
+    console.log('✓ City hero image uniqueness verified across all 5 cities!');
+
+    // 14. Image Uniqueness WITHIN the same city page (no duplicate images across cards)
+    const hydPhotos = hydData.places.map(p => p.photos[0]).filter(Boolean);
+    const hydUniquePhotos = new Set(hydPhotos);
+    console.log(`Hyderabad place photo uniqueness: ${hydUniquePhotos.size}/${hydPhotos.length} unique photos`);
+    assert.strictEqual(hydUniquePhotos.size, hydPhotos.length, 'Every place card in Hyderabad must have a unique photo');
+
+    const chnPhotos = chnData.places.map(p => p.photos[0]).filter(Boolean);
+    const chnUniquePhotos = new Set(chnPhotos);
+    console.log(`Chennai place photo uniqueness: ${chnUniquePhotos.size}/${chnPhotos.length} unique photos`);
+    assert.strictEqual(chnUniquePhotos.size, chnPhotos.length, 'Every place card in Chennai must have a unique photo');
+
+    const blrPhotos = blrData.places.map(p => p.photos[0]).filter(Boolean);
+    const blrUniquePhotos = new Set(blrPhotos);
+    console.log(`Bangalore place photo uniqueness: ${blrUniquePhotos.size}/${blrPhotos.length} unique photos`);
+    assert.strictEqual(blrUniquePhotos.size, blrPhotos.length, 'Every place card in Bangalore must have a unique photo');
+
+    const mumPhotos = mumData.places.map(p => p.photos[0]).filter(Boolean);
+    const mumUniquePhotos = new Set(mumPhotos);
+    console.log(`Mumbai place photo uniqueness: ${mumUniquePhotos.size}/${mumPhotos.length} unique photos`);
+    assert.strictEqual(mumUniquePhotos.size, mumPhotos.length, 'Every place card in Mumbai must have a unique photo');
+
+    const delPhotos = delData.places.map(p => p.photos[0]).filter(Boolean);
+    const delUniquePhotos = new Set(delPhotos);
+    console.log(`Delhi place photo uniqueness: ${delUniquePhotos.size}/${delPhotos.length} unique photos`);
+    assert.strictEqual(delUniquePhotos.size, delPhotos.length, 'Every place card in Delhi must have a unique photo');
+    console.log('✓ In-page image uniqueness verified across all 5 cities!');
+
+    // 15. Reverse Geocoding API verification
+    const geoRes = await fetch(`${BASE_URL}/api/location/reverse-geocode`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lat: 17.3850, lng: 78.4867 })
+    });
+    const geoData = await geoRes.json();
+    console.log(`✓ Reverse geocoding passed: (${geoData.lat}, ${geoData.lng}) -> City=${geoData.city}, State=${geoData.state}`);
+    assert(geoData.city.toLowerCase().includes('hyderabad'), 'Reverse geocoding must identify Hyderabad');
+
+    // 16. Weather API verification
+    const weatherRes = await fetch(`${BASE_URL}/api/location/weather?lat=17.3850&lng=78.4867`);
+    const weatherData = await weatherRes.json();
+    console.log(`✓ Weather query passed: Temp=${weatherData.temperature}°C, Condition=${weatherData.condition}`);
+    assert(typeof weatherData.temperature === 'number');
+    assert(weatherData.condition);
+
+    // 17. Dynamic City Image API verification
+    const imgRes = await fetch(`${BASE_URL}/api/images?city=Hyderabad&feature=charminar`);
+    const imgData = await imgRes.json();
+    console.log(`✓ Dynamic city image passed: Query=${imgData.query}, URL=${imgData.imageUrl}`);
+    assert(imgData.imageUrl);
+    assert(imgData.imageUrl.includes('photo-'));
+
+    console.log('\n--- ALL 17 INTEGRATION TESTS PASSED PERFECTLY! ---');
   } finally {
     if (serverProcess) {
       console.log('Stopping test backend process...');

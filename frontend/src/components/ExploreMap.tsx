@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 import { Place, LatLng } from "../types";
 import { MapPin, Navigation, Compass, Star, Map as MapIcon, Loader } from "lucide-react";
 import { FALLBACK_IMAGE } from "../constants";
@@ -13,8 +15,6 @@ interface ExploreMapProps {
   showDirections?: boolean;
   theme?: string;
 }
-
-declare const L: any; // Leaflet global declaration
 
 export default function ExploreMap({
   places,
@@ -31,46 +31,20 @@ export default function ExploreMap({
   const tileLayerRef = useRef<any>(null);
   const markersGroupRef = useRef<any>(null);
   const routePolylineRef = useRef<any>(null);
-  const [isLeafletLoaded, setIsLeafletLoaded] = useState(false);
 
-  // 1. Dynamic CDN Loading of Leaflet JS & CSS
+  // 1. Cleanup on unmount
   useEffect(() => {
-    const cleanup = () => {
+    return () => {
       if (leafletMapRef.current) {
         leafletMapRef.current.remove();
         leafletMapRef.current = null;
       }
     };
-
-    if (typeof L !== "undefined") {
-      setIsLeafletLoaded(true);
-      return cleanup;
-    }
-
-    // Load Leaflet CSS
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
-    link.integrity = "sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=";
-    link.crossOrigin = "";
-    document.head.appendChild(link);
-
-    // Load Leaflet JS
-    const script = document.createElement("script");
-    script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
-    script.integrity = "sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=";
-    script.crossOrigin = "";
-    script.onload = () => {
-      setIsLeafletLoaded(true);
-    };
-    document.head.appendChild(script);
-
-    return cleanup;
   }, []);
 
   // 2. Initialize Leaflet Map
   useEffect(() => {
-    if (!isLeafletLoaded || !mapContainerRef.current) return;
+    if (!mapContainerRef.current) return;
 
     if (!leafletMapRef.current) {
       // Initialize map instance
@@ -87,30 +61,27 @@ export default function ExploreMap({
       // Smoothly update center when city changes
       leafletMapRef.current.setView([center.lat, center.lng], zoom);
     }
-  }, [isLeafletLoaded, center, zoom]);
+  }, [center, zoom]);
 
-  // 2b. Dynamic Tile Layer based on Dark Mode theme
+  // 2b. Clean OpenStreetMap Tile Layer (Zero watermarks, No API key required)
   useEffect(() => {
-    if (!isLeafletLoaded || !leafletMapRef.current) return;
+    if (!leafletMapRef.current) return;
 
     if (tileLayerRef.current) {
       tileLayerRef.current.remove();
     }
 
-    const tileUrl = theme === "dark" 
-      ? "https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png"
-      : "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png";
+    const tileUrl = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 
     tileLayerRef.current = L.tileLayer(tileUrl, {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd',
-      maxZoom: 20
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 19
     }).addTo(leafletMapRef.current);
-  }, [theme, isLeafletLoaded]);
+  }, [theme]);
 
   // 3. Render Custom Pins & Markers
   useEffect(() => {
-    if (!isLeafletLoaded || !leafletMapRef.current || !markersGroupRef.current) return;
+    if (!leafletMapRef.current || !markersGroupRef.current) return;
 
     // Clear previous markers
     markersGroupRef.current.clearLayers();
@@ -123,8 +94,8 @@ export default function ExploreMap({
 
     // Draw route polyline from center to selected place if requested
     if (showDirections && selectedPlace) {
-      const start = [center.lat, center.lng];
-      const end = [selectedPlace.coordinates.lat, selectedPlace.coordinates.lng];
+      const start: L.LatLngTuple = [center.lat, center.lng];
+      const end: L.LatLngTuple = [selectedPlace.coordinates.lat, selectedPlace.coordinates.lng];
       
       routePolylineRef.current = L.polyline([start, end], {
         color: "#f97316", // Tailwind orange-500
@@ -229,11 +200,11 @@ export default function ExploreMap({
       });
     });
 
-  }, [isLeafletLoaded, places, selectedPlace, showDirections, center]);
+  }, [places, selectedPlace, showDirections, center]);
 
   // 4. Smooth Pan when selected place changes from details view
   useEffect(() => {
-    if (!isLeafletLoaded || !leafletMapRef.current || !selectedPlace) return;
+    if (!leafletMapRef.current || !selectedPlace) return;
     
     // Pan smoothly
     leafletMapRef.current.setView(
@@ -241,19 +212,10 @@ export default function ExploreMap({
       15,
       { animate: true, duration: 1.0 }
     );
-  }, [selectedPlace, isLeafletLoaded]);
+  }, [selectedPlace]);
 
   return (
     <div className="relative w-full h-full rounded-2xl overflow-hidden border border-gray-200/60 dark:border-slate-800 shadow-md">
-      {!isLeafletLoaded && (
-        <div className="absolute inset-0 bg-gray-50/80 dark:bg-slate-900/80 backdrop-blur-sm flex flex-col items-center justify-center z-50">
-          <Loader className="w-10 h-10 text-[#070235] dark:text-orange-400 animate-spin mb-2" />
-          <p className="text-xs text-gray-500 dark:text-gray-400 font-mono tracking-wider font-bold">
-            LOADING CITY MAP...
-          </p>
-        </div>
-      )}
-
       {/* Map Division */}
       <div id="leaflet-map" ref={mapContainerRef} className="w-full h-full min-h-[300px] z-10" />
 

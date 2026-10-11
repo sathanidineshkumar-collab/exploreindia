@@ -4,7 +4,7 @@ import {
   Coffee, Shield, LogIn, UserPlus, Heart, History, Sparkles, Filter, 
   Check, ArrowLeft, Globe, Phone, ExternalLink, Calendar, Plus, Edit2, 
   Trash2, Sliders, Menu, X, CheckCircle, AlertTriangle, HelpCircle, 
-  Eye, RefreshCw, BarChart2, Users, FileText
+  Eye, RefreshCw, BarChart2, Users, FileText, Landmark, Waves, Mountain, Trees, ShoppingBag, ArrowUpDown
 } from "lucide-react";
 import { 
   User, Place, Review, SearchHistory, CityInfo, 
@@ -18,7 +18,9 @@ import {
   DEFAULT_CITIES, DEFAULT_TIPS, DEFAULT_HOTELS, 
   generateClientDiscovery 
 } from "./constants";
-import { getApiUrl } from "./services/api";
+import { api, getApiUrl } from "./services/api";
+import { locationService, CityWeatherData } from "./services/locationService";
+import { handlePlaceImageError, getCategoryPlaceholder, fetchDynamicCityImage } from "./services/imageService";
 
 export { FALLBACK_IMAGE, FALLBACK_AVATAR };
 
@@ -60,6 +62,50 @@ const renderTripAdvisorBubbles = (rating: number) => {
   return <div className="flex items-center gap-0.5">{bubbles}</div>;
 };
 
+// URL Router Helper: maps browser path & query params to active view & params
+const parseRouteFromUrl = () => {
+  if (typeof window === "undefined") return { view: "home" };
+  const path = window.location.pathname.replace(/\/+$/, "") || "/";
+  const params = new URLSearchParams(window.location.search);
+
+  if (path === "" || path === "/" || path === "/home") {
+    return { view: "home" };
+  }
+  if (path === "/search" || path === "/explore") {
+    return {
+      view: "search",
+      query: params.get("q") || undefined,
+      tab: params.get("tab") || undefined
+    };
+  }
+  if (path.startsWith("/city/")) {
+    const cityName = decodeURIComponent(path.replace("/city/", ""));
+    return {
+      view: "search",
+      query: cityName,
+      tab: params.get("tab") || undefined
+    };
+  }
+  if (path.startsWith("/places/") || path.startsWith("/place/") || path.startsWith("/hotel/")) {
+    const parts = path.split("/");
+    const placeId = parts[2];
+    return { view: "details", placeId };
+  }
+  if (path === "/trips") {
+    return { view: "trips" };
+  }
+  if (path === "/tips") {
+    return { view: "tips" };
+  }
+  if (path === "/profile") {
+    return { view: "profile", profileTab: params.get("tab") || "favorites" };
+  }
+  if (path === "/admin") {
+    return { view: "admin" };
+  }
+  return { view: "not-found" };
+};
+
 export default function App() {
   // Theme state
   const [theme, setTheme] = useState<"light" | "dark">(() => {
@@ -85,7 +131,9 @@ export default function App() {
   });
 
   // Active View & Data state
-  const [activeView, setActiveView] = useState<string>("home");
+  const [activeView, setActiveView] = useState<string>(() => {
+    return parseRouteFromUrl().view;
+  });
   const [activeViewData, setActiveViewData] = useState<any>(null);
   const [trendingCities, setTrendingCities] = useState<CityInfo[]>(DEFAULT_CITIES);
   const [famousHotels, setFamousHotels] = useState<Place[]>(DEFAULT_HOTELS);
@@ -99,7 +147,21 @@ export default function App() {
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
   const [showDirectionsOnMap, setShowDirectionsOnMap] = useState(false);
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
-  const [resultsTab, setResultsTab] = useState<"all" | "tourism" | "stays" | "food" | "temples">("all");
+  const [resultsTab, setResultsTab] = useState<
+    "all" | "tourism" | "stays" | "food" | "temples" | "heritage" | "beaches" | "waterfalls" | "nature" | "wildlife" | "markets"
+  >("all");
+  const [categoryCounts, setCategoryCounts] = useState<Record<string, number> | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+  const [pageSize, setPageSize] = useState(24);
+  const [sortBy, setSortBy] = useState<"featured" | "rating" | "reviews" | "price_asc" | "price_desc" | "name">("featured");
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+
+  // Geolocation & Weather states
+  const [isDetectingLocation, setIsDetectingLocation] = useState(false);
+  const [locationError, setLocationError] = useState<string | null>(null);
+  const [cityWeather, setCityWeather] = useState<CityWeatherData | null>(null);
 
   // Filters state
   const [filters, setFilters] = useState({
@@ -113,7 +175,7 @@ export default function App() {
   });
 
   // Profile View Tab State
-  const [profileTab, setProfileTab] = useState<"favorites" | "history" | "reviews" | "settings">("favorites");
+  const [profileTab, setProfileTab] = useState<"favorites" | "history" | "reviews" | "settings" | "bookings">("favorites");
   const [profileData, setProfileData] = useState<any>(null);
 
   // Admin Panel states
@@ -164,6 +226,7 @@ export default function App() {
   const [bookingGuests, setBookingGuests] = useState("2");
   const [bookingTime, setBookingTime] = useState("7:30 PM");
   const [bookingSuccess, setBookingSuccess] = useState(false);
+  const [isSubmittingBooking, setIsSubmittingBooking] = useState(false);
 
   // Auth Inputs
   const [authInputs, setAuthInputs] = useState({
@@ -331,13 +394,65 @@ export default function App() {
     }
   }, [activeView, adminTab, user]);
 
+  // Fetch real-time weather when selectedCity coordinates change
+  useEffect(() => {
+    if (selectedCity?.lat && selectedCity?.lng) {
+      locationService.getWeather(selectedCity.lat, selectedCity.lng)
+        .then(w => setCityWeather(w))
+        .catch(() => setCityWeather(null));
+    } else {
+      setCityWeather(null);
+    }
+  }, [selectedCity?.name, selectedCity?.lat, selectedCity?.lng]);
+
+  // Handle Current Location Detection
+  const handleDetectLocation = async () => {
+    setIsDetectingLocation(true);
+    setLocationError(null);
+    try {
+      const detected = await locationService.detectUserCity();
+      if (detected && detected.city) {
+        await handleSearchCity(detected.city, { lat: detected.lat, lng: detected.lng });
+      } else {
+        setLocationError("Could not determine your city from current location. Please choose a city below.");
+      }
+    } catch (err: any) {
+      console.warn("Location detection failed:", err);
+      setLocationError("Location permission denied or unavailable. Please choose your city manually.");
+    } finally {
+      setIsDetectingLocation(false);
+    }
+  };
+
+  // Optional background permission check on mount (do not nag if denied)
+  useEffect(() => {
+    if (!locationService.hasUserDeniedLocation() && typeof navigator !== "undefined" && navigator.permissions) {
+      navigator.permissions.query({ name: "geolocation" as PermissionName }).then((status) => {
+        if (status.state === "granted") {
+          handleDetectLocation();
+        }
+      }).catch(() => {
+        // ignore
+      });
+    }
+  }, []);
+
   // Trigger discovery searches
-  const handleSearchCity = async (cityQuery: string, preDefinedCoords?: LatLng, forceTab?: "all" | "tourism" | "stays" | "food" | "temples") => {
+  const handleSearchCity = async (
+    cityQuery: string,
+    preDefinedCoords?: LatLng,
+    forceTab?: any,
+    pageToFetch: number = 1,
+    isAppend: boolean = false,
+    customPageSize?: number,
+    customSort?: string
+  ) => {
     if (!cityQuery.trim()) return;
-    setIsSearching(true);
+    if (!isAppend) setIsSearching(true);
+    else setIsLoadingMore(true);
 
     let finalQuery = cityQuery;
-    let finalTab: "all" | "tourism" | "stays" | "food" | "temples" = forceTab || "all";
+    let finalTab = forceTab || "all";
     
     if (cityQuery.toLowerCase() === "luxury hotels") {
       finalQuery = "Delhi";
@@ -411,7 +526,7 @@ export default function App() {
         nonVegOnly: false,
         openNow: false
       });
-    } else {
+    } else if (!isAppend) {
       setFilters({
         type: "all",
         priceLevel: "all",
@@ -427,7 +542,7 @@ export default function App() {
     
     // Auto-detect intent category based on search query or use forceTab
     const queryLower = finalQuery.toLowerCase();
-    let detectedTab: "all" | "tourism" | "stays" | "food" | "temples" = finalTab;
+    let detectedTab = finalTab;
     
     if (finalTab === "all" && !forceTab) {
       if (
@@ -446,24 +561,46 @@ export default function App() {
         detectedTab = "food";
       } else if (queryLower.includes("temple") || queryLower.includes("shrine") || queryLower.includes("pilgrim") || queryLower.includes("mandir")) {
         detectedTab = "temples";
+      } else if (queryLower.includes("fort") || queryLower.includes("palace") || queryLower.includes("heritage") || queryLower.includes("monument") || queryLower.includes("haveli")) {
+        detectedTab = "heritage";
+      } else if (queryLower.includes("beach") || queryLower.includes("coast") || queryLower.includes("cove")) {
+        detectedTab = "beaches";
+      } else if (queryLower.includes("waterfall") || queryLower.includes("falls") || queryLower.includes("lake")) {
+        detectedTab = "waterfalls";
+      } else if (queryLower.includes("hill") || queryLower.includes("valley") || queryLower.includes("nature") || queryLower.includes("viewpoint")) {
+        detectedTab = "nature";
+      } else if (queryLower.includes("wildlife") || queryLower.includes("safari") || queryLower.includes("national park") || queryLower.includes("sanctuary")) {
+        detectedTab = "wildlife";
+      } else if (queryLower.includes("market") || queryLower.includes("bazaar") || queryLower.includes("shopping")) {
+        detectedTab = "markets";
       } else if (
         queryLower.includes("museum") || 
         queryLower.includes("sight") || queryLower.includes("attraction") || 
-        queryLower.includes("visit") || queryLower.includes("monument") || 
-        queryLower.includes("place") || queryLower.includes("historical") ||
-        queryLower.includes("fort") || queryLower.includes("palace")
+        queryLower.includes("visit") || queryLower.includes("place")
       ) {
         detectedTab = "tourism";
       }
     }
     
-    setResultsTab(detectedTab);
+    if (!isAppend) {
+      setResultsTab(detectedTab);
+    }
 
     try {
-      const payload: any = { query: finalQuery };
+      const activeSort = customSort || sortBy;
+      const activeLimit = customPageSize || pageSize;
+      const payload: any = {
+        query: finalQuery,
+        page: pageToFetch,
+        limit: activeLimit,
+        sortBy: activeSort
+      };
       if (preDefinedCoords) {
         payload.lat = preDefinedCoords.lat;
         payload.lng = preDefinedCoords.lng;
+      }
+      if (finalTab && finalTab !== "all") {
+        payload.category = finalTab;
       }
 
       const headers: Record<string, string> = { "Content-Type": "application/json" };
@@ -492,14 +629,40 @@ export default function App() {
 
       if (data && data.city) {
         setSelectedCity(data.city);
-        setPlaces(data.places || []);
-        setSelectedPlace(data.places?.[0] || null);
+        if (isAppend) {
+          setPlaces(prev => {
+            const existingIds = new Set(prev.map(p => p.id));
+            const newPlaces = (data.places || []).filter((p: Place) => !existingIds.has(p.id));
+            return [...prev, ...newPlaces];
+          });
+        } else {
+          setPlaces(data.places || []);
+          setSelectedPlace(data.places?.[0] || null);
+        }
+        setTotalCount(data.total || (data.places || []).length);
+        setCurrentPage(data.page || pageToFetch);
+        setTotalPages(data.totalPages || 1);
+        if (data.categoryCounts) {
+          setCategoryCounts(data.categoryCounts);
+        }
         setShowDirectionsOnMap(false);
         setActiveView("search");
         if (forceTab) {
           setResultsTab(forceTab);
-        } else if (data.suggestedTab) {
+        } else if (data.suggestedTab && !isAppend) {
           setResultsTab(data.suggestedTab as any);
+        }
+        if (typeof window !== "undefined" && !isAppend) {
+          const params = new URLSearchParams();
+          params.set("q", finalQuery);
+          const currentTab = forceTab || (data.suggestedTab && !isAppend ? data.suggestedTab : resultsTab);
+          if (currentTab && currentTab !== "all") {
+            params.set("tab", currentTab);
+          }
+          const searchPath = `/search?${params.toString()}`;
+          if (window.location.pathname + window.location.search !== searchPath) {
+            window.history.pushState({ view: "search", query: finalQuery, tab: currentTab }, "", searchPath);
+          }
         }
       }
     } catch (e: any) {
@@ -512,8 +675,46 @@ export default function App() {
       setActiveView("search");
     } finally {
       setIsSearching(false);
+      setIsLoadingMore(false);
     }
   };
+
+  const handleLoadMore = () => {
+    if (currentPage < totalPages && !isLoadingMore && !isSearching) {
+      handleSearchCity(searchQuery, undefined, resultsTab, currentPage + 1, true);
+    }
+  };
+
+  // Initial URL route hydration & browser Back/Forward (popstate) navigation listener
+  useEffect(() => {
+    const handleRouteSync = () => {
+      const route = parseRouteFromUrl();
+      setActiveView(route.view);
+
+      if (route.view === "details" && route.placeId) {
+        fetch(getApiUrl(`/api/places/${route.placeId}`))
+          .then(res => res.ok ? res.json() : null)
+          .then(data => {
+            if (data && data.id) {
+              setSelectedPlace(data);
+            } else {
+              setActiveView("not-found");
+            }
+          })
+          .catch(() => setActiveView("not-found"));
+      } else if (route.view === "search" && route.query) {
+        handleSearchCity(route.query, undefined, route.tab);
+      } else if (route.view === "profile" && route.profileTab) {
+        setProfileTab(route.profileTab as any);
+      }
+    };
+
+    handleRouteSync();
+
+    const onPopState = () => handleRouteSync();
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
 
   // Toggle favorite place
   const handleToggleFavorite = async (placeId: string, e?: React.MouseEvent) => {
@@ -726,12 +927,58 @@ export default function App() {
   // Filter application logic
   const filteredPlaces = places.filter(place => {
     // Tab filter
-    if (resultsTab === "tourism" && place.type !== "attraction") return false;
-    if (resultsTab === "stays" && place.type !== "hotel" && place.type !== "resort") return false;
-    if (resultsTab === "food" && place.type !== "restaurant" && place.type !== "cafe") return false;
-    if (resultsTab === "temples" && place.type !== "temple") return false;
+    if (resultsTab === "tourism") {
+      const isTourism = place.type === "attraction" || place.category === "attraction" || 
+        place.category === "heritage" || place.category === "museum" || place.category === "nature";
+      if (!isTourism) return false;
+    }
+    if (resultsTab === "stays") {
+      const isStay = place.type === "hotel" || place.type === "resort" || place.category === "hotel" || place.category === "resort";
+      if (!isStay) return false;
+    }
+    if (resultsTab === "food") {
+      const isFood = place.type === "restaurant" || place.type === "cafe" || place.category === "restaurant" || place.category === "cafe";
+      if (!isFood) return false;
+    }
+    if (resultsTab === "temples") {
+      const isTemple = place.type === "temple" || place.category === "temple" || place.category === "pilgrimage";
+      if (!isTemple) return false;
+    }
+    if (resultsTab === "heritage") {
+      const isHeritage = place.category === "heritage" || (place.type as string) === "heritage" || 
+        (place.subtypes && (place.subtypes.includes("fort") || place.subtypes.includes("palace") || place.subtypes.includes("monument") || place.subtypes.includes("heritage")));
+      if (!isHeritage) return false;
+    }
+    if (resultsTab === "beaches") {
+      const isBeach = place.category === "beach" || (place.type as string) === "beach" || 
+        (place.subtypes && place.subtypes.includes("beach"));
+      if (!isBeach) return false;
+    }
+    if (resultsTab === "waterfalls") {
+      const isWaterfall = place.category === "waterfall" || (place.type as string) === "waterfall" || 
+        (place.subtypes && (place.subtypes.includes("waterfall") || place.subtypes.includes("lake")));
+      if (!isWaterfall) return false;
+    }
+    if (resultsTab === "nature") {
+      const isNature = place.category === "nature" || (place.type as string) === "nature" || 
+        (place.subtypes && (place.subtypes.includes("hill_station") || place.subtypes.includes("viewpoint") || place.subtypes.includes("valley")));
+      if (!isNature) return false;
+    }
+    if (resultsTab === "wildlife") {
+      const isWildlife = place.category === "wildlife" || (place.type as string) === "wildlife" || 
+        (place.subtypes && (place.subtypes.includes("national_park") || place.subtypes.includes("wildlife_sanctuary") || place.subtypes.includes("safari")));
+      if (!isWildlife) return false;
+    }
+    if (resultsTab === "markets") {
+      const isMarket = place.category === "market" || (place.type as string) === "market" || 
+        (place.subtypes && (place.subtypes.includes("bazaar") || place.subtypes.includes("market") || place.subtypes.includes("shopping")));
+      if (!isMarket) return false;
+    }
 
-    if (filters.type !== "all" && place.type !== filters.type) return false;
+    if (filters.type !== "all") {
+      const typeMatches = place.type === filters.type || place.category === filters.type;
+      if (!typeMatches) return false;
+    }
     if (filters.priceLevel !== "all" && place.priceLevel !== Number(filters.priceLevel)) return false;
     if (filters.rating !== "all" && place.rating < Number(filters.rating)) return false;
     
@@ -741,11 +988,23 @@ export default function App() {
 
     // Amenities
     if (filters.amenities.length > 0) {
-      const hasAll = filters.amenities.every(amenity => place.facilities.includes(amenity));
+      const hasAll = filters.amenities.every(amenity =>
+        (place.facilities || []).some(f =>
+          f.toLowerCase().includes(amenity.toLowerCase()) ||
+          amenity.toLowerCase().includes(f.toLowerCase())
+        )
+      );
       if (!hasAll) return false;
     }
 
     return true;
+  }).sort((a, b) => {
+    if (sortBy === "rating") return b.rating - a.rating;
+    if (sortBy === "reviews") return b.reviewCount - a.reviewCount;
+    if (sortBy === "price_asc") return a.priceLevel - b.priceLevel;
+    if (sortBy === "price_desc") return b.priceLevel - a.priceLevel;
+    if (sortBy === "name") return a.name.localeCompare(b.name);
+    return 0;
   });
 
   const handleAmenityToggle = (amenity: string) => {
@@ -758,11 +1017,57 @@ export default function App() {
     });
   };
 
+  // Helper to select a place and update browser URL to /places/:id
+  const handleSelectPlace = (place: Place) => {
+    setSelectedPlace(place);
+    setActiveView("details");
+    if (typeof window !== "undefined") {
+      window.history.pushState({ view: "details", placeId: place.id }, "", `/places/${place.id}`);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  // Synchronize browser address bar with current active view
+  const syncBrowserUrl = (view: string, data?: any) => {
+    if (typeof window === "undefined") return;
+    let newPath = "/";
+    if (view === "home") {
+      newPath = "/";
+    } else if (view === "search") {
+      const q = data?.query || searchQuery;
+      const tab = data?.tab || resultsTab;
+      const params = new URLSearchParams();
+      if (q) params.set("q", q);
+      if (tab && tab !== "all") params.set("tab", tab);
+      const qs = params.toString();
+      newPath = qs ? `/search?${qs}` : "/search";
+    } else if (view === "details") {
+      const id = data?.place?.id || selectedPlace?.id || data?.id;
+      newPath = id ? `/places/${id}` : "/search";
+    } else if (view === "trips") {
+      newPath = "/trips";
+    } else if (view === "tips") {
+      newPath = "/tips";
+    } else if (view === "profile") {
+      const tab = data?.tab || profileTab;
+      newPath = tab && tab !== "favorites" ? `/profile?tab=${tab}` : "/profile";
+    } else if (view === "admin") {
+      newPath = "/admin";
+    } else if (view === "not-found") {
+      return;
+    }
+
+    if (window.location.pathname + window.location.search !== newPath) {
+      window.history.pushState({ view, data }, "", newPath);
+    }
+  };
+
   // Navigations handler
   const handleNavigate = (view: string, data?: any) => {
     if (view === "profile-favorites") {
       setActiveView("profile");
       setProfileTab("favorites");
+      syncBrowserUrl("profile", { tab: "favorites" });
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
@@ -788,8 +1093,9 @@ export default function App() {
       setProfileTab(data.tab);
     }
     if (view === "search" && data?.query) {
-      handleSearchCity(data.query);
+      handleSearchCity(data.query, undefined, data?.tab);
     }
+    syncBrowserUrl(view, data);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -925,31 +1231,35 @@ export default function App() {
       return;
     }
 
-    try {
-      const res = await fetch(getApiUrl("/api/bookings"), {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${user.token}`
-        },
-        body: JSON.stringify({
-          placeId: selectedPlace.id,
-          date: bookingDate,
-          dateOut: bookingDateOut,
-          guests: bookingGuests,
-          time: bookingTime
-        })
-      });
-      if (res.ok) {
-        const newBooking = await res.json();
-        setUserBookings(prev => [newBooking, ...prev]);
-        setBookingSuccess(true);
-      } else {
-        const data = await res.json();
-        alert(data.error || "Failed to make reservation");
+    if (!bookingDate) {
+      alert("Please select a valid booking date.");
+      return;
+    }
+
+    if (selectedPlace.type === "hotel" || selectedPlace.type === "resort") {
+      if (bookingDateOut && new Date(bookingDateOut) <= new Date(bookingDate)) {
+        alert("Check-out date must be strictly after the check-in date.");
+        return;
       }
-    } catch (err) {
-      console.error(err);
+    }
+
+    setIsSubmittingBooking(true);
+    try {
+      const newBooking = await api.bookings.create(user.token || "", {
+        placeId: selectedPlace.id,
+        date: bookingDate,
+        dateOut: bookingDateOut || bookingDate,
+        guests: bookingGuests,
+        time: bookingTime,
+        roomType: selectedPlace.rooms?.[0]?.type || "Standard Room",
+        totalPrice: selectedPlace.priceRange || "₹4,500"
+      });
+      setUserBookings(prev => [newBooking, ...prev]);
+      setBookingSuccess(true);
+    } catch (err: any) {
+      alert(err.message || "Failed to make reservation");
+    } finally {
+      setIsSubmittingBooking(false);
     }
   };
 
@@ -958,19 +1268,11 @@ export default function App() {
     if (!confirm("Are you sure you want to cancel this reservation?")) return;
 
     try {
-      const res = await fetch(getApiUrl(`/api/bookings/${bookingId}`), {
-        method: "DELETE",
-        headers: { "Authorization": `Bearer ${user.token}` }
-      });
-      if (res.ok) {
-        setUserBookings(prev => prev.filter(b => b.id !== bookingId));
-        alert("Booking cancelled successfully.");
-      } else {
-        const data = await res.json();
-        alert(data.error || "Failed to cancel booking");
-      }
-    } catch (err) {
-      console.error(err);
+      await api.bookings.delete(user.token || "", bookingId);
+      setUserBookings(prev => prev.filter(b => b.id !== bookingId));
+      alert("Booking cancelled successfully.");
+    } catch (err: any) {
+      alert(err.message || "Failed to cancel booking");
     }
   };
 
@@ -1031,6 +1333,9 @@ export default function App() {
         onOpenAuth={() => setAuthModal({ isOpen: true, mode: "login" })}
         theme={theme}
         onToggleTheme={handleToggleTheme}
+        currentCity={selectedCity?.name}
+        onDetectLocation={handleDetectLocation}
+        isDetectingLocation={isDetectingLocation}
       />
 
       {/* Main Page Routing Switch */}
@@ -1080,6 +1385,20 @@ export default function App() {
                         placeholder="Search Tirupati, Varanasi, Goa, Jaipur, Hyderabad..." 
                         className="w-full bg-transparent border-none text-sm text-gray-800 dark:text-white focus:outline-none placeholder-gray-400 py-3"
                       />
+                      <button
+                        type="button"
+                        onClick={handleDetectLocation}
+                        disabled={isDetectingLocation}
+                        title="Use my current location"
+                        className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800 text-gray-500 hover:text-[#00AA6C] transition-colors shrink-0 flex items-center gap-1 text-xs cursor-pointer font-sans"
+                      >
+                        {isDetectingLocation ? (
+                          <RefreshCw className="w-4 h-4 animate-spin text-[#00AA6C]" />
+                        ) : (
+                          <MapPin className="w-4 h-4 text-[#00AA6C]" />
+                        )}
+                        <span className="hidden md:inline font-semibold text-[11px]">Near Me</span>
+                      </button>
                     </div>
                     <button 
                       type="submit"
@@ -1090,6 +1409,39 @@ export default function App() {
                       Search
                     </button>
                   </form>
+
+                  {/* Location Error notification with manual quick picks */}
+                  {locationError && (
+                    <div className="mt-3 p-3 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-amber-300 dark:border-amber-700 text-amber-900 dark:text-amber-200 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 text-xs shadow-lg animate-fade-in">
+                      <div className="flex items-center gap-2">
+                        <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
+                        <span>{locationError}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 flex-wrap shrink-0">
+                        <span className="text-[10px] text-gray-500 dark:text-gray-400">Select city:</span>
+                        {["Hyderabad", "Bangalore", "Mumbai", "Delhi", "Goa", "Jaipur"].map(c => (
+                          <button
+                            key={c}
+                            type="button"
+                            onClick={() => {
+                              setLocationError(null);
+                              handleSearchCity(c);
+                            }}
+                            className="px-2 py-0.5 rounded-md bg-emerald-100 dark:bg-emerald-900/60 hover:bg-emerald-200 text-emerald-800 dark:text-emerald-200 text-[10px] font-bold cursor-pointer transition-colors"
+                          >
+                            {c}
+                          </button>
+                        ))}
+                        <button 
+                          type="button"
+                          onClick={() => setLocationError(null)}
+                          className="p-1 hover:bg-gray-100 dark:hover:bg-slate-800 rounded cursor-pointer ml-1"
+                        >
+                          <X className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  )}
 
                   {/* TripAdvisor category quick search pills */}
                   <div className="flex flex-wrap justify-center gap-3 pt-8">
@@ -1292,7 +1644,6 @@ export default function App() {
                           </div>
                           <button
                             onClick={() => {
-                              setSelectedPlace(hotel);
                               setSelectedCity({
                                 name: hotel.city,
                                 state: hotel.state,
@@ -1301,7 +1652,7 @@ export default function App() {
                                 lat: hotel.coordinates.lat,
                                 lng: hotel.coordinates.lng
                               });
-                              setActiveView("details");
+                              handleSelectPlace(hotel);
                             }}
                             className="px-4 py-2 rounded-xl bg-[#00AA6C] hover:bg-[#008f5a] active:scale-97 text-white font-bold text-[10px] font-sans tracking-wide uppercase transition-all cursor-pointer shadow-sm"
                           >
@@ -1454,6 +1805,20 @@ export default function App() {
                       placeholder="Enter city or location to discover..."
                       className="w-full bg-transparent border-none text-xs text-gray-900 dark:text-white focus:outline-none p-2.5"
                     />
+                    <button
+                      type="button"
+                      onClick={handleDetectLocation}
+                      disabled={isDetectingLocation}
+                      title="Detect my current location"
+                      className="p-1.5 rounded-lg hover:bg-gray-200 dark:hover:bg-slate-700 text-gray-400 hover:text-[#00AA6C] transition-colors shrink-0 flex items-center gap-1 text-[11px] cursor-pointer font-sans"
+                    >
+                      {isDetectingLocation ? (
+                        <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#00AA6C]" />
+                      ) : (
+                        <Compass className="w-3.5 h-3.5 text-[#00AA6C]" />
+                      )}
+                      <span className="hidden sm:inline font-medium">Near Me</span>
+                    </button>
                   </div>
                   <button 
                     type="submit"
@@ -1470,7 +1835,7 @@ export default function App() {
                       src={selectedCity.image || "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1600"} 
                       alt={selectedCity.name}
                       className="absolute inset-0 w-full h-full object-cover" 
-                      onError={handleImageError}
+                      onError={(e) => handlePlaceImageError(e, "attraction", selectedCity.name)}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent"></div>
                     <div className="absolute bottom-4 left-4 right-4 text-white flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
@@ -1487,8 +1852,17 @@ export default function App() {
                           </p>
                         )}
                       </div>
-                      <div className="px-2 py-1 rounded-lg bg-black/40 backdrop-blur-sm border border-white/10 text-[9px] text-gray-300 font-mono text-left shrink-0">
-                        Coords: {selectedCity.lat.toFixed(4)}, {selectedCity.lng.toFixed(4)}
+                      <div className="flex flex-col sm:items-end gap-1.5 shrink-0">
+                        {cityWeather && (
+                          <div className="px-2.5 py-1 rounded-lg bg-emerald-950/80 backdrop-blur-md border border-emerald-500/30 text-[10px] text-emerald-300 font-sans font-bold flex items-center gap-1.5 shadow-sm">
+                            <span>{cityWeather.condition}</span>
+                            <span>{cityWeather.temperature}°C</span>
+                            <span className="text-[9px] opacity-75 font-normal">Wind: {cityWeather.windSpeed} km/h</span>
+                          </div>
+                        )}
+                        <div className="px-2 py-1 rounded-lg bg-black/40 backdrop-blur-sm border border-white/10 text-[9px] text-gray-300 font-mono text-left">
+                          Coords: {selectedCity.lat.toFixed(4)}, {selectedCity.lng.toFixed(4)}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1527,6 +1901,12 @@ export default function App() {
                       <option value="attraction">Attractions</option>
                       <option value="cafe">Cafes</option>
                       <option value="temple">Temples</option>
+                      <option value="heritage">Heritage & Forts</option>
+                      <option value="beach">Beaches</option>
+                      <option value="waterfall">Waterfalls & Lakes</option>
+                      <option value="nature">Nature & Hills</option>
+                      <option value="wildlife">Wildlife & Safaris</option>
+                      <option value="market">Markets & Bazaars</option>
                     </select>
                   </div>
 
@@ -1602,63 +1982,171 @@ export default function App() {
               {/* Discovery Places List Grid */}
               <div className="space-y-4">
                 <div className="flex flex-col gap-3">
-                  <div className="flex justify-between items-center">
-                    <p className="text-xs text-gray-500 dark:text-gray-400 font-mono tracking-wider font-bold">
-                      FOUND {filteredPlaces.length} PREMIUM PLACES
-                    </p>
+                  <div className="flex flex-wrap justify-between items-center gap-2">
+                    <div>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 font-mono tracking-wider font-bold">
+                        FOUND {filteredPlaces.length} OF {totalCount || places.length} PLACES
+                      </p>
+                      {selectedCity && (
+                        <p className="text-[10px] text-gray-400 dark:text-gray-500">
+                          Exploring {selectedCity.name}, {selectedCity.state}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Sort & Page Size Controls */}
+                    <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
+                        <ArrowUpDown className="w-3.5 h-3.5" />
+                        <span className="text-[10px] font-bold uppercase hidden sm:inline">Sort:</span>
+                        <select
+                          value={sortBy}
+                          onChange={(e) => {
+                            const newSort = e.target.value as any;
+                            setSortBy(newSort);
+                            handleSearchCity(searchQuery, undefined, resultsTab, 1, false, pageSize, newSort);
+                          }}
+                          className="p-1.5 rounded-lg bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-xs text-gray-700 dark:text-gray-200 font-medium"
+                        >
+                          <option value="featured">Featured / Top Pick</option>
+                          <option value="rating">Rating: High to Low</option>
+                          <option value="reviews">Most Reviewed</option>
+                          <option value="price_asc">Price: Low to High</option>
+                          <option value="price_desc">Price: High to Low</option>
+                          <option value="name">Name (A-Z)</option>
+                        </select>
+                      </div>
+
+                      <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
+                        <span className="text-[10px] font-bold uppercase hidden sm:inline">Show:</span>
+                        <select
+                          value={pageSize}
+                          onChange={(e) => {
+                            const newSize = Number(e.target.value);
+                            setPageSize(newSize);
+                            handleSearchCity(searchQuery, undefined, resultsTab, 1, false, newSize, sortBy);
+                          }}
+                          className="p-1.5 rounded-lg bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-xs text-gray-700 dark:text-gray-200 font-medium"
+                        >
+                          <option value={12}>12 / page</option>
+                          <option value={24}>24 / page</option>
+                          <option value={48}>48 / page</option>
+                        </select>
+                      </div>
+                    </div>
                   </div>
                   
                   {/* Premium Category Filter Tabs */}
-                  <div className="flex flex-wrap gap-2 border-b border-gray-200/50 dark:border-slate-800/80 pb-3">
+                  <div className="flex flex-wrap gap-1.5 border-b border-gray-200/50 dark:border-slate-800/80 pb-3">
                     <button
                       onClick={() => setResultsTab("all")}
-                      className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-[10px] font-bold font-sans tracking-wide uppercase transition-all cursor-pointer ${
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10px] font-bold font-sans tracking-wide uppercase transition-all cursor-pointer ${
                         resultsTab === "all"
                           ? "bg-[#070235] dark:bg-orange-500 text-white shadow-sm scale-102"
                           : "bg-white dark:bg-slate-900 text-gray-500 hover:text-gray-900 dark:hover:text-white border border-gray-200/60 dark:border-slate-800"
                       }`}
                     >
-                      <Sparkles className="w-3.5 h-3.5" /> All ({places.length})
+                      <Sparkles className="w-3.5 h-3.5" /> All ({totalCount || places.length})
                     </button>
                     <button
                       onClick={() => setResultsTab("tourism")}
-                      className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-[10px] font-bold font-sans tracking-wide uppercase transition-all cursor-pointer ${
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10px] font-bold font-sans tracking-wide uppercase transition-all cursor-pointer ${
                         resultsTab === "tourism"
                           ? "bg-[#070235] dark:bg-orange-500 text-white shadow-sm scale-102"
                           : "bg-white dark:bg-slate-900 text-gray-500 hover:text-gray-900 dark:hover:text-white border border-gray-200/60 dark:border-slate-800"
                       }`}
                     >
-                      <Compass className="w-3.5 h-3.5" /> Tourism Places ({places.filter(p => p.type === "attraction").length})
+                      <Compass className="w-3.5 h-3.5" /> Tourism ({categoryCounts?.attraction ?? places.filter(p => p.type === "attraction" || p.category === "attraction").length})
                     </button>
                     <button
                       onClick={() => setResultsTab("stays")}
-                      className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-[10px] font-bold font-sans tracking-wide uppercase transition-all cursor-pointer ${
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10px] font-bold font-sans tracking-wide uppercase transition-all cursor-pointer ${
                         resultsTab === "stays"
                           ? "bg-[#070235] dark:bg-orange-500 text-white shadow-sm scale-102"
                           : "bg-white dark:bg-slate-900 text-gray-500 hover:text-gray-900 dark:hover:text-white border border-gray-200/60 dark:border-slate-800"
                       }`}
                     >
-                      <Hotel className="w-3.5 h-3.5" /> Stays & Resorts ({places.filter(p => p.type === "hotel" || p.type === "resort").length})
+                      <Hotel className="w-3.5 h-3.5" /> Stays ({((categoryCounts?.hotel || 0) + (categoryCounts?.resort || 0)) || places.filter(p => p.type === "hotel" || p.type === "resort" || p.category === "hotel" || p.category === "resort").length})
                     </button>
                     <button
                       onClick={() => setResultsTab("food")}
-                      className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-[10px] font-bold font-sans tracking-wide uppercase transition-all cursor-pointer ${
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10px] font-bold font-sans tracking-wide uppercase transition-all cursor-pointer ${
                         resultsTab === "food"
                           ? "bg-[#070235] dark:bg-orange-500 text-white shadow-sm scale-102"
                           : "bg-white dark:bg-slate-900 text-gray-500 hover:text-gray-900 dark:hover:text-white border border-gray-200/60 dark:border-slate-800"
                       }`}
                     >
-                      <Utensils className="w-3.5 h-3.5" /> Eats & Cafes ({places.filter(p => p.type === "restaurant" || p.type === "cafe").length})
+                      <Utensils className="w-3.5 h-3.5" /> Eats ({((categoryCounts?.restaurant || 0) + (categoryCounts?.cafe || 0)) || places.filter(p => p.type === "restaurant" || p.type === "cafe" || p.category === "restaurant" || p.category === "cafe").length})
                     </button>
                     <button
                       onClick={() => setResultsTab("temples")}
-                      className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-[10px] font-bold font-sans tracking-wide uppercase transition-all cursor-pointer ${
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10px] font-bold font-sans tracking-wide uppercase transition-all cursor-pointer ${
                         resultsTab === "temples"
                           ? "bg-[#070235] dark:bg-orange-500 text-white shadow-sm scale-102"
                           : "bg-white dark:bg-slate-900 text-gray-500 hover:text-gray-900 dark:hover:text-white border border-gray-200/60 dark:border-slate-800"
                       }`}
                     >
-                      <span className="text-orange-500 text-xs">🛕</span> Temples ({places.filter(p => p.type === "temple").length})
+                      <span className="text-orange-500 text-xs">🛕</span> Temples ({((categoryCounts?.temple || 0) + (categoryCounts?.pilgrimage || 0)) || places.filter(p => p.type === "temple" || p.category === "temple" || p.category === "pilgrimage").length})
+                    </button>
+                    <button
+                      onClick={() => setResultsTab("heritage")}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10px] font-bold font-sans tracking-wide uppercase transition-all cursor-pointer ${
+                        resultsTab === "heritage"
+                          ? "bg-[#070235] dark:bg-orange-500 text-white shadow-sm scale-102"
+                          : "bg-white dark:bg-slate-900 text-gray-500 hover:text-gray-900 dark:hover:text-white border border-gray-200/60 dark:border-slate-800"
+                      }`}
+                    >
+                      <Landmark className="w-3.5 h-3.5 text-amber-500" /> Heritage ({categoryCounts?.heritage ?? places.filter(p => p.category === "heritage" || (p.type as string) === "heritage" || (p.subtypes && (p.subtypes.includes("fort") || p.subtypes.includes("palace") || p.subtypes.includes("monument")))).length})
+                    </button>
+                    <button
+                      onClick={() => setResultsTab("beaches")}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10px] font-bold font-sans tracking-wide uppercase transition-all cursor-pointer ${
+                        resultsTab === "beaches"
+                          ? "bg-[#070235] dark:bg-orange-500 text-white shadow-sm scale-102"
+                          : "bg-white dark:bg-slate-900 text-gray-500 hover:text-gray-900 dark:hover:text-white border border-gray-200/60 dark:border-slate-800"
+                      }`}
+                    >
+                      <Waves className="w-3.5 h-3.5 text-cyan-500" /> Beaches ({categoryCounts?.beach ?? places.filter(p => p.category === "beach" || (p.type as string) === "beach").length})
+                    </button>
+                    <button
+                      onClick={() => setResultsTab("waterfalls")}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10px] font-bold font-sans tracking-wide uppercase transition-all cursor-pointer ${
+                        resultsTab === "waterfalls"
+                          ? "bg-[#070235] dark:bg-orange-500 text-white shadow-sm scale-102"
+                          : "bg-white dark:bg-slate-900 text-gray-500 hover:text-gray-900 dark:hover:text-white border border-gray-200/60 dark:border-slate-800"
+                      }`}
+                    >
+                      <span className="text-blue-500 text-xs">🌊</span> Waterfalls ({categoryCounts?.waterfall ?? places.filter(p => p.category === "waterfall" || (p.type as string) === "waterfall").length})
+                    </button>
+                    <button
+                      onClick={() => setResultsTab("nature")}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10px] font-bold font-sans tracking-wide uppercase transition-all cursor-pointer ${
+                        resultsTab === "nature"
+                          ? "bg-[#070235] dark:bg-orange-500 text-white shadow-sm scale-102"
+                          : "bg-white dark:bg-slate-900 text-gray-500 hover:text-gray-900 dark:hover:text-white border border-gray-200/60 dark:border-slate-800"
+                      }`}
+                    >
+                      <Mountain className="w-3.5 h-3.5 text-emerald-500" /> Nature ({categoryCounts?.nature ?? places.filter(p => p.category === "nature" || (p.type as string) === "nature").length})
+                    </button>
+                    <button
+                      onClick={() => setResultsTab("wildlife")}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10px] font-bold font-sans tracking-wide uppercase transition-all cursor-pointer ${
+                        resultsTab === "wildlife"
+                          ? "bg-[#070235] dark:bg-orange-500 text-white shadow-sm scale-102"
+                          : "bg-white dark:bg-slate-900 text-gray-500 hover:text-gray-900 dark:hover:text-white border border-gray-200/60 dark:border-slate-800"
+                      }`}
+                    >
+                      <Trees className="w-3.5 h-3.5 text-green-600" /> Wildlife ({categoryCounts?.wildlife ?? places.filter(p => p.category === "wildlife" || (p.type as string) === "wildlife").length})
+                    </button>
+                    <button
+                      onClick={() => setResultsTab("markets")}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10px] font-bold font-sans tracking-wide uppercase transition-all cursor-pointer ${
+                        resultsTab === "markets"
+                          ? "bg-[#070235] dark:bg-orange-500 text-white shadow-sm scale-102"
+                          : "bg-white dark:bg-slate-900 text-gray-500 hover:text-gray-900 dark:hover:text-white border border-gray-200/60 dark:border-slate-800"
+                      }`}
+                    >
+                      <ShoppingBag className="w-3.5 h-3.5 text-purple-500" /> Bazaars ({categoryCounts?.market ?? places.filter(p => p.category === "market" || (p.type as string) === "market").length})
                     </button>
                   </div>
                 </div>
@@ -1675,8 +2163,20 @@ export default function App() {
                     <HelpCircle className="w-12 h-12 text-orange-400 mx-auto" />
                     <h3 className="font-serif font-extrabold text-lg text-gray-900 dark:text-white">No Matching Places Found</h3>
                     <p className="text-xs text-gray-500 dark:text-gray-400 max-w-sm mx-auto leading-relaxed">
-                      We searched coordinates but nothing matches the active filters. Try resetting the pricing, ratings, or amenity filters.
+                      We searched coordinates but nothing matches the active filters. Try resetting the pricing, ratings, or category filters.
                     </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setResultsTab("all");
+                        setFilters({
+                          type: "all", priceLevel: "all", rating: "all", amenities: [], vegOnly: false, nonVegOnly: false, openNow: false
+                        });
+                      }}
+                      className="px-6 py-2.5 rounded-full bg-[#00AA6C] hover:bg-[#008f5a] text-white text-xs font-bold uppercase transition-all shadow-sm cursor-pointer"
+                    >
+                      Clear All Filters
+                    </button>
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1686,8 +2186,7 @@ export default function App() {
                         <div
                           key={place.id}
                           onClick={() => {
-                            setSelectedPlace(place);
-                            setActiveView("details");
+                            handleSelectPlace(place);
                           }}
                           className="bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-200/60 dark:border-slate-800/80 p-3 text-left flex flex-col justify-between cursor-pointer premium-card-hover group relative"
                         >
@@ -1705,7 +2204,7 @@ export default function App() {
                               <img 
                                 src={place.photos[0]} 
                                 alt={place.name} 
-                                onError={handleImageError}
+                                onError={(e) => handlePlaceImageError(e, place.type, place.name)}
                                 className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300"
                               />
                               {/* Price bracket tag */}
@@ -1714,7 +2213,7 @@ export default function App() {
                               </span>
                               {/* Place type absolute badge */}
                               <span className="absolute top-3 left-3 px-2 py-1 rounded-lg bg-indigo-950/80 backdrop-blur-md text-white font-bold text-[8px] tracking-wider uppercase">
-                                {place.type}
+                                {place.category || place.type}
                               </span>
                             </div>
 
@@ -1742,20 +2241,67 @@ export default function App() {
                           </div>
 
                           <div className="px-1.5 pt-3 mt-3 border-t border-gray-100 dark:border-slate-800 flex flex-wrap gap-1.5">
-                            {place.facilities.slice(0, 3).map(f => (
+                            {place.entryFee && (
+                              <span className="text-[9px] font-semibold text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40 px-2 py-0.5 rounded border border-amber-200/60 dark:border-amber-800">
+                                🎟️ {place.entryFee}
+                              </span>
+                            )}
+                            {place.bestTimeToVisit && (
+                              <span className="text-[9px] font-medium text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/40 px-2 py-0.5 rounded border border-blue-200/60 dark:border-blue-800">
+                                🗓️ {place.bestTimeToVisit}
+                              </span>
+                            )}
+                            {place.facilities.slice(0, 2).map(f => (
                               <span key={f} className="text-[9px] font-medium text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-slate-800 px-2 py-0.5 rounded border border-gray-100 dark:border-slate-700">
                                 {f}
                               </span>
                             ))}
-                            {place.facilities.length > 3 && (
+                            {place.facilities.length > 2 && (
                               <span className="text-[9px] text-gray-400 font-medium px-1.5 py-0.5">
-                                +{place.facilities.length - 3} more
+                                +{place.facilities.length - 2} more
                               </span>
                             )}
                           </div>
                         </div>
                       );
                     })}
+                  </div>
+                )}
+
+                {/* Pagination & Load More Controls */}
+                {filteredPlaces.length > 0 && (
+                  <div className="pt-6 pb-2 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-gray-200/60 dark:border-slate-800/80 mt-6">
+                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                      Showing <span className="font-bold text-gray-800 dark:text-gray-200">{filteredPlaces.length}</span> of{" "}
+                      <span className="font-bold text-gray-800 dark:text-gray-200">{totalCount || places.length}</span> destinations
+                      {totalPages > 1 && ` (Page ${currentPage} of ${totalPages})`}
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      {currentPage < totalPages && (
+                        <button
+                          onClick={handleLoadMore}
+                          disabled={isLoadingMore}
+                          className="px-6 py-2.5 rounded-xl bg-[#00AA6C] hover:bg-[#008f5a] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm hover:shadow flex items-center gap-2 cursor-pointer disabled:opacity-50"
+                        >
+                          {isLoadingMore ? (
+                            <>
+                              <RefreshCw className="w-3.5 h-3.5 animate-spin" /> Loading More Places...
+                            </>
+                          ) : (
+                            <>
+                              <Sparkles className="w-3.5 h-3.5" /> Load More Places (Page {currentPage + 1} of {totalPages})
+                            </>
+                          )}
+                        </button>
+                      )}
+
+                      {currentPage >= totalPages && totalPages > 1 && (
+                        <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-3 py-1.5 rounded-lg border border-emerald-200 dark:border-emerald-800">
+                          ✓ All {totalCount} destinations loaded
+                        </span>
+                      )}
+                    </div>
                   </div>
                 )}
               </div>
@@ -1770,8 +2316,7 @@ export default function App() {
                   setSelectedPlace(place);
                 }}
                 onPlaceDetailsNavigate={(place) => {
-                  setSelectedPlace(place);
-                  setActiveView("details");
+                  handleSelectPlace(place);
                 }}
                 center={selectedCity ? { lat: selectedCity.lat, lng: selectedCity.lng } : { lat: 20.5937, lng: 78.9629 }}
                 zoom={12}
@@ -1784,14 +2329,59 @@ export default function App() {
         )}
 
         {/* ======================================================== */}
+        {/* 404 NOT FOUND VIEW                                       */}
+        {/* ======================================================== */}
+        {activeView === "not-found" && (
+          <div className="max-w-md mx-auto my-24 p-8 bg-white dark:bg-slate-900 rounded-3xl border border-gray-200/80 dark:border-slate-800 text-center space-y-4 shadow-sm animate-fade-in">
+            <div className="w-16 h-16 bg-orange-100 dark:bg-orange-950/40 text-orange-600 rounded-full flex items-center justify-center mx-auto">
+              <Compass className="w-8 h-8 text-orange-500 animate-spin" style={{ animationDuration: "12s" }} />
+            </div>
+            <h3 className="font-serif font-extrabold text-2xl text-gray-900 dark:text-white">Destination Not Found (404)</h3>
+            <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+              The page or destination you are looking for does not exist or has been moved.
+            </p>
+            <div className="flex justify-center gap-3 pt-2">
+              <button
+                onClick={() => handleNavigate("home")}
+                className="px-5 py-2.5 rounded-full bg-[#00AA6C] hover:bg-[#008f5a] text-white font-bold text-xs uppercase cursor-pointer transition-all shadow-sm"
+              >
+                Return to Home
+              </button>
+              <button
+                onClick={() => handleNavigate("search")}
+                className="px-5 py-2.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-gray-800 dark:text-white font-bold text-xs uppercase cursor-pointer transition-all"
+              >
+                Browse Places
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* ======================================================== */}
         {/* DETAILS PAGE VIEW                                        */}
         {/* ======================================================== */}
+        {activeView === "details" && !selectedPlace && (
+          <div className="max-w-md mx-auto my-24 p-8 bg-white dark:bg-slate-900 rounded-3xl border border-gray-200/80 dark:border-slate-800 text-center space-y-4 shadow-sm animate-fade-in">
+            <Compass className="w-12 h-12 text-[#00AA6C] mx-auto animate-pulse" />
+            <h3 className="font-serif font-extrabold text-xl text-gray-900 dark:text-white">No Destination Selected</h3>
+            <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+              Select any landmark, stay, or restaurant from the discovery list to inspect details, browse photos, and reserve.
+            </p>
+            <button
+              onClick={() => handleNavigate("search")}
+              className="px-6 py-2.5 rounded-full bg-[#00AA6C] hover:bg-[#008f5a] text-white font-bold text-xs uppercase cursor-pointer transition-all shadow-sm"
+            >
+              Browse Discovery Places
+            </button>
+          </div>
+        )}
+
         {activeView === "details" && selectedPlace && (
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fade-in space-y-8">
             {/* Navigation back and save button */}
             <div className="flex justify-between items-center">
               <button
-                onClick={() => setActiveView("search")}
+                onClick={() => handleNavigate("search")}
                 className="flex items-center gap-1 text-xs font-bold text-gray-600 dark:text-gray-300 hover:text-orange-500 cursor-pointer"
               >
                 <ArrowLeft className="w-4 h-4" /> Back to Discovery List
@@ -1813,7 +2403,7 @@ export default function App() {
                 <img 
                   src={selectedPlace.photos[activePhotoIndex] || selectedPlace.photos[0]} 
                   alt={selectedPlace.name} 
-                  onError={handleImageError} 
+                  onError={(e) => handlePlaceImageError(e, selectedPlace.type, selectedPlace.name)} 
                   className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-80 pointer-events-none"></div>
@@ -1872,14 +2462,26 @@ export default function App() {
               {/* Left 2 Cols: descriptions, menu highlights, rooms, reviews */}
               <div className="md:col-span-2 space-y-8 text-left">
                 <div className="space-y-2">
-                  <span className="px-2.5 py-1 text-[10px] font-mono tracking-wider font-extrabold bg-indigo-950 text-orange-400 rounded-lg uppercase">
-                    {selectedPlace.type}
-                  </span>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="px-2.5 py-1 text-[10px] font-mono tracking-wider font-extrabold bg-indigo-950 text-orange-400 rounded-lg uppercase">
+                      {selectedPlace.category || selectedPlace.type}
+                    </span>
+                    {selectedPlace.entryFee && (
+                      <span className="px-2.5 py-1 text-[10px] font-semibold bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 rounded-lg border border-amber-200/60 dark:border-amber-800">
+                        🎟️ Entry: {selectedPlace.entryFee}
+                      </span>
+                    )}
+                    {selectedPlace.bestTimeToVisit && (
+                      <span className="px-2.5 py-1 text-[10px] font-medium bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 rounded-lg border border-blue-200/60 dark:border-blue-800">
+                        🗓️ Best Time: {selectedPlace.bestTimeToVisit}
+                      </span>
+                    )}
+                  </div>
                   <h1 className="font-serif font-extrabold text-3xl text-gray-900 dark:text-white">
                     {selectedPlace.name}
                   </h1>
                   <p className="text-xs text-gray-400 flex items-center gap-1 font-sans">
-                    <MapPin className="w-3.5 h-3.5 text-orange-500" /> {selectedPlace.address}, {selectedPlace.city}, {selectedPlace.state}
+                    <MapPin className="w-3.5 h-3.5 text-orange-500" /> {selectedPlace.address}, {selectedPlace.city}{selectedPlace.district ? `, ${selectedPlace.district}` : ""}, {selectedPlace.state}
                   </p>
                 </div>
 
@@ -1910,8 +2512,13 @@ export default function App() {
                 <div className="space-y-2">
                   <h3 className="font-serif font-bold text-lg text-gray-900 dark:text-white">About the Location</h3>
                   <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed font-sans font-normal">
-                    {selectedPlace.description}
+                    {selectedPlace.detailedDescription || selectedPlace.description}
                   </p>
+                  {selectedPlace.detailedDescription && selectedPlace.detailedDescription !== selectedPlace.description && (
+                    <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed font-sans mt-2">
+                      {selectedPlace.description}
+                    </p>
+                  )}
                 </div>
 
                 {/* Restaurant Menu Highlights */}
@@ -2144,9 +2751,10 @@ export default function App() {
                       ) : (
                         <button
                           type="submit"
-                          className="w-full py-3 rounded-full bg-[#FFC000] hover:bg-[#e6ad00] active:scale-98 text-black font-black text-xs uppercase font-sans tracking-wide shadow-md transition-all cursor-pointer text-center block border border-[#FFC000]"
+                          disabled={isSubmittingBooking}
+                          className="w-full py-3 rounded-full bg-[#FFC000] hover:bg-[#e6ad00] active:scale-98 disabled:opacity-50 text-black font-black text-xs uppercase font-sans tracking-wide shadow-md transition-all cursor-pointer text-center block border border-[#FFC000]"
                         >
-                          Check Availability & Book
+                          {isSubmittingBooking ? "Reserving..." : "Check Availability & Book"}
                         </button>
                       )}
                     </form>
@@ -2567,8 +3175,7 @@ export default function App() {
                                   selectedPlace={dayPlaces[0]}
                                   onPlaceSelect={(place) => {}}
                                   onPlaceDetailsNavigate={(place) => {
-                                    setSelectedPlace(place);
-                                    setActiveView("details");
+                                    handleSelectPlace(place);
                                   }}
                                   center={{ lat: dayPlaces[0].coordinates.lat, lng: dayPlaces[0].coordinates.lng }}
                                   zoom={12}
@@ -2636,6 +3243,24 @@ export default function App() {
         {/* ======================================================== */}
         {/* PROFILE & HISTORY VIEW                                   */}
         {/* ======================================================== */}
+        {activeView === "profile" && !user && (
+          <div className="max-w-md mx-auto my-24 p-8 bg-white dark:bg-slate-900 rounded-3xl border border-gray-200/80 dark:border-slate-800 text-center space-y-4 shadow-sm animate-fade-in">
+            <div className="w-16 h-16 bg-[#00AA6C]/10 text-[#00AA6C] rounded-full flex items-center justify-center mx-auto">
+              <LogIn className="w-8 h-8" />
+            </div>
+            <h3 className="font-serif font-extrabold text-xl text-gray-900 dark:text-white">Sign In to Your Account</h3>
+            <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+              Sign in to manage your saved heritage favorites, view past booking reservations, write reviews, and build vacation itineraries.
+            </p>
+            <button
+              onClick={() => setAuthModal({ isOpen: true, mode: "login" })}
+              className="px-6 py-2.5 rounded-full bg-[#00AA6C] hover:bg-[#008f5a] text-white font-bold text-xs uppercase cursor-pointer transition-all shadow-sm"
+            >
+              Sign In / Register
+            </button>
+          </div>
+        )}
+
         {activeView === "profile" && user && (
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 animate-fade-in space-y-8 text-left">
             {/* Header card info */}
@@ -2716,8 +3341,7 @@ export default function App() {
                         <div
                           key={place.id}
                           onClick={() => {
-                            setSelectedPlace(place);
-                            setActiveView("details");
+                            handleSelectPlace(place);
                           }}
                           className="bg-white dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-800 p-4 flex gap-4 cursor-pointer premium-card-hover"
                         >
@@ -2935,6 +3559,24 @@ export default function App() {
         {/* ======================================================== */}
         {/* SECURE ADMIN CONTROL PANEL                               */}
         {/* ======================================================== */}
+        {activeView === "admin" && (!user || user?.role !== "admin") && (
+          <div className="max-w-md mx-auto my-24 p-8 bg-white dark:bg-slate-900 rounded-3xl border border-gray-200/80 dark:border-slate-800 text-center space-y-4 shadow-sm animate-fade-in">
+            <div className="w-16 h-16 bg-red-100 dark:bg-red-950/40 text-red-600 rounded-full flex items-center justify-center mx-auto">
+              <Shield className="w-8 h-8" />
+            </div>
+            <h3 className="font-serif font-extrabold text-xl text-gray-900 dark:text-white">Admin Privileges Required</h3>
+            <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+              You must be signed in with an administrator account to view portal metrics and manage places or reviews.
+            </p>
+            <button
+              onClick={() => setAuthModal({ isOpen: true, mode: "login" })}
+              className="px-6 py-2.5 rounded-full bg-[#070235] hover:bg-[#0c0350] dark:bg-orange-500 text-white font-bold text-xs uppercase cursor-pointer transition-all shadow-sm"
+            >
+              Sign In as Administrator
+            </button>
+          </div>
+        )}
+
         {activeView === "admin" && user?.role === "admin" && (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 animate-fade-in space-y-8 text-left">
             <div className="space-y-1">

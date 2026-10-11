@@ -3,7 +3,9 @@ const { spawn } = require('child_process');
 console.log('====================================================');
 console.log('  ExploreIndia Full-Stack Development Environment   ');
 console.log('====================================================');
-console.log('Starting Backend (Port 5000) & Frontend (Port 3000)...\n');
+console.log('  \x1b[32m✔ Frontend Web App:\x1b[0m  http://localhost:3000 (Open in Browser)');
+console.log('  \x1b[36m✔ Backend REST API:\x1b[0m  http://localhost:5000/api');
+console.log('====================================================\n');
 
 const isWin = process.platform === 'win32';
 

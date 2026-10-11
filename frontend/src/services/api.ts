@@ -6,7 +6,9 @@ import {
   CityInfo,
   TravelTip,
   Notification,
-  AnalyticsData
+  AnalyticsData,
+  DiscoverResponse,
+  Booking
 } from "../types";
 
 // Base API URL: In development with Vite proxy, empty string uses relative paths '/api/...'
@@ -76,14 +78,68 @@ export const api = {
 
   // Places & Discovery
   places: {
-    discover: (query: string, lat?: number | null, lng?: number | null, userId?: string) => {
+    discover: (
+      query: string,
+      latOrOptions?: number | null | {
+        lat?: number | null;
+        lng?: number | null;
+        userId?: string;
+        page?: number;
+        limit?: number;
+        category?: string;
+        sortBy?: string;
+      },
+      lngParam?: number | null,
+      userIdParam?: string
+    ) => {
+      let lat: number | null | undefined = undefined;
+      let lng: number | null | undefined = undefined;
+      let userId: string | undefined = undefined;
+      let page = 1;
+      let limit = 24;
+      let category: string | undefined = undefined;
+      let sortBy: string | undefined = undefined;
+
+      if (typeof latOrOptions === "number") {
+        lat = latOrOptions;
+        lng = lngParam;
+        userId = userIdParam;
+      } else if (latOrOptions === null) {
+        lat = null;
+        lng = lngParam;
+        userId = userIdParam;
+      } else if (latOrOptions) {
+        lat = latOrOptions.lat;
+        lng = latOrOptions.lng;
+        userId = latOrOptions.userId;
+        page = latOrOptions.page || 1;
+        limit = latOrOptions.limit || 24;
+        category = latOrOptions.category;
+        sortBy = latOrOptions.sortBy;
+      }
+
       const headers = getHeaders();
       if (userId) (headers as any)["x-user-id"] = userId;
       return fetch(`${API_BASE_URL}/api/discover`, {
         method: "POST",
         headers,
-        body: JSON.stringify({ query, lat, lng }),
-      }).then(handleResponse<{ city: CityInfo; places: Place[]; suggestedTab?: string }>);
+        body: JSON.stringify({ query, lat, lng, page, limit, category, sortBy }),
+      }).then(handleResponse<DiscoverResponse>);
+    },
+
+    getCategories: (city?: string) =>
+      fetch(`${API_BASE_URL}/api/places/categories${city ? `?city=${encodeURIComponent(city)}` : ""}`).then(
+        handleResponse<Record<string, number>>
+      ),
+
+    getPlacesList: (params: Record<string, any>) => {
+      const qs = new URLSearchParams();
+      Object.entries(params).forEach(([k, v]) => {
+        if (v !== undefined && v !== null && v !== "") qs.append(k, String(v));
+      });
+      return fetch(`${API_BASE_URL}/api/places?${qs.toString()}`).then(
+        handleResponse<{ places: Place[]; total: number; page: number; totalPages: number; categoryCounts: Record<string, number> }>
+      );
     },
 
     getTrending: () =>
@@ -203,7 +259,7 @@ export const api = {
         headers: getHeaders(token),
       }).then(handleResponse<any[]>),
 
-    create: (token: string, data: { placeId: string; date: string; dateOut?: string; guests: number; time?: string }) =>
+    create: (token: string, data: { placeId: string; date: string; dateOut?: string; guests: number | string; time?: string; roomType?: string; totalPrice?: string }) =>
       fetch(`${API_BASE_URL}/api/bookings`, {
         method: "POST",
         headers: getHeaders(token),

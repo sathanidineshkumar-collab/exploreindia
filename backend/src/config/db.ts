@@ -19,21 +19,30 @@ const moduleDir = getModuleDir();
 
 // Determine database file path reliably
 function resolveDbPath(): string {
-  const possiblePaths = [
-    path.resolve(process.cwd(), "data_store.json"),
-    path.resolve(process.cwd(), "backend", "data_store.json"),
-    path.resolve(moduleDir, "../../data_store.json"),
-    path.resolve(moduleDir, "../../../data_store.json")
-  ];
+  // 1. Explicit override via environment variable
+  if (process.env.DATA_STORE_PATH) {
+    return path.resolve(process.env.DATA_STORE_PATH);
+  }
 
-  for (const p of possiblePaths) {
-    if (fs.existsSync(p)) {
-      return p;
-    }
+  // 2. Primary authoritative path: backend/data_store.json relative to module dir
+  const moduleBasedBackend = path.resolve(moduleDir, "../../data_store.json");
+  if (fs.existsSync(moduleBasedBackend)) {
+    return moduleBasedBackend;
+  }
+
+  // 3. Current working directory checks
+  const cwdBackend = path.resolve(process.cwd(), "backend", "data_store.json");
+  if (fs.existsSync(cwdBackend)) {
+    return cwdBackend;
+  }
+
+  const cwdRoot = path.resolve(process.cwd(), "data_store.json");
+  if (fs.existsSync(cwdRoot)) {
+    return cwdRoot;
   }
 
   // Default path in backend directory
-  return path.resolve(process.cwd(), "data_store.json");
+  return cwdBackend;
 }
 
 export const DB_FILE = resolveDbPath();
@@ -171,9 +180,21 @@ export function loadDatabase(): Database {
 
 export function saveDatabase(database: Database): void {
   try {
-    fs.writeFileSync(DB_FILE, JSON.stringify(database, null, 2));
+    const serialized = JSON.stringify(database, null, 2);
+    fs.writeFileSync(DB_FILE, serialized, "utf-8");
+
+    // Mirror to root data_store.json if it exists to maintain consistency across project views
+    const rootMirrorPath = path.resolve(moduleDir, "../../../data_store.json");
+    if (rootMirrorPath !== DB_FILE && fs.existsSync(rootMirrorPath)) {
+      try {
+        fs.writeFileSync(rootMirrorPath, serialized, "utf-8");
+      } catch {
+        // mirror failure is non-fatal
+      }
+    }
   } catch (error) {
     console.error("Error writing database:", error);
+    throw error;
   }
 }
 

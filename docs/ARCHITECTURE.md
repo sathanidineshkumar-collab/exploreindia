@@ -1,97 +1,146 @@
-# ExploreIndia Architecture & Technical Design
+# ExploreIndia — System Architecture & Layer Design
 
-## 1. System Overview
+## 1. High-Level Architecture Overview
 
-ExploreIndia is an Indian tourism web platform featuring smart AI-powered destination discovery, interactive geographical mapping, multi-day itinerary planning, hotel/resort room booking, and platform administration.
-
-The project follows a **Decoupled Client-Server Architecture** designed for maintainability, independent deployment, and developer ergonomics:
+ExploreIndia follows a **Decoupled Client-Server Architecture** tailored for simplicity, fast local development, and clear separation of concerns.
 
 ```
-┌────────────────────────────────────────────────────────┐
-│                   Client Layer                         │
-│   React 19 + TypeScript + Tailwind CSS v4 + Motion     │
-│   Vite Dev Server (Port 3000)                          │
-└──────────────────────────┬─────────────────────────────┘
-                           │
-             HTTP / REST   │  (Vite Proxy in Dev: /api -> :5000)
-                           ▼
-┌────────────────────────────────────────────────────────┐
-│                   Backend API Layer                    │
-│   Node.js + Express 4 + TypeScript (tsx)               │
-│   Express REST Server (Port 5000)                      │
-│   ├── Controllers (Request orchestration)              │
-│   ├── Middleware (JWT auth guard, central errors)      │
-│   ├── Services (Gemini AI, Geo data & fallbacks)       │
-│   └── Config (DB access layer, environment config)     │
-└──────────────────────────┬─────────────────────────────┘
-                           │
-                           ▼
-┌────────────────────────────────────────────────────────┐
-│                   Data Persistence                     │
-│   File-based JSON Database: `backend/data_store.json`  │
-│   - Users & JWT Password Hashes                        │
-│   - 196+ Curated Places & 1,280+ Curated Cities        │
-│   - Reviews & Admin Moderation Queue                   │
-│   - Multi-Day Trips & Room Bookings                    │
-└────────────────────────────────────────────────────────┘
++-------------------------------------------------------------------------+
+|                         PRESENTATION LAYER                              |
+|   React 19 + TypeScript + Tailwind CSS v4 + Motion + Lucide Icons       |
+|   Local Dev: Vite Dev Server (http://localhost:3000)                    |
++------------------------------------+------------------------------------+
+                                     |
+               REST API Requests     |  Vite Dev Proxy: /api -> :5000
+               (JSON Payloads)       |  Production: direct /api
+                                     v
++-------------------------------------------------------------------------+
+|                         APPLICATION API LAYER                           |
+|   Node.js + Express 4 + TypeScript (tsx / tsc)                          |
+|   Express HTTP Server (http://localhost:5000)                           |
+|                                                                         |
+|   +-----------------------+   +------------------------------------+    |
+|   |   Route Handlers      |   |   Middleware Pipeline              |    |
+|   |   - /api/auth         |   |   - CORS Header Manager            |    |
+|   |   - /api/places       |   |   - authenticateToken (JWT)        |    |
+|   |   - /api/bookings     |   |   - requireAdmin (Role Guard)      |    |
+|   |   - /api/trips        |   |   - central errorHandler           |    |
+|   +-----------+-----------+   +-----------------+------------------+    |
+|               |                                 |                       |
+|               +----------------+----------------+                       |
+|                                |                                        |
+|                                v                                        |
+|   +----------------------------------------------------------------+    |
+|   |   Services & Domain Logic                                      |    |
+|   |   - DatabaseEngine (In-memory Inverted Indexes: O(1) lookups)  |    |
+|   |   - locationService (Open-Meteo Weather, Nominatim Geocoding)  |    |
+|   |   - geminiService (Optional Gemini AI with offline fallbacks)  |    |
+|   |   - imageService (Curated landmark photo registry)             |    |
+|   +----------------------------+-----------------------------------+    |
++--------------------------------|----------------------------------------+
+                                 |
+                                 v
++-------------------------------------------------------------------------+
+|                         PERSISTENCE LAYER                               |
+|   File-based JSON Document Store: backend/data_store.json               |
+|   - Synchronous, atomic file writes via fs.writeFileSync                |
+|   - Zero database daemon setup required                                 |
+|   - 490+ Places, 1,280+ Cities, Users, Bookings, Reviews, Trips         |
++-------------------------------------------------------------------------+
 ```
 
 ---
 
-## 2. Directory Layout & Module Responsibilities
+## 2. Beginner-Friendly Explanation of Each Layer
 
-### `frontend/` (Client Application)
-- **`src/components/`**: Reusable modular UI components (`Navbar.tsx`, `Footer.tsx`, `ExploreMap.tsx`).
-- **`src/services/api.ts`**: Strongly-typed API client handling authentication headers, error envelopes, and REST calls.
-- **`src/types.ts`**: Client-side TypeScript contracts matching backend entities.
-- **`src/constants.ts`**: Fallback avatars and SVG placeholders for resilient image handling.
-- **`src/App.tsx`**: Main application coordinator containing view routing (Home, Search, Details, Trip Planner, Bookings, Admin).
-- **`vite.config.ts`**: Vite configuration containing Tailwind CSS plugin and `/api` reverse proxy to `http://localhost:5000`.
+### Layer 1: Presentation Layer (`frontend/`)
+* **What it does:** Renders the user interface in the web browser, collects user input, validates forms client-side, and provides responsive visual feedback.
+* **Key Components:**
+  * `src/App.tsx`: Main application controller that manages view state (`home`, `search`, `details`, `trips`, `profile`, `admin`), active filters, and user session.
+  * `src/components/Navbar.tsx`: Navigation header with search bar, theme toggler (Dark/Light mode), and auth triggers.
+  * `src/components/Footer.tsx`: Informational footer with quick navigation links.
+  * `src/components/ExploreMap.tsx`: Interactive map utilizing Leaflet and OpenStreetMap tiles to render place coordinates.
+  * `src/services/api.ts`: Centralized service client wrapping browser `fetch` calls, automatic authorization headers, and error parsing.
 
-### `backend/` (Server Application)
-- **`src/config/`**:
-  - `env.ts`: Typed environment configuration with default fallbacks.
-  - `db.ts`: Database file path resolver and atomic synchronous `loadDatabase()` / `saveDatabase()` engine.
-- **`src/controllers/`**: HTTP handlers organized strictly by business domain:
-  - `authController.ts`: Signup, bcrypt password hashing, login, JWT token signing, OTP verification.
-  - `placeController.ts`: AI-assisted place discovery, curated trending lists, places by ID.
-  - `userController.ts`: Profile management, favorites toggling, search history clearing.
-  - `tripController.ts`: Multi-day trip itinerary CRUD.
-  - `bookingController.ts`: Room reservation creation and cancellation.
-  - `reviewController.ts`: Review submissions and rating recalculations.
-  - `notificationController.ts`: Platform notifications.
-  - `adminController.ts`: Platform analytics, place management, user moderation, review approval queue.
-- **`src/middleware/`**:
-  - `auth.ts`: JWT bearer token validator and `requireAdmin` role guard.
-  - `errorHandler.ts`: Central error-catching middleware with structured JSON responses.
-- **`src/models/types.ts`**: TypeScript entity models and Database schema definitions.
-- **`src/routes/`**: Express route declarations mounted onto modular routers.
-- **`src/services/`**:
-  - `geminiService.ts`: Integration with Google GenAI SDK (`@google/genai`) with structured JSON parsing.
-  - `geoDataService.ts`: Offline database covering 90+ Indian cities and mock generation fallback.
-- **`data_store.json`**: Active JSON database file for the backend.
+### Layer 2: API & Routing Layer (`backend/src/routes/` & `controllers/`)
+* **What it does:** Receives incoming HTTP requests from the frontend, verifies user credentials, validates request bodies, and calls domain services.
+* **Key Controllers:**
+  * `authController.ts`: Handles user registration, bcrypt password hashing, login, JWT token generation, and OTP email verification.
+  * `bookingController.ts`: Handles hotel, resort, and attraction reservation creation, validation, duplicate prevention, and deletion.
+  * `placeController.ts`: Discovers places by city/category with pagination, handles trending places, and serves destination details.
+  * `tripController.ts`: Creates and manages custom day-by-day travel itineraries.
+  * `adminController.ts`: Serves moderation queues, analytics, user administration, and review approvals.
 
-### `scripts/` (Build & Operational Tooling)
-- **`dev.cjs`**: Cross-platform launcher running both backend and frontend concurrently with unified colored terminal logging.
-- **`seed_db.cjs`**: Data hydration script populating curated places and cities into `backend/data_store.json`.
+### Layer 3: Middleware Pipeline (`backend/src/middleware/`)
+* **What it does:** Intercepts requests before reaching controllers to ensure security and consistency.
+  * `auth.ts`: Extracts `Bearer <token>` from the HTTP `Authorization` header, verifies its digital signature using `ENV.JWT_SECRET`, and attaches the decoded user payload to `req.user`.
+  * `errorHandler.ts`: Catches unhandled errors across all routes and returns a predictable `{ error: message }` JSON envelope with appropriate HTTP status codes.
 
-### `tests/` (Quality Assurance)
-- **`test_flow.cjs`**: Automated end-to-end integration test validating 12 critical API flows against the backend.
+### Layer 4: Domain & Indexing Engine (`backend/src/services/`)
+* **What it does:** Provides fast search and external service integrations.
+  * `databaseEngine.ts`: On server startup, builds in-memory inverted hash maps (`cityIndex`, `categoryIndex`, `tokenIndex`) over `db.places`. When a user filters by city or category, lookups complete in $O(1)$ constant time without scanning all 490+ records sequentially.
+  * `locationService.ts`: Queries OpenStreetMap Nominatim for reverse geocoding and Open-Meteo for real-time weather forecasts.
+  * `geminiService.ts`: Communicates with Google's Gemini AI if `GEMINI_API_KEY` is configured. If the key is absent or invalid, seamlessly falls back to the curated offline engine.
+
+### Layer 5: Persistence Layer (`backend/src/config/db.ts`)
+* **What it does:** Manages disk storage in `backend/data_store.json`.
+  * On server boot, `loadDatabase()` reads `data_store.json` using `fs.readFileSync` and deserializes it into memory.
+  * On mutations, `saveDatabase(db)` serializes the updated state using `JSON.stringify` and flushes it to disk via `fs.writeFileSync`.
+  * Guarantees that bookings, reviews, and registered users remain persistent across server restarts.
 
 ---
 
-## 3. Communication & Security Flow
+## 3. End-to-End Hotel Booking Flow
 
-1. **Development Proxy**:
-   During development, the frontend makes relative calls (e.g., `fetch('/api/discover')`). The Vite dev server proxies these to `http://localhost:5000/api/discover`, avoiding browser CORS complications.
+Here is the exact step-by-step lifecycle of a hotel reservation:
 
-2. **Cross-Origin Resource Sharing (CORS)**:
-   The backend includes built-in CORS middleware permitting credentials and requests originating from frontend development servers (`http://localhost:3000`, `http://localhost:5173`).
+```
+[1. User Action]
+User selects a hotel in Search/Details view -> clicks "Book".
+       |
+       v
+[2. Frontend Validation (App.tsx)]
+- Checks user authentication (prompts Login modal if unauthenticated).
+- Checks check-in date is not empty and not in the past.
+- If hotel/resort, checks check-out date is strictly after check-in date.
+- Sets `isSubmittingBooking = true` to prevent double-clicks.
+       |
+       v
+[3. Service Layer (api.ts)]
+- Calls `api.bookings.create(token, payload)`
+- Sends HTTP POST to `/api/bookings` with `Authorization: Bearer <token>`.
+       |
+       v
+[4. Authentication Guard (auth.ts)]
+- `authenticateToken` middleware verifies JWT token using `JWT_SECRET`.
+- Attaches decoded `user` (id, email, role) to `req.user`.
+       |
+       v
+[5. Controller Validation (bookingController.ts)]
+- Validates placeId exists in `db.places`.
+- Validates guest count (numeric range 1 to 20).
+- Validates check-in date >= today; check-out date > check-in date.
+- Checks for duplicate active bookings for the same user, place, and date.
+       |
+       v
+[6. Persistence Operation (db.ts)]
+- Generates unique ID `b-<timestamp>-<random>`.
+- Pushes new booking object into in-memory `db.bookings` array.
+- Calls `saveDatabase(db)` -> synchronously writes to `backend/data_store.json`.
+       |
+       v
+[7. HTTP Response & State Update]
+- Returns HTTP 201 Created with saved booking JSON object.
+- Frontend prepends booking to `userBookings` state.
+- Form shows animated green success banner: "Reservation Confirmed!".
+- Booking immediately appears in User Profile -> "My Bookings" tab.
+```
 
-3. **Authentication**:
-   - Passwords are encrypted using `bcryptjs` with salt rounds.
-   - Sessions are managed statelessly using `jsonwebtoken` (JWT).
-   - Protected endpoints require `Authorization: Bearer <token>`.
+---
 
-4. **Fault-Tolerant AI & Geocoding**:
-   If `GEMINI_API_KEY` is not provided or invalid, the backend seamlessly falls back to `geoDataService.ts` containing offline coordinates and curated listings for over 90 Indian destinations.
+## 4. Local Development vs. Production Execution
+
+| Mode | Command | Frontend URL | Backend URL | How API Requests Flow |
+| :--- | :--- | :--- | :--- | :--- |
+| **Development** | `npm run dev` | `http://localhost:3000` | `http://localhost:5000` | Browser calls `/api/...` -> Vite Proxy forwards to `http://localhost:5000/api/...` |
+| **Production Build** | `npm run build && npm start` | `http://localhost:5000` | `http://localhost:5000` | Express serves compiled frontend static assets (`dist/`) and handles `/api/...` directly |

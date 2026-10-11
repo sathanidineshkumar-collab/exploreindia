@@ -14,6 +14,9 @@ interface NavbarProps {
   onOpenAuth: () => void;
   theme: "light" | "dark";
   onToggleTheme: () => void;
+  currentCity?: string;
+  onDetectLocation?: () => void;
+  isDetectingLocation?: boolean;
 }
 
 export default function Navbar({
@@ -23,7 +26,10 @@ export default function Navbar({
   onLogout,
   onOpenAuth,
   theme,
-  onToggleTheme
+  onToggleTheme,
+  currentCity,
+  onDetectLocation,
+  isDetectingLocation = false
 }: NavbarProps) {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [showNotifications, setShowNotifications] = useState(false);
@@ -128,7 +134,20 @@ export default function Navbar({
           </div>
 
           {/* Right Controls */}
-          <div className="flex items-center gap-2 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Location Detection Button */}
+            {onDetectLocation && (
+              <button
+                onClick={onDetectLocation}
+                disabled={isDetectingLocation}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold font-sans transition-all cursor-pointer border border-emerald-500/30 bg-emerald-50 dark:bg-emerald-950/40 text-[#004F32] dark:text-[#34E0A1] hover:bg-emerald-100 dark:hover:bg-emerald-900/50"
+                title="Detect or view current location"
+              >
+                <MapPin className={`w-3.5 h-3.5 text-emerald-600 dark:text-[#34E0A1] ${isDetectingLocation ? "animate-spin" : ""}`} />
+                <span className="max-w-[110px] truncate">{isDetectingLocation ? "Detecting..." : (currentCity || "Near Me")}</span>
+              </button>
+            )}
+
             {/* Theme Toggle */}
             <button
               onClick={onToggleTheme}
@@ -290,6 +309,19 @@ export default function Navbar({
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
         <div className="md:hidden glass-panel border-b border-gray-100 dark:border-slate-800/60 p-4 space-y-2 animate-fade-in">
+          {onDetectLocation && (
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onDetectLocation();
+              }}
+              disabled={isDetectingLocation}
+              className="w-full text-left flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-emerald-700 dark:text-[#34E0A1] bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-500/20"
+            >
+              <MapPin className={`w-4 h-4 ${isDetectingLocation ? "animate-spin" : ""}`} />
+              {isDetectingLocation ? "Detecting location..." : (currentCity ? `Current: ${currentCity}` : "Detect Current City")}
+            </button>
+          )}
           {navLinks.map((link) => (
             <button
               key={link.view}

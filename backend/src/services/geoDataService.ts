@@ -1,4 +1,5 @@
 import { Place, PlaceType, CityInfo } from "../models/types";
+import { getPlacePhotos } from "./imageService";
 
 export interface QueryMetadata {
   cityName: string;
@@ -292,106 +293,7 @@ const photosDbMaster = {
 };
 
 export function getSanitizedPhotos(type: string, name: string, cityName: string, i: number, customPool?: any): string[] {
-  let photos: string[] = [];
-  const nameLower = name.toLowerCase();
-  const cityLower = cityName.toLowerCase();
-  const cityHash = cityName.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
-
-  if (nameLower.includes("golden temple") || cityLower.includes("amritsar")) {
-    photos = [
-      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=600",
-      "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=600"
-    ];
-  } else if (nameLower.includes("charminar") || cityLower.includes("hyderabad")) {
-    photos = [
-      "https://images.unsplash.com/photo-1605007493699-af65834f8a00?w=600",
-      "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=600"
-    ];
-  } else if (nameLower.includes("taj mahal") || nameLower.includes("taj")) {
-    photos = [
-      "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=600",
-      "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=600"
-    ];
-  } else if (cityLower.includes("varanasi") || nameLower.includes("ghat") || nameLower.includes("ganga")) {
-    photos = [
-      "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=600",
-      "https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=600"
-    ];
-  } else if (cityLower.includes("goa") || nameLower.includes("beach")) {
-    photos = [
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600",
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600"
-    ];
-  } else if (cityLower.includes("bangalore") && (nameLower.includes("palace") || nameLower.includes("attraction"))) {
-    photos = [
-      "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=600",
-      "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=600"
-    ];
-  } else if (cityLower.includes("mumbai") && nameLower.includes("gateway")) {
-    photos = [
-      "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=600",
-      "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=600"
-    ];
-  } else if (cityLower.includes("delhi") && nameLower.includes("gate")) {
-    photos = [
-      "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=600",
-      "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=600"
-    ];
-  } else if (cityLower.includes("kerala") || nameLower.includes("houseboat") || nameLower.includes("backwaters")) {
-    photos = [
-      "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=600",
-      "https://images.unsplash.com/photo-1610641818989-c2051b5e2cfd?w=600"
-    ];
-  } else if (nameLower.includes("street food") || nameLower.includes("dhaba")) {
-    photos = [
-      "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=600",
-      "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600"
-    ];
-  } else if (nameLower.includes("biryani") || nameLower.includes("pulao") || nameLower.includes("rice")) {
-    photos = [
-      "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600",
-      "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=600"
-    ];
-  } else if (nameLower.includes("dosa") || nameLower.includes("idli") || nameLower.includes("south indian") || nameLower.includes("sambar")) {
-    photos = [
-      "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=600",
-      "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600"
-    ];
-  } else if (nameLower.includes("samosa") || nameLower.includes("chaat") || nameLower.includes("sweet") || nameLower.includes("dessert")) {
-    photos = [
-      "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600",
-      "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600"
-    ];
-  } else if (nameLower.includes("curry") || nameLower.includes("paneer") || nameLower.includes("masala") || nameLower.includes("punjabi")) {
-    photos = [
-      "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600",
-      "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600"
-    ];
-  }
-
-  if (photos.length === 0) {
-    let resolvedType = type || "attraction";
-    if (resolvedType === "attraction" && (nameLower.includes("temple") || nameLower.includes("shrine") || nameLower.includes("mandir"))) {
-      resolvedType = "temple";
-    } else if (resolvedType === "attraction" && (
-      nameLower.includes("lake") || nameLower.includes("cheruvu") || nameLower.includes("reservoir") || 
-      nameLower.includes("canal") || nameLower.includes("river") || nameLower.includes("boat")
-    )) {
-      resolvedType = "lake";
-    }
-    const pool = (customPool && customPool[resolvedType]) || (photosDbMaster as any)[resolvedType] || photosDbMaster.attraction;
-    const firstIdx = (cityHash + i * 4) % pool.length;
-    const secondIdx = (cityHash + i * 4 + 1) % pool.length;
-    const thirdIdx = (cityHash + i * 4 + 2) % pool.length;
-    const fourthIdx = (cityHash + i * 4 + 3) % pool.length;
-    photos = [
-      pool[firstIdx],
-      pool[secondIdx] || pool[firstIdx],
-      pool[thirdIdx] || pool[firstIdx],
-      pool[fourthIdx] || pool[secondIdx]
-    ];
-  }
-  return photos;
+  return getPlacePhotos(cityName, name, type, new Set(), 2);
 }
 
 // Curated City Specific Images
@@ -422,8 +324,8 @@ const CURATED_CITY_IMAGES: Record<string, string> = {
   "haridwar": "https://images.unsplash.com/photo-1580537659466-0a9bfa916a54?w=800",
   "kolkata": "https://images.unsplash.com/photo-1558431382-27e303142255?w=800",
   "calcutta": "https://images.unsplash.com/photo-1558431382-27e303142255?w=800",
-  "chennai": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800",
-  "madras": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800",
+  "chennai": "https://images.unsplash.com/photo-1621847468516-1ed5d0df56fe?w=800",
+  "madras": "https://images.unsplash.com/photo-1621847468516-1ed5d0df56fe?w=800",
   "tirupati": "https://images.unsplash.com/photo-1566837930304-a28a2a11f53b?w=800",
   "tirupathi": "https://images.unsplash.com/photo-1566837930304-a28a2a11f53b?w=800",
   "tirumala": "https://images.unsplash.com/photo-1566837930304-a28a2a11f53b?w=800",

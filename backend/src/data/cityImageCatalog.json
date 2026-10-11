@@ -1,0 +1,2480 @@
+[
+  {
+    "city": "Hyderabad",
+    "place": "Charminar",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1605007493699-af65834f8a00?w=800"
+  },
+  {
+    "city": "Hyderabad",
+    "place": "Golconda Fort",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?w=800"
+  },
+  {
+    "city": "Hyderabad",
+    "place": "Chowmahalla Palace",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800"
+  },
+  {
+    "city": "Hyderabad",
+    "place": "Birla Mandir Hyderabad",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800"
+  },
+  {
+    "city": "Hyderabad",
+    "place": "Chilkur Balaji Temple",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1620766182966-c6eb5ed2b788?w=800"
+  },
+  {
+    "city": "Hyderabad",
+    "place": "Salar Jung Museum",
+    "category": "museum",
+    "image": "https://images.unsplash.com/photo-1558431382-27e303142255?w=800"
+  },
+  {
+    "city": "Hyderabad",
+    "place": "Hussain Sagar & Monolithic Buddha",
+    "category": "waterfall",
+    "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800"
+  },
+  {
+    "city": "Hyderabad",
+    "place": "Nehru Zoological Park",
+    "category": "wildlife",
+    "image": "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=800"
+  },
+  {
+    "city": "Hyderabad",
+    "place": "Taj Falaknuma Palace",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800"
+  },
+  {
+    "city": "Hyderabad",
+    "place": "ITC Kohenur",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800"
+  },
+  {
+    "city": "Hyderabad",
+    "place": "Paradise Biryani Secunderabad",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800"
+  },
+  {
+    "city": "Hyderabad",
+    "place": "Bawarchi Restaurant RTC X Roads",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800"
+  },
+  {
+    "city": "Hyderabad",
+    "place": "Laad Bazaar",
+    "category": "market",
+    "image": "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=800"
+  },
+  {
+    "city": "Hyderabad",
+    "place": "Rajiv Gandhi International Airport",
+    "category": "transit",
+    "image": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800"
+  },
+  {
+    "city": "Bangalore",
+    "place": "Bangalore Palace",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=800"
+  },
+  {
+    "city": "Bangalore",
+    "place": "Vidhana Soudha",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1600100397608-f010b98a00a2?w=800"
+  },
+  {
+    "city": "Bangalore",
+    "place": "Lalbagh Botanical Garden",
+    "category": "garden",
+    "image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800"
+  },
+  {
+    "city": "Bangalore",
+    "place": "Cubbon Park",
+    "category": "garden",
+    "image": "https://images.unsplash.com/photo-1570009731245?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Bangalore",
+    "place": "Bannerghatta National Park & Zoo",
+    "category": "wildlife",
+    "image": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800"
+  },
+  {
+    "city": "Bangalore",
+    "place": "The Leela Palace Bengaluru",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800"
+  },
+  {
+    "city": "Bangalore",
+    "place": "Vidyarthi Bhavan",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800"
+  },
+  {
+    "city": "Bangalore",
+    "place": "Commercial Street",
+    "category": "market",
+    "image": "https://images.unsplash.com/photo-1570019462490?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Mumbai",
+    "place": "Gateway of India",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800"
+  },
+  {
+    "city": "Mumbai",
+    "place": "Marine Drive",
+    "category": "beach",
+    "image": "https://images.unsplash.com/photo-1566837930304-a28a2a11f53b?w=800"
+  },
+  {
+    "city": "Mumbai",
+    "place": "Siddhivinayak Temple",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1561361513-2d000a50f0db?w=800"
+  },
+  {
+    "city": "Mumbai",
+    "place": "Elephanta Caves",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1570029193735?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Mumbai",
+    "place": "The Taj Mahal Palace Mumbai",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1570038924980?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Mumbai",
+    "place": "Chhatrapati Shivaji Maharaj Terminus",
+    "category": "transit",
+    "image": "https://images.unsplash.com/photo-1570048656225?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Delhi",
+    "place": "India Gate",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1592635196078-9fe3d54f2377?w=800"
+  },
+  {
+    "city": "Delhi",
+    "place": "Qutub Minar",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800"
+  },
+  {
+    "city": "Delhi",
+    "place": "Red Fort",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1570058387470?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Delhi",
+    "place": "Akshardham Temple Delhi",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1570068118715?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Delhi",
+    "place": "Chandni Chowk",
+    "category": "market",
+    "image": "https://images.unsplash.com/photo-1570077849960?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Delhi",
+    "place": "The Oberoi New Delhi",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1570087581205?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Chennai",
+    "place": "Marina Beach",
+    "category": "beach",
+    "image": "https://images.unsplash.com/photo-1621847468516-1ed5d0df56fe?w=800"
+  },
+  {
+    "city": "Chennai",
+    "place": "Kapaleeshwarar Temple Mylapore",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800"
+  },
+  {
+    "city": "Chennai",
+    "place": "San Thome Cathedral Basilica",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1570097312450?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Chennai",
+    "place": "ITC Grand Chola",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1570107043695?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Goa",
+    "place": "Fort Aguada",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800"
+  },
+  {
+    "city": "Goa",
+    "place": "Basilica of Bom Jesus",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1570116774940?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Goa",
+    "place": "Dudhsagar Waterfalls",
+    "category": "waterfall",
+    "image": "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=800"
+  },
+  {
+    "city": "Goa",
+    "place": "Calangute Beach Promenade",
+    "category": "beach",
+    "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800"
+  },
+  {
+    "city": "Goa",
+    "place": "Taj Exotica Resort & Spa Goa",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1570126506185?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Jaipur",
+    "place": "Hawa Mahal",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1477584322902-471851bb1a83?w=800"
+  },
+  {
+    "city": "Jaipur",
+    "place": "Amer Fort",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1570136237430?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Jaipur",
+    "place": "City Palace Jaipur",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1599818818585-802c613c723b?w=800"
+  },
+  {
+    "city": "Jaipur",
+    "place": "Johari Bazaar",
+    "category": "market",
+    "image": "https://images.unsplash.com/photo-1570145968675?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Dashashwamedh Ghat",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1570155699920?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Kashi Vishwanath Temple",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Assi Ghat",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1570165431165?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Sarnath Deer Park & Dhamek Stupa",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1570175162410?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Agra",
+    "place": "Taj Mahal",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800"
+  },
+  {
+    "city": "Agra",
+    "place": "Agra Fort",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1570184893655?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kolkata",
+    "place": "Victoria Memorial & Gardens",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1570194624900?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kolkata",
+    "place": "Howrah Bridge",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800"
+  },
+  {
+    "city": "Kolkata",
+    "place": "Dakshineswar Kali Temple",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1570204356145?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kochi",
+    "place": "Fort Kochi & Chinese Fishing Nets",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1609137840173-477861a8e688?w=800"
+  },
+  {
+    "city": "Kochi",
+    "place": "Mattancherry Palace",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1570214087390?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Udaipur",
+    "place": "City Palace Complex Udaipur",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1570223818635?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Udaipur",
+    "place": "Lake Pichola & Jag Mandir Island",
+    "category": "waterfall",
+    "image": "https://images.unsplash.com/photo-1506461883276-594a12b11db3?w=800"
+  },
+  {
+    "city": "Udaipur",
+    "place": "Taj Lake Palace",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1570233549880?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Amritsar",
+    "place": "Sri Harmandir Sahib (The Golden Temple)",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1514222134-b57cbb8ce073?w=800"
+  },
+  {
+    "city": "Amritsar",
+    "place": "Jallianwala Bagh Memorial Garden",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1570243281125?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Amritsar",
+    "place": "Wagah Border Beating Retreat Ceremony",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1570253012370?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Amritsar",
+    "place": "Kesar Da Dhaba",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1570262743615?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Ahmedabad",
+    "place": "Sabarmati Ashram",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1603258593453-14d4291a1a45?w=800"
+  },
+  {
+    "city": "Ahmedabad",
+    "place": "Adalaj Stepwell",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1585135497273-1a86b09fe70e?w=800"
+  },
+  {
+    "city": "Ahmedabad",
+    "place": "Manek Chowk Night Food Market",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1567337710282-00832b41597a?w=800"
+  },
+  {
+    "city": "Somnath",
+    "place": "Somnath Temple",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1582510003544-d893d975231c?w=800"
+  },
+  {
+    "city": "Gir",
+    "place": "Gir National Park",
+    "category": "wildlife",
+    "image": "https://images.unsplash.com/photo-1584132967334-10e028bd69f9?w=800"
+  },
+  {
+    "city": "Shimla",
+    "place": "The Ridge & Mall Road Shimla",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=800"
+  },
+  {
+    "city": "Manali",
+    "place": "Solang Valley & Rohtang Pass",
+    "category": "adventure",
+    "image": "https://images.unsplash.com/photo-1518241353330-0f7941c2d9b6?w=800"
+  },
+  {
+    "city": "Dharamshala",
+    "place": "Tsuglagkhang Complex (Dalai Lama Temple)",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1514222134-b57cbe856c49?w=800"
+  },
+  {
+    "city": "Rishikesh",
+    "place": "Laxman Jhula & Triveni Ghat",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=800"
+  },
+  {
+    "city": "Haridwar",
+    "place": "Har Ki Pauri",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1580537659466-0a9bfa916a54?w=800"
+  },
+  {
+    "city": "Nainital",
+    "place": "Jim Corbett National Park",
+    "category": "wildlife",
+    "image": "https://images.unsplash.com/photo-1584132967334-10e028bd69f8?w=800"
+  },
+  {
+    "city": "Munnar",
+    "place": "Munnar Tea Gardens & Eravikulam",
+    "category": "nature",
+    "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fd?w=800"
+  },
+  {
+    "city": "Alappuzha",
+    "place": "Alleppey Backwaters & Houseboat Cruise",
+    "category": "waterfall",
+    "image": "https://images.unsplash.com/photo-1593693397690-362cb9666fc1?w=800"
+  },
+  {
+    "city": "Kochi",
+    "place": "Athirappilly Waterfalls",
+    "category": "waterfall",
+    "image": "https://images.unsplash.com/photo-1546776310-eef45dd6d63c?w=800"
+  },
+  {
+    "city": "Jaipur",
+    "place": "Mehrangarh Fort",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?w=800"
+  },
+  {
+    "city": "Thiruvananthapuram",
+    "place": "Sree Padmanabhaswamy Temple",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1604537466158-719b1972feb8?w=800"
+  },
+  {
+    "city": "Tirupati",
+    "place": "Tirumala Venkateswara Temple",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1582510003544-d893d9752328?w=800"
+  },
+  {
+    "city": "Visakhapatnam",
+    "place": "Visakhapatnam RK Beach & Submarine Museum",
+    "category": "beach",
+    "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3f?w=800"
+  },
+  {
+    "city": "Madurai",
+    "place": "Meenakshi Amman Temple",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1582510003544-d893d975231e?w=800"
+  },
+  {
+    "city": "Chennai",
+    "place": "Shore Temple & Pancha Rathas Mahabalipuram",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1582510003544-d893d9752327?w=800"
+  },
+  {
+    "city": "Puri",
+    "place": "Jagannath Temple Puri",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1616038242814-a6eac7845d88?w=800"
+  },
+  {
+    "city": "Puri",
+    "place": "Konark Sun Temple",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=800"
+  },
+  {
+    "city": "Srinagar",
+    "place": "Dal Lake & Shikara Cruise",
+    "category": "waterfall",
+    "image": "https://images.unsplash.com/photo-1548013146-72479768badb?w=800"
+  },
+  {
+    "city": "Leh",
+    "place": "Pangong Tso Lake",
+    "category": "nature",
+    "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800"
+  },
+  {
+    "city": "Guwahati",
+    "place": "Kamakhya Temple",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1582510003544-d893d9752326?w=800"
+  },
+  {
+    "city": "Shillong",
+    "place": "Cherrapunji Living Root Bridges & Nohkalikai Falls",
+    "category": "nature",
+    "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fe?w=800"
+  },
+  {
+    "city": "Bangalore",
+    "place": "The Leela Palace Bangalore",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=800"
+  },
+  {
+    "city": "Mumbai",
+    "place": "Shree Siddhivinayak Ganapati Temple",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800"
+  },
+  {
+    "city": "Chennai",
+    "place": "ITC Grand Chola Luxury Hotel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1600585154526-990dced4db0e?w=800"
+  },
+  {
+    "city": "Jaipur",
+    "place": "Amer Fort (Amber Palace)",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1555396273-367ea4eb4db9?w=800"
+  },
+  {
+    "city": "Puttaparhi",
+    "place": "Puttaparhi Sunset Point Lookout",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500003761702?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Varanasi Kashi Chat Bhandar",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1566073771259-6a8506099949?w=800"
+  },
+  {
+    "city": "Jagraon",
+    "place": "Jagraon Shanti Bhavan Veg Palace",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500033214370?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Amritsar",
+    "place": "Amritsar Kesar Da Dhaba",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1555396273-367ea4eb4dba?w=800"
+  },
+  {
+    "city": "Udaipur",
+    "place": "Udaipur Sri Ranganatha Hill Temple",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?w=800"
+  },
+  {
+    "city": "Kochi",
+    "place": "Kochi Pristine Sandy Beach",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1563911302283-d2bc129e7572?w=800"
+  },
+  {
+    "city": "Kochi",
+    "place": "Kochi Sri Venkateswara Hill Temple",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1567337710282-00832b41597b?w=800"
+  },
+  {
+    "city": "Titupathi",
+    "place": "Titupathi The Hideout Cafe",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500067534610?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Dharmavaram",
+    "place": "Sri Lakshmi Chennakesava Swamy Temple",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500061072938?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Pondicherry",
+    "place": "Pondicherry Coral Reef Spa & Resort",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500065312595?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalli",
+    "place": "Madanapalli Green Meadows Resort",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500059436460?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalli",
+    "place": "Madanapalli National Science Center Museum",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500059436597?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Dashashwamedh Ghat & Evening Ganga Aarti",
+    "category": "waterfall",
+    "image": "https://images.unsplash.com/photo-1542314831-068cd1dbfee9?w=800"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Kashi Vishwanath Temple (Golden Temple)",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c9?w=800"
+  },
+  {
+    "city": "Varanasi",
+    "place": "BrijRama Palace Heritage Grand Hotel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbc?w=800"
+  },
+  {
+    "city": "Kolkata",
+    "place": "The Oberoi Grand Heritage Hotel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1566073771259-6a8506099952?w=800"
+  },
+  {
+    "city": "Kochi",
+    "place": "Grand Hyatt Kochi Bolgatty",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800"
+  },
+  {
+    "city": "Udaipur",
+    "place": "Taj Lake Palace Ultra Luxury Hotel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?w=800"
+  },
+  {
+    "city": "Bangalore",
+    "place": "Vidyarthi Bhavan (Since 1943)",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1589301760014-d929f3979dbd?w=800"
+  },
+  {
+    "city": "Bangalore",
+    "place": "Sri Radha Krishna ISKCON Temple",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1600585154526-990dced4db10?w=800"
+  },
+  {
+    "city": "Mumbai",
+    "place": "Marine Drive (Queen's Necklace)",
+    "category": "beach",
+    "image": "https://images.unsplash.com/photo-1561501900-3701fa6a0864?w=800"
+  },
+  {
+    "city": "Mumbai",
+    "place": "Bandra-Worli Sea Link",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1556448485145?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Agra",
+    "place": "ITC Mughal Luxury Resort & Spa",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1599818818585-802c613c723e?w=800"
+  },
+  {
+    "city": "Jaipur",
+    "place": "Hawa Mahal (Palace of Winds)",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1629526956780?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Jaipur",
+    "place": "The Raj Palace Heritage Grand Hotel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c8?w=800"
+  },
+  {
+    "city": "Puttaparthi",
+    "place": "Puttaparthi Sri Balaji Residency",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500028015888?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparthi",
+    "place": "Puttaparthi Godavari Ruchulu",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500028016025?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparthi",
+    "place": "Puttaparthi Filter Kaapi Club",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500028016162?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparhi",
+    "place": "Puttaparhi Citrus City Inn",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500003761839?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparhi",
+    "place": "Puttaparhi Water Reservoir & Park",
+    "category": "waterfall",
+    "image": "https://images.unsplash.com/photo-1500003761976?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparhi",
+    "place": "Puttaparhi City Center Museum",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500003762113?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Tirupati",
+    "place": "Sri Padmavathi Ammavari Temple (Tiruchanur)",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500018616811?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Tirupati",
+    "place": "Tirupati Taj Tirupati",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500018616948?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Tirupati",
+    "place": "Tirupati Bhimas Paradise Veg Dining",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500018617085?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Varanasi Deena Chat Bhandar",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1555396273-367ea4eb4db6?w=800"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Varanasi Siva Devalayam Ancient Mandir",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9945?w=800"
+  },
+  {
+    "city": "Jagraon",
+    "place": "Jagraon Highway Haveli Motel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500033214507?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Jagraon",
+    "place": "Jagraon Golden Temple Residency",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500033214644?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kolkata",
+    "place": "Kolkata Brews & Bytes",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbd?w=800"
+  },
+  {
+    "city": "Amritsar",
+    "place": "Amritsar Taj Swarna Amritsar",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34ca?w=800"
+  },
+  {
+    "city": "Amritsar",
+    "place": "Amritsar Ranjit's Svaasa Heritage Boutique Resort",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1542314831-068cd1dbfeea?w=800"
+  },
+  {
+    "city": "Amritsar",
+    "place": "Amritsar Lake & Boating Ghat",
+    "category": "waterfall",
+    "image": "https://images.unsplash.com/photo-1566073771259-6a8506099950?w=800"
+  },
+  {
+    "city": "Amritsar",
+    "place": "Amritsar Partition Museum",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1600586965472?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Udaipur",
+    "place": "Udaipur Darbar Royal Dining",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1582719508461-905c673771f1?w=800"
+  },
+  {
+    "city": "Kochi",
+    "place": "Kochi Scenic Sunset Cliff Lookout",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1583665437107?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kochi",
+    "place": "Kochi Sai Baba Shrine Heritage Shrine",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1542314831-068cd1dbfeed?w=800"
+  },
+  {
+    "city": "Titupathi",
+    "place": "Titupathi Royal Orchid Hotel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500067534747?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Titupathi",
+    "place": "Titupathi Jungle Retreat & Spa",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500067534884?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Titupathi",
+    "place": "Titupathi The Curry Pot",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500067535021?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Titupathi",
+    "place": "Titupathi Sunset Point Lookout",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500067535158?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Dharmavaram",
+    "place": "Dharmavaram Handloom Silk Weaving Center",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500061073075?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Dharmavaram",
+    "place": "Dharmavaram Kanakadurga Family Restaurant",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500061073212?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Dharmavaram",
+    "place": "Dharmavaram Sri Lakshmi Pure Veg",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500061073349?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Pondicherry",
+    "place": "Pondicherry Coastal Highway Motel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500065312732?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Pondicherry",
+    "place": "Pondicherry Sri Ranganatha Temple Complex",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500065312869?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Pondicherry",
+    "place": "Pondicherry Ganesh Mandir Ancient Mandir",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500065313006?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalle",
+    "place": "Madanapalle Filter Kaapi Club",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500059436464?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalli",
+    "place": "Madanapalli The Fern Residency",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500059436734?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Assi Ghat & Subah-e-Banaras",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1552966170194?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Sarnath Buddhist Pilgrimage & Dhamek Stupa",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=800"
+  },
+  {
+    "city": "Srinagar",
+    "place": "Srinagar Warm Clay Tandoor",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500033429998?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Srinagar",
+    "place": "Srinagar Sri Venkateswara Ancient Mandir",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500033430135?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Hyderabad",
+    "place": "Paradise Biryani & Nizami Kitchen",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c5?w=800"
+  },
+  {
+    "city": "Bangalore",
+    "place": "Cubbon Park & Bamboo Groves",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1555100207192?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Bangalore",
+    "place": "Toit Brewpub Indiranagar",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1590490360182-c33d57733428?w=800"
+  },
+  {
+    "city": "Mumbai",
+    "place": "Chhatrapati Shivaji Maharaj Vastu Sangrahalaya",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1571896349842-33c89424de2e?w=800"
+  },
+  {
+    "city": "Delhi",
+    "place": "Red Fort (Lal Qila)",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1555396273-367ea4eb4db8?w=800"
+  },
+  {
+    "city": "Delhi",
+    "place": "Lotus Temple (Bahá'í House of Worship)",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1582510003544-d893d9752320?w=800"
+  },
+  {
+    "city": "Delhi",
+    "place": "Karim's Historic Mughal Cuisine",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=800"
+  },
+  {
+    "city": "Chennai",
+    "place": "Murugan Idli Shop & Madras Coffee",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f4?w=800"
+  },
+  {
+    "city": "Agra",
+    "place": "Fatehpur Sikri Imperial Complex",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1566073771259-6a8506099951?w=800"
+  },
+  {
+    "city": "Jaipur",
+    "place": "Laxmi Mishthan Bhandar (LMB) & Dal Baati",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1582719508461-905c673771f0?w=800"
+  },
+  {
+    "city": "Puttaparthi",
+    "place": "Puttaparthi Dwaraka Plaza Stays",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500028016299?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparthi",
+    "place": "Puttaparthi Deccan Highway Inn",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500028016436?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparthi",
+    "place": "Puttaparthi Satya Hills Eco Resort",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500028016573?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparthi",
+    "place": "Puttaparthi Durga Mata Mandir Swamy Devasthanam",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500028016710?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparhi",
+    "place": "Puttaparhi The Hideout Cafe",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500003762250?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Tirupati",
+    "place": "Tirupati Filter Kaapi Club",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500018617222?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Varanasi Radisson Hotel Varanasi",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1582510003544-d893d975231f?w=800"
+  },
+  {
+    "city": "Jagraon",
+    "place": "Jagraon Heritage Palace Retreat & Spa",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500033214781?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Jagraon",
+    "place": "Jagraon Darbar Royal Dining",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500033214918?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kolkata",
+    "place": "Kolkata Grand Regency",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34cc?w=800"
+  },
+  {
+    "city": "Kolkata",
+    "place": "Kolkata The Curry Pot",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1542314831-068cd1dbfeec?w=800"
+  },
+  {
+    "city": "Amritsar",
+    "place": "Amritsar Radisson Blu Amritsar",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1596461404969-9ae70f2830c5?w=800"
+  },
+  {
+    "city": "Amritsar",
+    "place": "Amritsar Amritsar Farmhouse Resort",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1542314831-068cd1dbfee8?w=800"
+  },
+  {
+    "city": "Amritsar",
+    "place": "Amritsar Bharawan Da Dhaba",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800"
+  },
+  {
+    "city": "Amritsar",
+    "place": "Amritsar Elgin Cafe Amritsar",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1524492412937-b28074a5d7dc?w=800"
+  },
+  {
+    "city": "Amritsar",
+    "place": "Amritsar Jallianwala Bagh Memorial",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1617919491489?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Udaipur",
+    "place": "Udaipur The Sanctuary Resort",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1566073771259-6a8506099947?w=800"
+  },
+  {
+    "city": "Titupathi",
+    "place": "Titupathi Green Meadows Resort",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500067535295?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Titupathi",
+    "place": "Titupathi Sri Mallikarjuna Swamy Devasthanam",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500067535432?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Dharmavaram",
+    "place": "Sri Ramalingeswara Swamy Temple",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500061073486?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Dharmavaram",
+    "place": "Dharmavaram Deccan Highway Inn",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500061073623?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Dharmavaram",
+    "place": "Dharmavaram Raju Gari Coffee Shop",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500061073760?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Dharmavaram",
+    "place": "Dharmavaram Sri Lakshmi Narasimha Heritage Shrine",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500061073897?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Pondicherry",
+    "place": "Pondicherry Wave Catchers Cafe",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500065313143?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Pondicherry",
+    "place": "Pondicherry Sri Chennakesava Spiritual Ashram",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500065313280?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalle",
+    "place": "Madanapalle Sri Balaji Residency",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500059436601?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalle",
+    "place": "Madanapalle Ganesh Mandir Hill Temple",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500059436738?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalli",
+    "place": "Madanapalli Royal Orchid Hotel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500059436871?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalli",
+    "place": "Madanapalli Sai Baba Shrine Heritage Shrine",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500059437008?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Kashi Chat Bhandar & Banarasi Street Delicacies",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffc?w=800"
+  },
+  {
+    "city": "Amritsar",
+    "place": "Kesar Da Dhaba Historic Punjabi Kitchen",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c6?w=800"
+  },
+  {
+    "city": "Kolkata",
+    "place": "Howrah Bridge (Rabindra Setu)",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab4?w=800"
+  },
+  {
+    "city": "Kolkata",
+    "place": "Peter Cat & Heritage Park Street Flavors",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800"
+  },
+  {
+    "city": "Kochi",
+    "place": "Paragon & Authentic Malabar Flavors",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34cd?w=800"
+  },
+  {
+    "city": "Udaipur",
+    "place": "Ambrai Waterfront Royal Dining",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1596461404969-9ae70f2830c8?w=800"
+  },
+  {
+    "city": "Srinagar",
+    "place": "Srinagar The Cozy Hearth Cafe",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500033430272?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Leh",
+    "place": "Leh Highland Meadows Hotel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500000107160?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Leh",
+    "place": "Leh The Mountain Brew Cafe",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500000107297?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Leh",
+    "place": "Leh Riverbank Canal Walk",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500000107434?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Hyderabad",
+    "place": "Roastery Coffee House",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1578474846511-04ba529f0b89?w=800"
+  },
+  {
+    "city": "Hyderabad",
+    "place": "Golkonda Resorts & Spa",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800"
+  },
+  {
+    "city": "Bangalore",
+    "place": "Visvesvaraya Industrial & Technological Museum",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=800"
+  },
+  {
+    "city": "Mumbai",
+    "place": "Juhu Beach & Chowpatty Street Flavors",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1498804103079-a6351b050096?w=800"
+  },
+  {
+    "city": "Chennai",
+    "place": "DakshinaChitra Heritage Living Museum",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1556146196270?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Agra",
+    "place": "Pinch of Spice & Agra Petha Delights",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1555396273-367ea4eb4dbb?w=800"
+  },
+  {
+    "city": "Jaipur",
+    "place": "Jal Mahal (Water Palace)",
+    "category": "heritage",
+    "image": "https://images.unsplash.com/photo-1629224667905?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Goa",
+    "place": "Curlies Beach Shack & Seafood Grill",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c7?w=800"
+  },
+  {
+    "city": "Puttaparthi",
+    "place": "Chaitanya Jyoti Museum",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500028016847?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparthi",
+    "place": "Puttaparthi Freshwater Lake Basin",
+    "category": "waterfall",
+    "image": "https://images.unsplash.com/photo-1500028016984?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparthi",
+    "place": "Puttaparthi Sri Rama Temple Hill Temple",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500028017121?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparhi",
+    "place": "Puttaparhi Sri Lakshmi Narasimha Heritage Shrine",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500003762387?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Tirupati",
+    "place": "Tirupati Fortune Select Grand Ridge",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500018617359?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Tirupati",
+    "place": "Tirupati Sri Lakshmi Narayana Pure Veg",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500018617496?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Varanasi Tree of Life Resort & Spa Varanasi",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1571896349842-33c89424de2f?w=800"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Varanasi The Brown Bread Bakery",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1585937421612-70a008356fbf?w=800"
+  },
+  {
+    "city": "Jagraon",
+    "place": "Jagraon The Curry Pot Heritage",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500033215055?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kolkata",
+    "place": "Kolkata National Science Center Museum",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1596461404969-9ae70f2830c6?w=800"
+  },
+  {
+    "city": "Kolkata",
+    "place": "Kolkata Botanical Gardens Walk",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1615821690750?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Amritsar",
+    "place": "Amritsar Sai Baba Shrine Temple Complex",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1582510003544-d893d9752324?w=800"
+  },
+  {
+    "city": "Kochi",
+    "place": "Kochi Coconut Grove Inn",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1596461404969-9ae70f2830c7?w=800"
+  },
+  {
+    "city": "Kochi",
+    "place": "Kochi Blue Lagoon Beach Resort",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1540555700478-4be289fbece0?w=800"
+  },
+  {
+    "city": "Kochi",
+    "place": "Kochi Wave Catchers Cafe",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34cb?w=800"
+  },
+  {
+    "city": "Pondicherry",
+    "place": "Pondicherry Coastal Spices Dinette",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500065313417?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalle",
+    "place": "Madanapalle Venkata Sai Guest House",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500059436875?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalle",
+    "place": "Madanapalle Sri Ranganatha Swamy Devasthanam",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500059437012?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalle",
+    "place": "Madanapalle Sri Chennakesava Heritage Shrine",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500059437149?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kochi",
+    "place": "Mattancherry Palace (Dutch Palace)",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1521401830884-6c03c1c87ebb?w=800"
+  },
+  {
+    "city": "Srinagar",
+    "place": "Srinagar Lake & Boating Ghat",
+    "category": "waterfall",
+    "image": "https://images.unsplash.com/photo-1500033430409?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Leh",
+    "place": "Leh Whispering Pines Forest Resort",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500000107571?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Leh",
+    "place": "Leh Mist & Mug Coffee Shop",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500000107708?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Leh",
+    "place": "Leh Ganesh Mandir Ancient Mandir",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500000107845?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparthi",
+    "place": "Sri Sathya Sai Samadhi Lake Reserve",
+    "category": "waterfall",
+    "image": "https://images.unsplash.com/photo-1500028017258?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparhi",
+    "place": "Puttaparhi Urban Cup",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500003762524?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Tirupati",
+    "place": "Sri Kapileswara Swamy Temple",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500018617633?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Tirupati",
+    "place": "Swami Pushkarini Holy Tank",
+    "category": "waterfall",
+    "image": "https://images.unsplash.com/photo-1500018617770?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Tirupati",
+    "place": "Srivari Museum",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500018617907?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Tirupati",
+    "place": "Tirupati Bhimas Deluxe Hotel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500018618044?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Tirupati",
+    "place": "Tirupati Srivari Tirumala Valley Resort",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500018618181?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Varanasi BrijRama Palace Heritage Hotel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1566073771259-6a8506099948?w=800"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Varanasi Riverbank Canal Walk",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1605937264805?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Varanasi Sarnath Buddhist Pilgrimage Ruins",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1552663881319?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Varanasi Sri Rama Temple Temple Complex",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1582510003544-d893d9752325?w=800"
+  },
+  {
+    "city": "Jagraon",
+    "place": "Jagraon The Chai Chauk Cafe",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500033215192?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Jagraon",
+    "place": "Jagraon The Culture Cup",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500033215329?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kolkata",
+    "place": "Kolkata Citrus City Inn",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1534447677768-be436bb09402?w=800"
+  },
+  {
+    "city": "Kolkata",
+    "place": "Kolkata Green Meadows Resort",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800"
+  },
+  {
+    "city": "Kolkata",
+    "place": "Kolkata Jungle Retreat & Spa",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1591149773438?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kolkata",
+    "place": "Kolkata Scenic Lake Viewpoint",
+    "category": "waterfall",
+    "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b471?w=800"
+  },
+  {
+    "city": "Kolkata",
+    "place": "Kolkata Durga Mata Mandir Temple Complex",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1582510003544-d893d9752321?w=800"
+  },
+  {
+    "city": "Amritsar",
+    "place": "Amritsar Hyatt Regency Amritsar",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1610580100194?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Amritsar",
+    "place": "Amritsar The Bean Street",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1557306716708?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Amritsar",
+    "place": "Amritsar Sri Venkateswara Spiritual Ashram",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1594033333222?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Udaipur",
+    "place": "Udaipur Traditional Ethnic Village Resort",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1630759949736?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Udaipur",
+    "place": "Udaipur The Curry Pot Heritage",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1577486566250?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kochi",
+    "place": "Kochi Sri Mallikarjuna Swamy Devasthanam",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1614213182764?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Titupathi",
+    "place": "Titupathi Sai Baba Shrine Heritage Shrine",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500067535569?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Dharmavaram",
+    "place": "Dharmavaram Venkata Sai Guest House",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500061074034?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Dharmavaram",
+    "place": "Dharmavaram Annapurna Tiffins",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500061074171?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Pondicherry",
+    "place": "Pondicherry Blue Lagoon Beach Resort",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500065313554?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Pondicherry",
+    "place": "Pondicherry The Crab Shack",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500065313691?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Pondicherry",
+    "place": "Pondicherry Riverside Seafood Grill",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500065313828?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Pondicherry",
+    "place": "Pondicherry Tidal Coffee Bar",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500065313965?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalli",
+    "place": "Madanapalli Grand Regency",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500059437145?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Srinagar",
+    "place": "Srinagar Pine Wood Stays",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500033430546?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Srinagar",
+    "place": "Srinagar Valley View Diner",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500033430683?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Srinagar",
+    "place": "Srinagar Lush Tea Plantation Walk",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500033430820?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Leh",
+    "place": "Leh Valley View Diner",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500000107982?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparthi",
+    "place": "Puttaparthi Sri Lakshmi Pure Veg",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500028017395?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparhi",
+    "place": "Puttaparhi Grand Regency",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500003762661?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparhi",
+    "place": "Puttaparhi Swad Junction",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500003762798?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Varanasi Canton Royale Restaurant",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1566217626093?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Jagraon",
+    "place": "Jagraon Sri Lakshmi Narasimha Hill Temple",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500033215466?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Amritsar",
+    "place": "Amritsar Surjit Food Plaza",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1639296097728?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Amritsar",
+    "place": "Amritsar Sri Mallikarjuna Ancient Mandir",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1586022714242?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Udaipur",
+    "place": "Udaipur Imperial Fort Hotel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1622749330756?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Udaipur",
+    "place": "Udaipur Ganesh Mandir Heritage Shrine",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1569475947270?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kochi",
+    "place": "Kochi Ocean Vista Stays",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1606202563784?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kochi",
+    "place": "Kochi Oceanic Retreat & Spa",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1552929180298?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Titupathi",
+    "place": "Titupathi The Fern Residency",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500067535706?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Titupathi",
+    "place": "Titupathi Spice Route",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500067535843?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Titupathi",
+    "place": "Titupathi Water Reservoir & Park",
+    "category": "waterfall",
+    "image": "https://images.unsplash.com/photo-1500067535980?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Titupathi",
+    "place": "Titupathi Sri Venkateswara Hill Temple",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500067536117?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Dharmavaram",
+    "place": "Dharmavaram Cheruvu (Lake)",
+    "category": "waterfall",
+    "image": "https://images.unsplash.com/photo-1500061074308?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Dharmavaram",
+    "place": "Dharmavaram Highway Grand Motel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500061074445?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalle",
+    "place": "Madanapalle Cheruvu (Lake Bund)",
+    "category": "waterfall",
+    "image": "https://images.unsplash.com/photo-1500059437286?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Srinagar",
+    "place": "Srinagar Alpine Pass Motel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500033430957?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Srinagar",
+    "place": "Srinagar Snowy Peaks Valley Retreat",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500033431094?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Srinagar",
+    "place": "Srinagar Mountain Crest Eco Resort",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500033431231?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Srinagar",
+    "place": "Srinagar Durga Mata Mandir Temple Complex",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500033431368?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Leh",
+    "place": "Leh Snowy Peak Viewpoint",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500000108119?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Leh",
+    "place": "Leh Siva Devalayam Temple Complex",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500000108256?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparthi",
+    "place": "Puttaparthi Haritha Valley Resorts",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500028017532?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparthi",
+    "place": "Puttaparthi Deccan Brews Cafe",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500028017669?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparhi",
+    "place": "Puttaparhi Grand Highway Motel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500003762935?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparhi",
+    "place": "Puttaparhi The Oasis Club & Resort",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500003763072?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparhi",
+    "place": "Puttaparhi Green Meadows Resort",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500003763209?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Tirupati",
+    "place": "Tirupati Woodlands Heritage Veg",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500018618318?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Varanasi Ramnagar Fort & Museum",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1560341044111?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Jagraon",
+    "place": "Jagraon Historic Fort & Museum Ruins",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500033215603?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kolkata",
+    "place": "Kolkata The Fern Residency",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1633419515746?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Udaipur",
+    "place": "Udaipur Heritage Gateway Motel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1580146132260?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Udaipur",
+    "place": "Udaipur The Chai Chauk Cafe",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1616872748774?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kochi",
+    "place": "Kochi Tidal Coffee Bar",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1563599365288?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Dharmavaram",
+    "place": "Dharmavaram Haritha Valley Resorts",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500061074582?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Pondicherry",
+    "place": "Pondicherry Scenic Sunset Cliff Lookout",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500065314102?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalle",
+    "place": "Madanapalle Godavari Ruchulu",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500059437423?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalle",
+    "place": "Madanapalle Historic Clock Tower Plaza",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500059437560?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalli",
+    "place": "Madanapalli Spice Route",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500059437282?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalli",
+    "place": "Madanapalli Nawaab's Kitchen",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500059437419?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalli",
+    "place": "Madanapalli The Roasted Bean",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500059437556?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Srinagar",
+    "place": "Srinagar Mist Valley Residency",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500033431505?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Srinagar",
+    "place": "Srinagar The Alpine Kitchen",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500033431642?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Leh",
+    "place": "Leh Mountain Crest Eco Resort",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500000108393?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Leh",
+    "place": "Leh Warm Clay Tandoor",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500000108530?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Leh",
+    "place": "Leh Sri Rama Temple Spiritual Ashram",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500000108667?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparhi",
+    "place": "Puttaparhi Spice Route",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500003763346?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparhi",
+    "place": "Puttaparhi Sri Ranganatha Swamy Devasthanam",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500003763483?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Tirupati",
+    "place": "Silathoranam Natural Arch",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500018618455?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Varanasi The Varanasi Sanctuary",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1605603808617?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Jagraon",
+    "place": "Jagraon Traditional Ethnic Village Resort",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500033215740?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Jagraon",
+    "place": "Jagraon Freshwater Lake Basin",
+    "category": "waterfall",
+    "image": "https://images.unsplash.com/photo-1500033215877?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Jagraon",
+    "place": "Jagraon Sri Veerabhadra Swamy Devasthanam",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500033216014?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Udaipur",
+    "place": "Udaipur Highway Haveli Motel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1571385990494?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Udaipur",
+    "place": "Udaipur Freshwater Lake Basin",
+    "category": "waterfall",
+    "image": "https://images.unsplash.com/photo-1616489953149-803cfc4b78df?w=800"
+  },
+  {
+    "city": "Dharmavaram",
+    "place": "Dharmavaram Gouthami Riverfront Retreat",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500061074719?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Dharmavaram",
+    "place": "Dharmavaram Filter Kaapi Club",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500061074856?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Pondicherry",
+    "place": "Pondicherry Oceanic Shore Motel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500065314239?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Pondicherry",
+    "place": "Pondicherry Marine Bay Hotel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500065314376?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Pondicherry",
+    "place": "Pondicherry Lake & Boating Ghat",
+    "category": "waterfall",
+    "image": "https://images.unsplash.com/photo-1500065314513?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalle",
+    "place": "Madanapalle Dwaraka Plaza Stays",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500059437697?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalle",
+    "place": "Madanapalle Satya Hills Eco Resort",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500059437834?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalle",
+    "place": "Madanapalle Haritha Valley Resorts",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500059437971?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalle",
+    "place": "Madanapalle Raju Gari Coffee Shop",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500059438108?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalle",
+    "place": "Madanapalle Local Weaver Cooperative Street",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500059438245?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalli",
+    "place": "Madanapalli The Curry Pot",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500059437693?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalli",
+    "place": "Madanapalli Freshwater Lake Basin",
+    "category": "waterfall",
+    "image": "https://images.unsplash.com/photo-1500059437830?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalli",
+    "place": "Madanapalli City Center Museum",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500059437967?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalli",
+    "place": "Madanapalli Sri Rama Temple Hill Temple",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500059438104?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Srinagar",
+    "place": "Srinagar Mist & Mug Coffee Shop",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500033431779?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Srinagar",
+    "place": "Srinagar Snowy Peak Viewpoint",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500033431916?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Srinagar",
+    "place": "Srinagar Sai Baba Shrine Spiritual Ashram",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500033432053?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Leh",
+    "place": "Leh Alpine Pass Motel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500000108804?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparthi",
+    "place": "Prasanthi Nilayam (Main Ashram)",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500028017806?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparthi",
+    "place": "Puttaparthi Kanakadurga Family Restaurant",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500028017943?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparhi",
+    "place": "Puttaparhi Sri Veerabhadra Hill Temple",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500003763620?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Tirupati",
+    "place": "Sri Venkateswara Swamy Temple (Tirumala)",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500018618592?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Tirupati",
+    "place": "Tirupati The Pilgrims Sanctuary Resort",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500018618729?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Tirupati",
+    "place": "Tirupati Srivari Heritage Cafe",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500018618866?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Varanasi Open Hand Cafe Varanasi",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1616908985033?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Varanasi Durga Mata Mandir Spiritual Ashram",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1563635601547?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Jagraon",
+    "place": "Jagraon Heritage Gateway Motel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500033216151?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Jagraon",
+    "place": "Jagraon Royal Cenotaphs",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500033216288?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Jagraon",
+    "place": "Jagraon Sri Ranganatha Heritage Shrine",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500033216425?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kolkata",
+    "place": "Kolkata Swad Junction",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1619417783424?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kolkata",
+    "place": "Kolkata Urban Cup",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1566144399938?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kolkata",
+    "place": "Kolkata Siva Devalayam Spiritual Ashram",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1602871016452?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kolkata",
+    "place": "Kolkata Sri Rama Temple Ancient Mandir",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1639597632966?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Udaipur",
+    "place": "Udaipur Shanti Bhavan Veg Palace",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1586324249480?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Udaipur",
+    "place": "Udaipur City Palace Museum Tour",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1623050865994?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Udaipur",
+    "place": "Udaipur Archaeological Excavation Site",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1569777482508?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kochi",
+    "place": "Kochi Coastal Highway Motel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1606504099022?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kochi",
+    "place": "Kochi Coastal Spices Dinette",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1553230715536?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kochi",
+    "place": "Kochi The Crab Shack",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1589957332050?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Titupathi",
+    "place": "Titupathi Grand Highway Motel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500067536254?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Titupathi",
+    "place": "Titupathi Urban Cup",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500067536391?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Titupathi",
+    "place": "Titupathi Botanical Gardens Walk",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500067536528?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Dharmavaram",
+    "place": "Kothakonda Hill Fort Ruins",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500061074993?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Pondicherry",
+    "place": "Pondicherry Historic Coastal Fort & Lighthouse",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500065314650?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalle",
+    "place": "Madanapalle Annapurna Tiffins",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500059438382?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalle",
+    "place": "Madanapalle Kanakadurga Family Restaurant",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500059438519?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalli",
+    "place": "Madanapalli Jungle Retreat & Spa",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500059438241?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalli",
+    "place": "Madanapalli The Hideout Cafe",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500059438378?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Leh",
+    "place": "Leh Mist Valley Residency",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500000108941?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Leh",
+    "place": "Leh Tribal Culture Museum",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500000109078?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Puttaparhi",
+    "place": "Puttaparhi Nawaab's Kitchen",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500003763757?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Varanasi",
+    "place": "Varanasi Alka Guest House",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1612906210016?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kolkata",
+    "place": "Kolkata Nawaab's Kitchen",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1559632826530?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Udaipur",
+    "place": "Udaipur Aesthetic Temple Cafe",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1596359443044?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Udaipur",
+    "place": "Udaipur Sri Chennakesava Swamy Devasthanam",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1633086059558?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kochi",
+    "place": "Kochi Riverside Seafood Grill",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1579812676072?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kochi",
+    "place": "Kochi Water Reservoir & Park",
+    "category": "waterfall",
+    "image": "https://images.unsplash.com/photo-1616539292586?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Titupathi",
+    "place": "Titupathi Nawaab's Kitchen",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500067536665?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Madanapalli",
+    "place": "Madanapalli Durga Mata Mandir Swamy Devasthanam",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500059438515?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Leh",
+    "place": "Leh The Alpine Kitchen",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500000109215?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Forts Rajasthan",
+    "place": "Forts Rajasthan Golden Temple Residency",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500079489386?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Forts Rajasthan",
+    "place": "Forts Rajasthan Heritage Gateway Motel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500079489523?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Forts Rajasthan",
+    "place": "Forts Rajasthan Highway Haveli Motel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500079489660?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Forts Rajasthan",
+    "place": "Forts Rajasthan Heritage Palace Retreat & Spa",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500079489797?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Forts Rajasthan",
+    "place": "Forts Rajasthan Traditional Ethnic Village Resort",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1500079489934?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Forts Rajasthan",
+    "place": "Forts Rajasthan Shanti Bhavan Veg Palace",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500079490071?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Forts Rajasthan",
+    "place": "Forts Rajasthan Darbar Royal Dining",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500079490208?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Forts Rajasthan",
+    "place": "Forts Rajasthan The Curry Pot Heritage",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500079490345?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Forts Rajasthan",
+    "place": "Forts Rajasthan The Chai Chauk Cafe",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500079490482?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Forts Rajasthan",
+    "place": "Forts Rajasthan The Culture Cup",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1500079490619?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Forts Rajasthan",
+    "place": "Forts Rajasthan Cheruvu (Lake Bund)",
+    "category": "waterfall",
+    "image": "https://images.unsplash.com/photo-1500079490756?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Forts Rajasthan",
+    "place": "Forts Rajasthan Archaeological Excavation Site",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500079490893?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Forts Rajasthan",
+    "place": "Forts Rajasthan City Palace Museum Tour",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1500079491030?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Forts Rajasthan",
+    "place": "Forts Rajasthan Sri Rama Temple Swamy Devasthanam",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500079491167?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Forts Rajasthan",
+    "place": "Forts Rajasthan Durga Mata Mandir Heritage Shrine",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500079491304?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Forts Rajasthan",
+    "place": "Forts Rajasthan Sai Baba Shrine Hill Temple",
+    "category": "temple",
+    "image": "https://images.unsplash.com/photo-1500079491441?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kochi",
+    "place": "Kochi Marine Bay Hotel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1623951156399?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kochi",
+    "place": "Kochi Oceanic Shore Motel",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1570677772913?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kochi",
+    "place": "Kochi Historic Coastal Fort & Lighthouse",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1607404389427?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kochi",
+    "place": "Kochi Maritime Heritage Museum",
+    "category": "attraction",
+    "image": "https://images.unsplash.com/photo-1554131005941?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kochi",
+    "place": "Kochi Coral Reef Spa & Resort",
+    "category": "hotel",
+    "image": "https://images.unsplash.com/photo-1590857622455?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "city": "Kochi",
+    "place": "Kochi The Sand Deck Cafe",
+    "category": "restaurant",
+    "image": "https://images.unsplash.com/photo-1627584238969?w=800&auto=format&fit=crop&q=80"
+  }
+]

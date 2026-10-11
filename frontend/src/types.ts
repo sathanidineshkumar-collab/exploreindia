@@ -30,26 +30,58 @@ export interface Review {
   approved: boolean;
 }
 
+export type PlaceCategory =
+  | 'temple'
+  | 'heritage'
+  | 'attraction'
+  | 'museum'
+  | 'beach'
+  | 'waterfall'
+  | 'nature'
+  | 'wildlife'
+  | 'hotel'
+  | 'restaurant'
+  | 'adventure'
+  | 'garden'
+  | 'market'
+  | 'pilgrimage'
+  | 'cultural'
+  | 'hidden_gem'
+  | 'transit';
+
 export interface Place {
   id: string;
   name: string;
+  altNames?: string[];
   type: PlaceType;
+  category?: PlaceCategory | string;
   subtypes: string[]; // e.g., ['Luxury Hotels', 'Hill Resorts', 'Veg Friendly', 'Fine Dining']
   rating: number;
   reviewCount: number;
   priceLevel: number; // 1 to 4 stars ($ to $$$$)
   priceRange?: string; // e.g., '₹1,500 - ₹3,000' or '₹500 for two'
+  entryFee?: string;
   address: string;
+  city: string;
+  district?: string;
+  state: string;
+  region?: string;
+  country?: string;
+  coordinates: LatLng;
   description: string;
+  detailedDescription?: string;
   photos: string[];
   facilities: string[];
+  openHours?: string;
+  bestTimeToVisit?: string;
   phone?: string;
   website?: string;
-  coordinates: LatLng;
-  openHours?: string;
+  source?: string;
+  sourceId?: string;
+  lastVerified?: string;
+  featured?: boolean;
+  tags?: string[];
   reviews?: Review[];
-  city: string;
-  state: string;
   
   // Restaurant-specific
   menuHighlights?: string[];
@@ -64,6 +96,24 @@ export interface Place {
     price: string;
     amenities: string[];
   }[];
+}
+
+export interface CategoryCounts {
+  all: number;
+  [category: string]: number;
+}
+
+export interface DiscoverResponse {
+  city: CityInfo;
+  places: Place[];
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+  categoryCounts: CategoryCounts;
+  suggestedTab?: string;
 }
 
 export interface SearchHistory {
@@ -134,12 +184,17 @@ export interface Booking {
   userId: string;
   placeId: string;
   placeName: string;
-  placeType: PlaceType;
-  checkIn: string;
-  checkOut: string;
+  placePhoto?: string;
+  placeType?: PlaceType;
+  city?: string;
+  date?: string;
+  dateOut?: string;
+  checkIn?: string;
+  checkOut?: string;
   guests: number;
+  time?: string;
   roomType?: string;
-  totalPrice: string;
-  status: 'confirmed' | 'cancelled';
+  totalPrice?: string;
+  status: 'confirmed' | 'cancelled' | string;
   createdAt: string;
 }
