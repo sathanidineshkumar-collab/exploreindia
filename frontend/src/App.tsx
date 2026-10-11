@@ -2827,7 +2827,7 @@ export default function App() {
                   
                   <div className="h-32 rounded-2xl overflow-hidden relative border border-gray-100 dark:border-slate-800 shadow-inner">
                     {/* Tiny Leaflet Map placeholder or static style representation */}
-                    <div className="absolute inset-0 bg-[url('https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/12/1154/2288.png')] bg-cover opacity-60"></div>
+                    <div className="absolute inset-0 bg-[url('https://tile.openstreetmap.org/12/1154/2288.png')] bg-cover opacity-60"></div>
                     <div className="absolute inset-0 flex flex-col items-center justify-center p-4 bg-indigo-950/10 text-center relative z-10 text-white">
                       <MapPin className="w-8 h-8 text-red-500 drop-shadow-md animate-bounce" />
                     </div>

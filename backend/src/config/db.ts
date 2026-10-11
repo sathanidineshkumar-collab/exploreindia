@@ -2,6 +2,7 @@ import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
 import { Database } from "../models/types";
+import defaultDataStore from "../../data_store.json";
 
 const getModuleDir = (): string => {
   try {
@@ -166,16 +167,23 @@ export function loadDatabase(): Database {
       return parsed;
     }
   } catch (error) {
-    console.error("Error reading database file, using seeds:", error);
+    console.error("Error reading database file, using fallback store:", error);
   }
 
-  // Create default seed DB if not present
+  // Use the full bundled default dataset (1,282 cities, 493 places, etc.) or initial seeds
+  const fallback = (defaultDataStore as unknown as Database) || initialDatabase;
+  const cloned: Database = JSON.parse(JSON.stringify(fallback));
+  cloned.trips = cloned.trips || [];
+  cloned.bookings = cloned.bookings || [];
+
+  // Attempt to write fallback DB to disk if writable (e.g. first local run)
   try {
-    fs.writeFileSync(DB_FILE, JSON.stringify(initialDatabase, null, 2));
-  } catch (err) {
-    console.error("Failed to write seed database file:", err);
+    fs.writeFileSync(DB_FILE, JSON.stringify(cloned, null, 2));
+  } catch {
+    // Expected in serverless read-only environments (e.g. Vercel EROFS); do not throw
+    console.warn("[DB] Read-only filesystem detected; operating with in-memory database store.");
   }
-  return initialDatabase;
+  return cloned;
 }
 
 export function saveDatabase(database: Database): void {
@@ -192,9 +200,12 @@ export function saveDatabase(database: Database): void {
         // mirror failure is non-fatal
       }
     }
-  } catch (error) {
+  } catch (error: any) {
+    if (error?.code === "EROFS" || error?.message?.includes("read-only")) {
+      console.warn("[DB] Serverless read-only filesystem detected; disk write skipped (in-memory state preserved).");
+      return;
+    }
     console.error("Error writing database:", error);
-    throw error;
   }
 }
 
